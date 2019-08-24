@@ -1,4 +1,4 @@
-# CODING STYLE GUIDE
+# ```CODING STYLE GUIDE```
 
 ## Styling
 >* Use camelCase for classnames
