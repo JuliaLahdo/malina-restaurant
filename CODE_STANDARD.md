@@ -1,12 +1,10 @@
 # CODING STYLE GUIDE
 
 ## Styling
-```
 >* Use camelCase for classnames
 >* Use EM with padding/margins etc.
 >* Use REM with font-size
 >* Use Flexbox
-```
 
 ## PHP, React & HTML
 >* Use camelCase for classnames
