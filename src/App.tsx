@@ -1,25 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Home from './Pages/Home';
+import Menu from './Pages/Menu';
+import Booking from './Pages/Booking';
+import Admin from './Pages/Admin';
+import Default from './Pages/Default';
+import Navbar from './Components/Navbar';
+import { BrowserRouter as Router,Route,Switch } from 'react-router-dom';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <main>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/Menu" exact component={Menu} />
+          <Route path="/Booking" exact component={Booking} />          
+          <Route path="/Admin" exact component={Admin} />
+          <Route component={Default} />
+        </Switch>
+      </main>
+    </Router>
   );
 }
 
