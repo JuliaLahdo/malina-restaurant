@@ -13,13 +13,13 @@ const App: React.FC = () => {
     <Router>
       <main>
         <Navbar />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/Menu" exact component={Menu} />
-          <Route path="/Booking" exact component={Booking} />          
-          <Route path="/Admin" exact component={Admin} />
-          <Route component={Default} />
-        </Switch>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/Menu" exact component={Menu} />
+            <Route path="/Booking" exact component={Booking} />          
+            <Route path="/Admin" exact component={Admin} />
+            <Route component={Default} />
+          </Switch>
       </main>
     </Router>
   );
