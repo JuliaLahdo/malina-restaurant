@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Admin extends Component {
+class Admin extends React.Component {
     render() {
         return (
             <h4>
@@ -9,3 +9,5 @@ export default class Admin extends Component {
         )
     }
 }
+
+export default Admin;
