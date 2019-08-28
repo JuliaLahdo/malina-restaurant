@@ -8,12 +8,14 @@ import Navbar from './Components/Navbar/Navbar';
 import { BrowserRouter as Router,Route,Switch } from 'react-router-dom';
 import NotFound404 from './Pages/NotFound404/NotFound404';
 
+
 class App extends React.Component{
   render() {
     return (
       <Router>
         <main>
           <Navbar />
+
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/Menu" exact component={Menu} />
@@ -25,6 +27,7 @@ class App extends React.Component{
       </Router>
     );
   }
+
 }
 
 export default App;
