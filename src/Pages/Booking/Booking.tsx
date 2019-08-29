@@ -1,45 +1,86 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
+// import Data from '../../Service/Data';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Booking.css';
-
+import axios from 'axios';
 
 // export interface IBookings{
 //     data: [];
 
 // }
 
-export interface IBookingsProps{
 
+export interface IBookingsProps{
+  // bookingData(data:Data): void;
+ 
 }
 
-interface IDateState {
-    date : any;  
+interface IBookingState {
+    date : Date,
+    bookings: any; 
   }
 
 
-class Booking extends React.Component<IBookingsProps, IDateState> {
+class Booking extends React.Component<IBookingsProps, IBookingState> {    
 
-    handleSubmit(e: any) {
-        e.preventDefault();
-    }
+   
 
     constructor(props:any) {
         super(props);
 
         this.state = {
-          date: new Date()
+          date: new Date(),
+          bookings: []
+          // bookingData: []
         };       
         this.handleChange = this.handleChange.bind(this);
       }
+
+    //   createData() {
+    //     axios.get('http://localhost:8889/api/booking/create.php')
+    //         .then(response => {
+
+    //           const bookings = response.data;
+    //           this.setState({bookings});
+    //             console.log(response.data);
+    //             return response;
+    //         }).catch(error => {
+    //             console.log(error);
+    //         });
+    // }
+
+       handleSubmit(e: any) {
+        e.preventDefault();
+        
+
+    }
+
+    componentDidMount(){
+      console.log('Did component mount ?');
+      axios.get('http://localhost:8888/api/booking/read.php')
+      .then(response => {
+        const bookings:any = response.data;
+          console.log(bookings);
+          
+          return bookings;
+      }).catch(error => {
+          console.log(error);
+      });
+
+    }
+
+
+
        
 
-      public handleChange(date:any) {
+      handleChange(date:any) {
         this.setState({
           date: date
         },
          () => {
           console.log(this.state.date);
+          
         });
       }
 
@@ -72,8 +113,16 @@ class Booking extends React.Component<IBookingsProps, IDateState> {
                             <input type="text" placeholder="email"/>
                         </div>
                         <button type="submit">submit</button>
-                    </form>            
+                    </form>  
+
+                     {/* <ul>
+                     { this.state.bookings.map((booking:any)=> <li>{booking.id}</li>)}
+                    </ul>           */}
                 </div>
+
+               
+
+
            </div>
         )
     }

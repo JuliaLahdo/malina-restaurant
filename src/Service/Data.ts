@@ -3,7 +3,7 @@ import axios from 'axios';
 class Data {
 
     readData() {
-        axios.get('http://localhost/react/malina-backend-php/api/booking/read.php')
+        axios.get('http://localhost:8888/api/booking/read.php')
             .then(response => {
                 console.log(response.data);
                 return response;
