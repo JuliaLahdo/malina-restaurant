@@ -1,6 +1,14 @@
 import React from 'react'
+import Data from '../../Service/Data'
 
 class Admin extends React.Component {
+
+componentDidMount() {
+    const data = new Data();
+    data.readData();
+}
+
+
     render() {
         return (
             <h4>
@@ -11,3 +19,14 @@ class Admin extends React.Component {
 }
 
 export default Admin;
+
+
+/* readData() {
+    axios.get('http://localhost/react/malina-backend-php/api/booking/read.php')
+        .then(response => {
+            console.log(response.data);
+            return response;
+        }).catch(error => {
+            console.log(error);
+        });
+} */

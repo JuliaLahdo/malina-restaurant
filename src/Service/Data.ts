@@ -10,6 +10,7 @@ class Data {
             }).catch(error => {
                 console.log(error);
             });
+            return axios.get('http://localhost/react/malina-backend-php/api/booking/read.php')
     }
 
     createData(createData: any) {
