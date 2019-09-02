@@ -3,9 +3,16 @@ import Data from '../../Service/Data'
 
 class Admin extends React.Component {
 
+    state = {
+        getBookings: []
+    }
+
 componentDidMount() {
     const getBookings = new Data();
-    console.log(getBookings.readData());
+    console.log(getBookings.readData()
+    .then(response => {
+        this.setState({getBookings});
+    })
 }
 
 
@@ -21,12 +28,3 @@ componentDidMount() {
 export default Admin;
 
 
-/* readData() {
-    axios.get('http://localhost/react/malina-backend-php/api/booking/read.php')
-        .then(response => {
-            console.log(response.data);
-            return response;
-        }).catch(error => {
-            console.log(error);
-        });
-} */
