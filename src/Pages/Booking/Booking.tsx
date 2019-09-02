@@ -5,6 +5,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './Booking.css';
 import axios from 'axios';
 import moment from 'moment';
+import Header from '../../Components/Header/Header';
+
 
 
 
@@ -40,18 +42,14 @@ class Booking extends React.Component<{}, IBookingsState> {
         super(props);
           this.state = {
           bookings: 
-            {
-              
+            {              
               dateOfBooking:moment(),
               timeOfBooking:"",
               numberOfGuests: 0,
               email:"",
               name:"",
-              phone:""
-              
-
-            }
-        
+              phone:"" 
+            }        
         };  
         
          // This binding is necessary to make `this` work in the callback
@@ -157,7 +155,14 @@ class Booking extends React.Component<{}, IBookingsState> {
     render() {
       console.log(this.state.bookings.dateOfBooking);
         return (
-            <div className="container">       
+
+
+
+            <div className="container">
+                 <Header title="Booking page" />
+       
+
+
              
               <div className="bookingFormContainer">
                     <form onSubmit={(e) => this.handleSubmit(e)} noValidate>
