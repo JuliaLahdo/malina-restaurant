@@ -4,6 +4,9 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Booking.css';
 import axios from 'axios';
+import moment from 'moment';
+
+
 
 // export interface IBookings{
 //     data: [];
@@ -11,119 +14,186 @@ import axios from 'axios';
 // }
 
 
-export interface IBookingsProps{
-  // bookingData(data:Data): void;
+// export interface IBookingsProps{
+//   bookingDatas(bookingData:IBooking):void;
  
+// }
+
+interface IBooking {
+  dateOfBooking: moment.Moment;
+  timeOfBooking: string;
+  numberOfGuests: number;
+  email:string;
+  name:string;
+  phone:string;
+  
 }
 
-interface IBookingState {
-    date : Date,
-    bookings: any; 
+interface IBookingsState {    
+    bookings: IBooking;
   }
 
 
-class Booking extends React.Component<IBookingsProps, IBookingState> {    
-
-   
+class Booking extends React.Component<{}, IBookingsState> {    
 
     constructor(props:any) {
         super(props);
+          this.state = {
+          bookings: 
+            {
+              
+              dateOfBooking:moment(),
+              timeOfBooking:"",
+              numberOfGuests: 0,
+              email:"",
+              name:"",
+              phone:""
+              
 
-        this.state = {
-          date: new Date(),
-          bookings: []
-          // bookingData: []
-        };       
+            }
+        
+        };  
+        
+         // This binding is necessary to make `this` work in the callback
         this.handleChange = this.handleChange.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleTimeChange = this.handleTimeChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
       }
 
-    //   createData() {
-    //     axios.get('http://localhost:8889/api/booking/create.php')
-    //         .then(response => {
 
-    //           const bookings = response.data;
-    //           this.setState({bookings});
-    //             console.log(response.data);
-    //             return response;
-    //         }).catch(error => {
-    //             console.log(error);
-    //         });
-    // }
 
-       handleSubmit(e: any) {
-        e.preventDefault();
-        
-
-    }
 
     componentDidMount(){
-      console.log('Did component mount ?');
       axios.get('http://localhost:8888/api/booking/read.php')
       .then(response => {
-        const bookings:any = response.data;
-          console.log(bookings);
-          
-          return bookings;
+          console.log(response.data);
+          return response;
       }).catch(error => {
           console.log(error);
       });
-
     }
+
+
+    handleSubmit(e: any) {
+      e.preventDefault();
+      console.log(this.state.bookings);
+
+
+      let postData = {
+        'dateOfBooking': this.state.bookings.dateOfBooking.format('YYYY-MM-DD'),
+        'numberOfGuests': this.state.bookings.numberOfGuests,
+        'timeOfBooking': this.state.bookings.timeOfBooking,
+        'email': this.state.bookings.email,
+        'name': this.state.bookings.name,
+        'phone': this.state.bookings.phone
+
+      }
+
+      console.log('Did component create?');
+      axios.post('http://localhost:8888/api/booking/create.php', postData, {
+          headers: { 'Content-Type': 'text/plain' }})
+          .then((response: any) => {
+              console.log(response);
+              return response;
+          }).catch((error: any) => {
+              console.log(error);
+          });
+  }
+
+    
 
 
 
        
 
-      handleChange(date:any) {
-        this.setState({
-          date: date
+      handleChange(e:any) {
+        let target = e.target;
+        let value = target.value;
+        let name = target.name;
+        // console.log("Changing values: { name {0}: value: {1} }", name, value);        
+        this.setState((prevState:any)=>{  
+          prevState.bookings[name] = value; 
+            return {
+             bookings: prevState.bookings
+            };          
         },
          () => {
-          console.log(this.state.date);
-          
+          console.log(this.state.bookings);          
         });
       }
 
+
+      handleDateChange(date: Date) { 
+      
+        let momentDate = moment(date);
+        console.log(momentDate);
+
+        this.setState((prevState:any)=>{  
+          prevState.bookings.dateOfBooking = momentDate; 
+            return {
+             bookings: prevState.bookings
+            };          
+        });
+        console.log(momentDate);
+      }
+
+
+      handleTimeChange(e:any) {       
+        let time = e.target.value; 
+        console.log(time);
+        this.setState((prevState:any)=>{  
+          prevState.bookings.timeOfBooking = time; 
+            return {
+             bookings: prevState.bookings
+            };          
+        });
+      }
+
+      
+    
+
+
     render() {
+      console.log(this.state.bookings.dateOfBooking);
         return (
-            <div className="container">  
-              <div>
-                <DatePicker selected={this.state.date} onChange={this.handleChange} />  
-              </div>
-            
+            <div className="container">       
              
               <div className="bookingFormContainer">
                     <form onSubmit={(e) => this.handleSubmit(e)} noValidate>
+                      <div>                    
+                        <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd"/>  
+                      </div>
+                
                         <div className="selectTime">
-                            <input type="radio" value="first" defaultChecked name="time"/>
+                            <input type="radio" value="18:00:00" name="timeOfBooking" onChange={this.handleTimeChange} defaultChecked/>
                             18:00
-                            <input type="radio" value="second" name="time"/>21:00
-
+                            <input type="radio" value="21:00:00" name="timeOfBooking" onChange={this.handleTimeChange}/>21:00
                         </div>
+
                         <div className="guests">
                             <label htmlFor="guests">guests</label>
-                            <input type="number" placeholder="how many guests?"/>
+                            <input type="number" value={ this.state.bookings.numberOfGuests } name="numberOfGuests" placeholder="how many guests?" onChange={this.handleChange}/>
                         </div>
+
                         <div className="name">
                             <label htmlFor="name">name</label>
-                            <input type="text" placeholder="name"/>
+                            <input type="text" value={ this.state.bookings.name } name="name"  placeholder="name" onChange={this.handleChange}/>
                         </div>
+
                         <div className="email">
                             <label htmlFor="email">email</label>
-                            <input type="text" placeholder="email"/>
+                            <input type="text" value={ this.state.bookings.email } name="email" placeholder="email" onChange={this.handleChange}/>
+                        </div>
+
+                        <div className="phone">
+                            <label htmlFor="phone">phone</label>
+                            <input type="text" value={ this.state.bookings.phone } name="phone" placeholder="phone" onChange={this.handleChange}/>
                         </div>
                         <button type="submit">submit</button>
                     </form>  
-
-                     {/* <ul>
-                     { this.state.bookings.map((booking:any)=> <li>{booking.id}</li>)}
-                    </ul>           */}
                 </div>
-
-               
-
-
-           </div>
+            </div>
         )
     }
     
