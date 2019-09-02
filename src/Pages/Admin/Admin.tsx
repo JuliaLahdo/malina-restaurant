@@ -4,8 +4,8 @@ import Data from '../../Service/Data'
 class Admin extends React.Component {
 
 componentDidMount() {
-    const data = new Data();
-    data.readData();
+    const getBookings = new Data();
+    console.log(getBookings.readData());
 }
 
 

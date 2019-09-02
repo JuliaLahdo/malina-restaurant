@@ -2,15 +2,14 @@ import axios from 'axios';
 
 class Data {
 
-    readData() {
-        axios.get('http://localhost/react/malina-backend-php/api/booking/read.php')
+    async readData() {
+        return axios.get('http://localhost/react/malina-backend-php/api/booking/read.php')
             .then(response => {
-                console.log(response.data);
-                return response;
+                //console.log(response.data);
+                return response.data;
             }).catch(error => {
                 console.log(error);
             });
-            return axios.get('http://localhost/react/malina-backend-php/api/booking/read.php')
     }
 
     createData(createData: any) {
