@@ -9,12 +9,11 @@ class Admin extends React.Component {
 
 componentDidMount() {
     const getBookings = new Data();
-    console.log(getBookings.readData()
+    getBookings.readData()
     .then(response => {
         this.setState({getBookings});
     })
 }
-
 
     render() {
         return (
