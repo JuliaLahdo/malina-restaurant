@@ -22,13 +22,22 @@ class Admin extends React.Component {
     getReservation = (id: number) => {
         console.log('This reservation with id ' + id)
     }
+
+    deleteReservation = (id: number) => {
+        console.log('Delete reservation with id ' + id)
+        const deleteBookings = new Data();
+        deleteBookings.deleteData(id);
+
+    }
+    
     
     listReservations = () => {
         return this.state.getReservations.map( (booking: any) => {
             return (
-            <li key={"Reservation:" + booking.id}>Reservation made by {booking.name} {booking.email}
+            <li key={"Reservation: " + booking.id}>Reservation made by {booking.name} {booking.email}
             {booking.phone} on {booking.dateOfBooking} {booking.timeOfBooking} for {booking.numberOfGuests} guests
-            <button onClick={(event) => this.getReservation(booking.id)}>Get</button>
+            <button onClick={() => this.getReservation(booking.id)}>Get</button>
+            <button onClick={() => this.deleteReservation(booking.id)}>Delete</button>
             </li>
             )
         });

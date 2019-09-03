@@ -23,13 +23,17 @@ class Data {
             });
     }
 
-      deleteData(deleteData: any) {
-        axios.post('http://localhost/react/malina-backend-php/api/booking/delete.php', deleteData, {
-            headers: { 'Content-Type': 'text/plain' }})
+      deleteData(id: any) {
+        axios.delete('http://localhost/react/malina-backend-php/api/booking/delete.php', {
+            "data": {
+                "id": id
+            }
+         })
             .then((response: any) => {
                 console.log(response);
                 return response;
             }).catch((error: any) => {
+               
                 console.log(error);
             });
     }
