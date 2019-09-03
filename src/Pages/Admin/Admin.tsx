@@ -4,29 +4,39 @@ import Data from '../../Service/Data'
 class Admin extends React.Component {
 
     state = {
-        getBook: []
+        getReservation: []
     }
 
 componentDidMount() {
     const getBookings = new Data();
     getBookings.readData()
     .then(response => {
-        this.setState({getBook: response.bookings});
-        
-        //console.log(this.state.getBook);
+        this.setState({getReservation: response.bookings});
 
-       console.log(response.bookings)
-      console.log(getBookings.readData()); //works
+        console.log(response.bookings)
+        //console.log(getBookings.readData()); //works
 
     })
+    .catch(error => console.log(error));
 }
 
+    listBookings = () => {
+        return this.state.getReservation.map( (booking: any) => {
+            return (
+                <li key={"Reservation:" + booking.id}>Reservation made by {booking.name} {booking.email} {booking.phone} on {booking.dateOfBooking} {booking.timeOfBooking} for {booking.numberOfGuests} guests</li>
+            )
+        });
+    };
+
+
     render() {
-        const {getBook} = this.state;
+        
         return (
-            <h4>
-               hello from Admin page 
-            </h4>
+            <div>
+                <ul>
+                    {this.listBookings()}
+                </ul>
+            </div>
         )
     }
 }
