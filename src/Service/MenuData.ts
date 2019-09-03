@@ -1,5 +1,5 @@
 class MenuData {
-    menu = {
+    menu = [{
         starters: {
             topic: [
                 "Chanterelle Toast",
@@ -67,7 +67,8 @@ class MenuData {
             ]
         }
         
-    }
+    }]
+
 }
 
 export default MenuData;
