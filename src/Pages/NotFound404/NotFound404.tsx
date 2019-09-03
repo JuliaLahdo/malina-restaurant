@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../../Components/Header/Header';
 import {Link} from 'react-router-dom';
+import './NotFound404.css';
 
 class NotFound404 extends React.Component {
     render() {
@@ -10,7 +11,7 @@ class NotFound404 extends React.Component {
                 you are in the wrong place
             </h2>
             <Link to="/">
-                return home
+                <p>return home</p>
             </Link>
             
             </Header>

@@ -6,7 +6,9 @@ import './Booking.css';
 import axios from 'axios';
 import moment from 'moment';
 import Header from '../../Components/Header/Header';
-
+// import SelectDate from '../../Components/SelectDate/SelectDate';
+// import SelectTime from '../../Components/SelectTime/SelectTime';
+// import Details from '../../Components/Details/Details';
 
 
 
@@ -122,11 +124,9 @@ class Booking extends React.Component<{}, IBookingsState> {
       }
 
 
-      handleDateChange(date: Date) { 
-      
+      handleDateChange(date: Date) {       
         let momentDate = moment(date);
         console.log(momentDate);
-
         this.setState((prevState:any)=>{  
           prevState.bookings.dateOfBooking = momentDate; 
             return {
@@ -155,27 +155,22 @@ class Booking extends React.Component<{}, IBookingsState> {
     render() {
       console.log(this.state.bookings.dateOfBooking);
         return (
-
-
-
             <div className="container">
-                 <Header title="Booking page" />
-       
-
-
-             
+                 <Header title="Booking page" />             
               <div className="bookingFormContainer">
                     <form onSubmit={(e) => this.handleSubmit(e)} noValidate>
-                      <div>                    
+                      {/* <SelectDate />  */}
+                      
+
                         <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd"/>  
-                      </div>
-                
+                        {/* <SelectTime />  */}
+                        
                         <div className="selectTime">
                             <input type="radio" value="18:00:00" name="timeOfBooking" onChange={this.handleTimeChange} defaultChecked/>
                             18:00
                             <input type="radio" value="21:00:00" name="timeOfBooking" onChange={this.handleTimeChange}/>21:00
                         </div>
-
+                        {/* <Details />  */}
                         <div className="guests">
                             <label htmlFor="guests">guests</label>
                             <input type="number" value={ this.state.bookings.numberOfGuests } name="numberOfGuests" placeholder="how many guests?" onChange={this.handleChange}/>
