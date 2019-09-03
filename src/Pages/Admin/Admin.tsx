@@ -27,7 +27,10 @@ class Admin extends React.Component {
         console.log('Delete reservation with id ' + id)
         const deleteBookings = new Data();
         deleteBookings.deleteData(id);
-
+        this.state.getReservations.map((item, index) => (
+            this.state.getReservations.splice(index,1)
+        ))
+        this.setState({getReservations: this.state.getReservations});
     }
     
     
@@ -36,8 +39,8 @@ class Admin extends React.Component {
             return (
             <li key={"Reservation: " + booking.id}>Reservation made by {booking.name} {booking.email}
             {booking.phone} on {booking.dateOfBooking} {booking.timeOfBooking} for {booking.numberOfGuests} guests
-            <button onClick={() => this.getReservation(booking.id)}>Get</button>
-            <button onClick={() => this.deleteReservation(booking.id)}>Delete</button>
+            <button onClick={(event) => this.getReservation(booking.id)}>Get</button>
+            <button onClick={(event) => this.deleteReservation(booking.id)}>Delete</button>
             </li>
             )
         });
