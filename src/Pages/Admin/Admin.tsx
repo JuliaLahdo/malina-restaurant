@@ -20,10 +20,18 @@ componentDidMount() {
     .catch(error => console.log(error));
 }
 
-    listBookings = () => {
+getReservation = (id: number) => {
+    console.log('Removing booking with id ' + id)
+
+}
+
+    listReservations = () => {
         return this.state.getReservation.map( (booking: any) => {
             return (
-                <li key={"Reservation:" + booking.id}>Reservation made by {booking.name} {booking.email} {booking.phone} on {booking.dateOfBooking} {booking.timeOfBooking} for {booking.numberOfGuests} guests</li>
+                <li key={"Reservation:" + booking.id}>Reservation made by {booking.name} {booking.email}
+                {booking.phone} on {booking.dateOfBooking} {booking.timeOfBooking} for {booking.numberOfGuests} guests
+                <button onClick={(event) => this.getReservation(booking.id)}>Get</button>
+                </li>
             )
         });
     };
@@ -34,7 +42,7 @@ componentDidMount() {
         return (
             <div>
                 <ul>
-                    {this.listBookings()}
+                    {this.listReservations()}
                 </ul>
             </div>
         )
