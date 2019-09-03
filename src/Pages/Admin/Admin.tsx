@@ -4,49 +4,43 @@ import Data from '../../Service/Data'
 class Admin extends React.Component {
 
     state = {
-        getReservation: []
+        getReservations: []
     }
 
-componentDidMount() {
-    const getBookings = new Data();
-    getBookings.readData()
-    .then(response => {
-        this.setState({getReservation: response.bookings});
+    componentDidMount() {
+        const getBookings = new Data();
+        getBookings.readData()
+        .then(response => {
+            this.setState({getReservations: response.bookings});
 
-        console.log(response.bookings)
-        //console.log(getBookings.readData()); //works
+            console.log(response.bookings)
+            //console.log(getBookings.readData()); //works
+        })
+        .catch(error => console.log(error));
+    }
 
-    })
-    .catch(error => console.log(error));
-}
-
-getReservation = (id: number) => {
-    console.log('Removing booking with id ' + id)
-
-}
-
+    getReservation = (id: number) => {
+        console.log('This reservation with id ' + id)
+    }
+    
     listReservations = () => {
-        return this.state.getReservation.map( (booking: any) => {
+        return this.state.getReservations.map( (booking: any) => {
             return (
-                <li key={"Reservation:" + booking.id}>Reservation made by {booking.name} {booking.email}
-                {booking.phone} on {booking.dateOfBooking} {booking.timeOfBooking} for {booking.numberOfGuests} guests
-                <button onClick={(event) => this.getReservation(booking.id)}>Get</button>
-                </li>
+            <li key={"Reservation:" + booking.id}>Reservation made by {booking.name} {booking.email}
+            {booking.phone} on {booking.dateOfBooking} {booking.timeOfBooking} for {booking.numberOfGuests} guests
+            <button onClick={(event) => this.getReservation(booking.id)}>Get</button>
+            </li>
             )
         });
     };
-
-
     render() {
-        
         return (
-            <div>
-                <ul>
-                    {this.listReservations()}
-                </ul>
+        <div>
+            <ul>
+            {this.listReservations()}
+            </ul>
             </div>
-        )
+            )
+        }
     }
-}
-
-export default Admin;
+    export default Admin;
