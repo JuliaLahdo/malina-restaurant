@@ -62,7 +62,7 @@ class Booking extends React.Component<{}, IBookingsState> {
   }
 
   componentDidMount(){
-    axios.get('http://localhost:8888/api/booking/read.php')
+    axios.get('http://localhost/api/booking/read.php')
     .then(response => {
         console.log(response.data);
         return response;
@@ -84,7 +84,7 @@ class Booking extends React.Component<{}, IBookingsState> {
     }
 
     console.log('Did component create?');
-    axios.post('http://localhost:8888/api/booking/create.php', postData, {
+    axios.post('http://localhost/api/booking/create.php', postData, {
         headers: { 'Content-Type': 'text/plain' }})
         .then((response: any) => {
             console.log(response);
@@ -119,7 +119,7 @@ class Booking extends React.Component<{}, IBookingsState> {
   handleDateChange(date: Date) {      
     let momentDate = moment(date);        
     console.log(momentDate);
-    axios.get('http://localhost:8888/api/booking/read.php')
+    axios.get('http://localhost/api/booking/read.php')
     .then(response => { 
       let numberOfTablesBookedAt18 = [];
       let numberOfTablesBookedAt21 = [];
