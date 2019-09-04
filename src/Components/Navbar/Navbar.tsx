@@ -4,13 +4,9 @@ import logo from '../../Images/blacklogo.svg';
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 
-
-
 interface IState {    
     isOpen: boolean;
-  }
-
-
+}
 
 class Navbar extends React.Component<{}, IState> {
     constructor(props:any){
@@ -46,19 +42,13 @@ class Navbar extends React.Component<{}, IState> {
                 <div>
                     <ul className={this.state.isOpen ? "navLinks showNav" : "navLinks"}>
                         <li>
-                            <Link to="/">
-                            Home
-                            </Link>
+                            <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <Link to="/Menu">
-                            Menu
-                            </Link>
+                            <Link to="/Menu">Menu</Link>
                         </li>
                         <li>
-                            <Link to="/Booking">
-                            Booking
-                            </Link>
+                            <Link to="/Booking">Booking</Link>
                         </li>
                     </ul>
                 </div>
