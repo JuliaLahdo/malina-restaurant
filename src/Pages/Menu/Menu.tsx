@@ -48,19 +48,13 @@ class Menu extends React.Component {
         return (
             <div>
                 <h3>Starter</h3>
-                {/* <ul> */}
-                    {startersItemContainer}
-                {/* </ul> */}
+                {startersItemContainer}
 
                 <h3>Main</h3>
-                <ul>
-                    {mainsItemContainer}
-                </ul>
+                {mainsItemContainer}
 
                 <h3>Dessert</h3>
-                <ul>
-                    {dessertsItemContainer}
-                </ul>
+                {dessertsItemContainer}
             </div>
         )
     }
