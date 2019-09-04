@@ -1,5 +1,82 @@
-footer{
-    background-color: #1f1f1f;
-    height: 20vh;
-    color: white;
+/* Small devices (landscape phones, 320px and up) */
+@media (min-width: 320px) {
+    footer{
+        background-color: #1f1f1f;
+        color: white;
+        padding: 1.5em;
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+    
+    a{
+        color: white;
+        display: block;
+    }
+
+    .restaurantInfo{
+        display: none;
+    }
+
+    .footerTopic{
+        padding-top: 0.5em;
+        margin-left: 0.5em;
+    }
+    
+    .footerInfo{
+        margin-left: 2em;
+    }
+
+    .footerIconsContainer{
+        display: flex;
+    }
+
+    .footerIcon{
+        font-size: 2em;
+        margin: 1em 0 0 1em;
+    }
+
+    .copyMalina{
+        text-align: center;
+        padding-top: 2em;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .footerContainer{
+        display: flex;
+    }
+
+    .restaurantInfo{
+        display: block;
+    }
+
+    .restaurantInfoContainer, .contactContainer, .openingHoursContainer, .followUsContainer{
+        flex: 25%;
+    }
+
+    img.footerLogo{
+        height: 80px;
+        margin: 1em 0;
+    }
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+    .aboutRestaurantText{
+        padding-right: 5em;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    footer{
+        padding-left: 8em;
+    }
 }
