@@ -10,7 +10,7 @@ export default class Footer extends Component {
                 <div className="footerContainer">
                     <div className="restaurantInfoContainer">
                         <div className="restaurantInfo">
-                            <img src={logo} alt="malina Restaurant" className="footerLogo"/>
+                            <img src={logo} alt="Malina logo" className="footerLogo"/>
                             <p className="footerInfo aboutRestaurantText">
                                 Malina was founded in 2016 by head chef Johan Sjögren. Who wanted to establish a restaurant with a feeling of fine-dining and comfortfood.
                             </p>
@@ -47,6 +47,7 @@ export default class Footer extends Component {
                         <a href="http://www.instagram.com/" className="footerInfo">Instagram</a>
                         <a href="http://www.facebook.com/" className="footerInfo">Facebook</a>
                         <a href="http://www.twitter.com/" className="footerInfo">Twitter</a>
+
                         <div className="footerIconsContainer">
                             <a href="http://www.instagram.com/"><FaInstagram className="footerIcon" /></a>
                             <a href="http://www.facebook.com/"><FaFacebook className="footerIcon" /></a>

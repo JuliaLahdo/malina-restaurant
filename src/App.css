@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Rajdhani:300|Source+Sans+Pro:300&display=swap');
 
-* {
+*{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body {
+body{
     line-height: 1.4;
 }
 
