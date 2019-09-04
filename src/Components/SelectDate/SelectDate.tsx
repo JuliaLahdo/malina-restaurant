@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import {IBooking, IBookingsState} from '../../Service/IBooking';
+import { IBooking, IBookingsState} from '../../Service/IBooking';
 import moment from 'moment';
 
+export interface ISelectDateProps {   
+    bookings( bookings: IBooking): void;
+    handleDateChange(): any;
 
-export interface IBookingsProps{
-  bookings(bookings:IBooking):void;
- 
 }
 
 
-export default class SelectDate extends Component <IBookingsProps, IBookingsState>{
-    constructor(props:IBookingsProps) {
+
+
+
+export default class SelectDate extends Component <ISelectDateProps,IBookingsState>{
+    constructor(props: ISelectDateProps) {
         super(props);
           this.state = {
           bookings: 
@@ -33,17 +36,18 @@ export default class SelectDate extends Component <IBookingsProps, IBookingsStat
       }
 
       handleDateChange(date: Date) { 
+          console.log(this.props.bookings);
       
-        let momentDate = moment(date);
-        console.log(momentDate);
+        // let momentDate = moment(date);
+        // console.log(momentDate);
 
-        this.setState((prevState:any)=>{  
-          prevState.bookings.dateOfBooking = momentDate; 
-            return {
-             bookings: prevState.bookings
-            };          
-        });
-        console.log(momentDate);
+        // this.setState((prevState:any)=>{  
+        //   prevState.bookings.dateOfBooking = momentDate; 
+        //     return {
+        //      bookings: prevState.bookings
+        //     };          
+        // });
+        // console.log(momentDate);
       }
 
 
@@ -52,7 +56,7 @@ export default class SelectDate extends Component <IBookingsProps, IBookingsStat
         return (
             <div>
 
-            {this.props.bookings}
+           
                 <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd"/>  
                 </div>
         )
