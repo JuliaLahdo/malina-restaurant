@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
+import Header from '../../Components/Header/Header';
+import {Link} from 'react-router-dom';
 
 class Home extends React.Component {
     render() {
         return (
-            <h4>
-                hello from Home page
-            </h4>
+            <Header title="welcome to Malina restaurnats">
+                 <Link to="/Booking">
+                            Booking
+                            </Link>
+                            </Header>
         )
     }
 }
