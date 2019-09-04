@@ -161,7 +161,7 @@ class Booking extends React.Component<{}, IBookingsState> {
       prevState.bookings.dateOfBooking = momentDate; 
         return {
           bookings: prevState.bookings
-        };          
+        };
     });
     console.log(momentDate);
   }
@@ -169,7 +169,6 @@ class Booking extends React.Component<{}, IBookingsState> {
   handleTimeChange(e:any) {       
     let time = e.target.value; 
     console.log(time);
-
     
     this.setState((prevState:any)=>{  
       prevState.bookings.timeOfBooking = time; 
@@ -211,13 +210,12 @@ class Booking extends React.Component<{}, IBookingsState> {
 
             <div className="email">
               <label htmlFor="email">Email </label>
-              <input type="email" value={ this.state.bookings.email } name="email" placeholder="name@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 3}$" onChange={this.handleChange}/>
+              <input type="email" value={ this.state.bookings.email } name="email" placeholder="name@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 3}$" onChange={this.handleChange} />
             </div>
 
             <div className="phone">
               <label htmlFor="phone">Phone </label>
-              <input type="text" value={ this.state.bookings.phone } name="phone" placeholder="Phonenumber" pattern="^\d{8,13}$
-" onChange={this.handleChange}/>
+              <input type="text" value={ this.state.bookings.phone } name="phone" placeholder="Phonenumber" pattern="^\d{8,13}$" onChange={this.handleChange} />
             </div>
 
             <button disabled={ !this.state.bookings.numberOfGuests || !this.state.bookings.name || !this.state.bookings.email || !this.state.bookings.phone } type="submit">Submit</button>
