@@ -2,11 +2,11 @@ import axios from 'axios';
 
 class Data {
 
-    readData() {
-        axios.get('http://localhost:8888/api/booking/read.php')
+    async readData() {
+        return axios.get('http://localhost/react/malina-backend-php/api/booking/read.php')
             .then(response => {
-                console.log(response.data);
-                return response;
+                //console.log(response.data);
+                return response.data;
             }).catch(error => {
                 console.log(error);
             });
@@ -23,13 +23,17 @@ class Data {
             });
     }
 
-      deleteData(deleteData: any) {
-        axios.post('http://localhost/react/malina-backend-php/api/booking/delete.php', deleteData, {
-            headers: { 'Content-Type': 'text/plain' }})
+      deleteData(id: any) {
+        axios.delete('http://localhost/react/malina-backend-php/api/booking/delete.php', {
+            "data": {
+                "id": id
+            }
+         })
             .then((response: any) => {
                 console.log(response);
                 return response;
             }).catch((error: any) => {
+               
                 console.log(error);
             });
     }
