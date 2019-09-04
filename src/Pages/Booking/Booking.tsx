@@ -26,8 +26,8 @@ interface IBooking {
   timeOfBooking: string;
   numberOfGuests: number;
   email:string;
-  phone:string;
   name:string;
+  phone:string;
 }
 
 interface IBookingsState {    
@@ -44,11 +44,11 @@ class Booking extends React.Component<{}, IBookingsState> {
     this.state = {
       bookings: {              
         dateOfBooking:moment(),
-        timeOfBooking:"",
-        numberOfGuests: 0,
-        email:"",
-        phone:"" ,
-        name:""
+        timeOfBooking: "",
+        numberOfGuests: 1,
+        email: "",
+        name: "",
+        phone: ""
       },
       isAvailableAt18: true,
       isAvailableAt21: true
@@ -72,7 +72,7 @@ class Booking extends React.Component<{}, IBookingsState> {
   }
 
   handleSubmit(e: any) {
-    e.preventDefault();
+    //e.preventDefault();
     console.log(this.state.bookings);
     let postData = {
       'dateOfBooking': this.state.bookings.dateOfBooking.format('YYYY-MM-DD'),
@@ -186,39 +186,41 @@ class Booking extends React.Component<{}, IBookingsState> {
         <Header title="Booking page" />             
         <div className="bookingFormContainer">   
 
-          <form onSubmit={(e) => this.handleSubmit(e)} noValidate>
+          <form onSubmit={(e) => this.handleSubmit(e)}>
             {/* <SelectDate />  */}
             <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd"/>  
-              {/* <SelectTime />  */}     
+            {/* <SelectTime />  */}     
 
             <div className="selectTime">
-                <input type="radio" value="18:00:00" name="timeOfBooking" onChange={this.handleTimeChange} defaultChecked/>
-                18:00
-                <input type="radio" value="21:00:00" name="timeOfBooking" onChange={this.handleTimeChange}/>21:00
+              {/* defaultChecked on 18:00, if not changed then booking won't be created */}
+              <input type="radio" value="18:00:00" name="timeOfBooking" onChange={this.handleTimeChange} />
+              18:00
+              <input type="radio" value="21:00:00" name="timeOfBooking" onChange={this.handleTimeChange}/>21:00
             </div>
 
-              {/* <Details />  */}
+            {/* <Details />  */}
             <div className="guests">
-                <label htmlFor="guests">guests</label>
-                <input type="number" value={ this.state.bookings.numberOfGuests } name="numberOfGuests" placeholder="how many guests?" onChange={this.handleChange}/>
+              <label htmlFor="guests">Number of guests </label>
+              <input type="number" min="1" max="6" value={ this.state.bookings.numberOfGuests } name="numberOfGuests" placeholder="Number of guests?" onChange={ this.handleChange }/>
             </div>
 
             <div className="name">
-                <label htmlFor="name">name</label>
-                <input type="text" value={ this.state.bookings.name } name="name"  placeholder="name" onChange={this.handleChange} />
+              <label htmlFor="name">Name </label>
+              <input type="text" value={ this.state.bookings.name } name="name"  placeholder="Name" onChange={this.handleChange} />
             </div>
 
             <div className="email">
-                <label htmlFor="email">email</label>
-                <input type="text" value={ this.state.bookings.email } name="email" placeholder="email" onChange={this.handleChange}/>
+              <label htmlFor="email">Email </label>
+              <input type="email" value={ this.state.bookings.email } name="email" placeholder="name@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 3}$" onChange={this.handleChange}/>
             </div>
 
             <div className="phone">
-                <label htmlFor="phone">phone</label>
-                <input type="text" value={ this.state.bookings.phone } name="phone" placeholder="phone" onChange={this.handleChange}/>
+              <label htmlFor="phone">Phone </label>
+              <input type="text" value={ this.state.bookings.phone } name="phone" placeholder="Phonenumber" pattern="^\d{8,13}$
+" onChange={this.handleChange}/>
             </div>
 
-            <button disabled={!this.state.bookings.numberOfGuests || !this.state.bookings.name || !this.state.bookings.email || !this.state.bookings.phone}type="submit">submit</button>
+            <button disabled={ !this.state.bookings.numberOfGuests || !this.state.bookings.name || !this.state.bookings.email || !this.state.bookings.phone } type="submit">Submit</button>
           </form>
 
         </div>
