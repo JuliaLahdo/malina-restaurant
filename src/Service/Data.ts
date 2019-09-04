@@ -3,7 +3,7 @@ import axios from 'axios';
 class Data {
 
     async readData() {
-        return axios.get('http://localhost/react/malina-backend-php/api/booking/read.php')
+        return axios.get('http://localhost:8888/api/booking/read.php')
             .then(response => {
                 //console.log(response.data);
                 return response.data;
@@ -13,7 +13,7 @@ class Data {
     }
 
     createData(createData: any) {
-        axios.post('http://localhost/react/malina-backend-php/api/booking/create.php', createData, {
+        axios.post('http://localhost:8888/api/booking/create.php', createData, {
             headers: { 'Content-Type': 'text/plain' }})
             .then((response: any) => {
                 console.log(response);
@@ -24,7 +24,7 @@ class Data {
     }
 
       deleteData(id: any) {
-        axios.delete('http://localhost/react/malina-backend-php/api/booking/delete.php', {
+        axios.delete('http://localhost:8888/api/booking/delete.php', {
             "data": {
                 "id": id
             }
@@ -39,7 +39,7 @@ class Data {
     }
 
     updateData(updateData: any) {
-        axios.post('http://localhost/react/malina-backend-php/api/booking/update.php', updateData, {
+        axios.post('http://localhost:8888/api/booking/update.php', updateData, {
             headers: { 'Content-Type': 'text/plain' }})
             .then((response: any) => {
                 console.log(response);
