@@ -2,16 +2,49 @@ import React from 'react';
 import './Navbar.css';
 import logo from '../../Images/blacklogo.svg';
 import { Link } from 'react-router-dom';
+import { FaBars } from 'react-icons/fa';
 
-class Navbar extends React.Component {
+
+
+interface IState {    
+    isOpen: boolean;
+  }
+
+
+
+class Navbar extends React.Component<{}, IState> {
+    constructor(props:any){
+        super(props);
+            this.state = {
+                isOpen: false
+            }
+
+        this.handleToggle = this.handleToggle.bind(this);
+    }
+    
+
+    handleToggle(){
+        this.setState({
+            isOpen:!this.state.isOpen
+        })
+    }
+
     render() {
         return(
             <nav className="navbar">
-                <Link to="/">
-                    <img src={logo} alt="logo" />
-                </Link>
+                <div className="navCenter">
+                    <div className="navHeader">
+                        <Link to="/">
+                            <img src={logo} alt="malina Restaurant" />
+                        </Link>
+                        <button type="button" className="navBtn" onClick={this.handleToggle}>
+                            <FaBars className="navIcon" />
+                        </button>
+                    </div>
+                </div>
+               
                 <div>
-                    <ul>
+                    <ul className={this.state.isOpen ? "navLinks showNav" : "navLinks"}>
                         <li>
                             <Link to="/">
                             Home

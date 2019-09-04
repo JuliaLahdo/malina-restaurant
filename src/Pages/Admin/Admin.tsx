@@ -1,6 +1,5 @@
 import React from 'react'
 import Data from '../../Service/Data'
-import { isTemplateElement } from '@babel/types';
 
 interface IBooking {
     id: number;
