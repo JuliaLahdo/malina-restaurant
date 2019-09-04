@@ -1,46 +1,63 @@
 import React from 'react'
 import Data from '../../Service/Data'
+import { isTemplateElement } from '@babel/types';
 
-class Admin extends React.Component {
+interface IBooking {
+    id: number;
+}
 
-    state = {
-        getReservations: []
+interface IAdminState {
+    reservations:  IBooking[];
+}
+
+class Admin extends React.Component<{}, IAdminState> {
+
+    constructor(props: any) {
+        super(props);
+
+        this.state = {
+            reservations: []
+        }
     }
+    
 
-    componentDidMount() {
+  componentDidMount() {
         const getBookings = new Data();
         getBookings.readData()
         .then(response => {
-            this.setState({getReservations: response.bookings});
+            this.setState({reservations: response.bookings});
 
             console.log(response.bookings)
             //console.log(getBookings.readData()); //works
         })
         .catch(error => console.log(error));
     }
+    
 
     getReservation = (id: number) => {
         console.log('This reservation with id ' + id)
     }
 
     deleteReservation = (id: number) => {
+
         console.log('Delete reservation with id ' + id)
         const deleteBookings = new Data();
         deleteBookings.deleteData(id);
-        this.state.getReservations.map((item, index) => (
-            this.state.getReservations.splice(index,1)
-        ))
-        this.setState({getReservations: this.state.getReservations});
+        this.state.reservations.map((item, index) => {
+            if(item.id === id) {
+                this.state.reservations.splice(index,1);
+            }
+        })
+        this.setState({reservations: this.state.reservations});
     }
     
-    
     listReservations = () => {
-        return this.state.getReservations.map( (booking: any) => {
+        return this.state.reservations.map( (booking: any) => {
             return (
             <li key={"Reservation: " + booking.id}>Reservation made by {booking.name} {booking.email}
             {booking.phone} on {booking.dateOfBooking} {booking.timeOfBooking} for {booking.numberOfGuests} guests
             <button onClick={(event) => this.getReservation(booking.id)}>Get</button>
-            <button onClick={(event) => this.deleteReservation(booking.id)}>Delete</button>
+             <button onClick={(event) => this.deleteReservation(booking.id)}>Delete</button>
             </li>
             )
         });
@@ -50,6 +67,7 @@ class Admin extends React.Component {
         <div>
             <ul>
             {this.listReservations()}
+           
             </ul>
             </div>
             )
