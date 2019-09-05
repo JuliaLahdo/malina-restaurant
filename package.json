@@ -10,6 +10,10 @@
     "@types/react-datepicker": "^2.8.1",
     "@types/react-dom": "16.9.0",
     "axios": "^0.19.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.4.0",
+    "jest": "^24.9.0",
     "moment": "^2.24.0",
     "react": "^16.9.0",
     "react-datepicker": "^2.9.3",
@@ -44,5 +48,13 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^4.3.5"
+  },
+  "jest": {
+    "setupFiles": [
+      "./test/jestsetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }

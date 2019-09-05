@@ -42,7 +42,7 @@ class Admin extends React.Component<{}, IAdminState> {
         console.log('Delete reservation with id ' + id)
         const deleteBookings = new Data();
         deleteBookings.deleteData(id);
-        this.state.reservations.map((item, index) => {
+        this.state.reservations.forEach((item, index) => {
             if(item.id === id) {
                 this.state.reservations.splice(index,1);
             }
