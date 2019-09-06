@@ -6,6 +6,7 @@ import './Booking.css';
 import axios from 'axios';
 import moment from 'moment';
 import Header from '../../Components/Header/Header';
+import { FaGalacticSenate } from 'react-icons/fa';
 
 
 // import SelectDate from '../../Components/SelectDate/SelectDate';
@@ -41,6 +42,7 @@ interface IError {
 
 interface IBookingsState {    
   bookings: IBooking;
+  isCheckedGdpr: boolean;
   isAvailableAt18: boolean;
   isAvailableAt21: boolean;
   isAvilableBookingTime: boolean;
@@ -65,7 +67,7 @@ class Booking extends React.Component<{}, IBookingsState> {
         nameError: "",
         phoneError: ""
       },
-     
+      isCheckedGdpr: false,
       isAvailableAt18: true,
       isAvailableAt21: true,
       isAvilableBookingTime: false
@@ -76,6 +78,8 @@ class Booking extends React.Component<{}, IBookingsState> {
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.checkedGdpr = this.checkedGdpr.bind(this);
+    this.validate = this.validate.bind(this);
   }
 
   componentDidMount(){
@@ -93,16 +97,26 @@ class Booking extends React.Component<{}, IBookingsState> {
     let nameError="";
     let phoneError= "";
 
-    if(!this.state.bookings.email.includes('@')){
-      emailError = "invalid email";
+    if(!this.state.bookings.email){
+      emailError = "E-mail can not be blank";
     }
 
+    
+
     if(!this.state.bookings.name){
-      nameError = "name can not be blank";
+      nameError = "Name can not be blank";
+    }
+
+    if(this.state.bookings.name.length < 3){
+      nameError = "Name can not be more than 3 characters";
     }
 
     if(!this.state.bookings.phone){
-      phoneError = "phone can not be blank";
+      phoneError = "Phone can not be blank";
+    }
+
+    if(this.state.bookings.phone.length < 5){
+      phoneError = "Phone can not be more than 5 numbers";
     }
 
     if(emailError||nameError||phoneError){
@@ -115,7 +129,7 @@ class Booking extends React.Component<{}, IBookingsState> {
     return true;
   }
 
-  handleSubmit() {
+  handleSubmit(e:any) {
     // e.preventDefault();
     console.log(this.state.bookings);  
 
@@ -140,6 +154,8 @@ class Booking extends React.Component<{}, IBookingsState> {
           }).catch((error: any) => {
               console.log(error);
         });
+      }else{
+       e.preventDefault();
       }   
   }
 
@@ -241,6 +257,20 @@ class Booking extends React.Component<{}, IBookingsState> {
    }
   }
 
+  checkedGdpr(){
+    if(!this.state.isCheckedGdpr){
+      this.setState({
+        isCheckedGdpr: true
+      });
+
+    }else{
+      this.setState({
+        isCheckedGdpr: false
+      });
+    }
+   
+  }
+
  
 
   render() {
@@ -250,7 +280,7 @@ class Booking extends React.Component<{}, IBookingsState> {
         <Header title="Booking page" />             
         <div className="bookingFormContainer">   
 
-          <form onSubmit={() => this.handleSubmit()}>
+          <form onSubmit={(e) => this.handleSubmit(e)}>
             {/* <SelectDate />  */}
             <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd" />  
             {/* <SelectTime />  */}     
@@ -305,7 +335,13 @@ class Booking extends React.Component<{}, IBookingsState> {
               ) : null }
             </div>
 
-            <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking} type="submit">Submit</button>
+            <div className="gdpr">
+              <label htmlFor="gdpr">GDPR</label>
+              <input type="checkbox" checked={this.state.isCheckedGdpr} onChange={this.checkedGdpr}/>
+  
+            </div>
+
+            <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit">Submit</button>
             
 
             {/* <button type="submit">Submit</button> */}
