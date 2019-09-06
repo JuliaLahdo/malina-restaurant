@@ -26,6 +26,8 @@ export default class Header extends Component <IHeaderProps,{}>{
                             <h1 className="text">
                                 {this.props.title}
                             </h1>
+                            
+                           
                         </div>
                
                 </div>

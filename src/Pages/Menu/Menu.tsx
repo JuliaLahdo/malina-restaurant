@@ -49,7 +49,7 @@ class Menu extends React.Component {
 
         return (
             <div>
-                <Header images="menuImages" title="Welcome to Malina" />
+                <Header images="menuImages" title="Our Menu" />
                         
                    
                 <h3>Starter</h3>
