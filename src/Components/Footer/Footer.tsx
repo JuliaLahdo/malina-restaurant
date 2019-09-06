@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './Footer.css';
+
+
 import logo from '../../Images/WhiteLogo.svg';
+
 import { FaInstagram, FaFacebook, FaTwitter } from 'react-icons/fa';
 
 export default class Footer extends Component {
