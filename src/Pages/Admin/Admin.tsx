@@ -11,6 +11,8 @@ interface IAdminState {
 
 class Admin extends React.Component<{}, IAdminState> {
 
+    _isMounted = false;
+
     constructor(props: any) {
         super(props);
 
@@ -21,16 +23,23 @@ class Admin extends React.Component<{}, IAdminState> {
     
 
   componentDidMount() {
+    this._isMounted = true;
         const getBookings = new Data();
         getBookings.readData()
         .then(response => {
+            if (this._isMounted) {
             this.setState({reservations: response.bookings});
 
             console.log(response.bookings)
             //console.log(getBookings.readData()); //works
+            }
         })
         .catch(error => console.log(error));
     }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+      }
     
 
     getReservation = (id: number) => {
@@ -42,7 +51,7 @@ class Admin extends React.Component<{}, IAdminState> {
         console.log('Delete reservation with id ' + id)
         const deleteBookings = new Data();
         deleteBookings.deleteData(id);
-        this.state.reservations.map((item, index) => {
+        this.state.reservations.forEach((item, index) => {
             if(item.id === id) {
                 this.state.reservations.splice(index,1);
             }
