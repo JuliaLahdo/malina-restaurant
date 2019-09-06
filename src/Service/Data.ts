@@ -12,6 +12,16 @@ class Data {
             });
     }
 
+    async readSingleBooking(id: number) {
+        return axios.get('http://localhost:8888/api/booking/readSingleBooking.php?id='+id)
+            .then(response => {
+                //console.log(response.data);
+                return response.data;
+            }).catch(error => {
+                console.log(error);
+            });
+    }
+
     createData(createData: any) {
         axios.post('http://localhost:8888/api/booking/create.php', createData, {
             headers: { 'Content-Type': 'text/plain' }})
