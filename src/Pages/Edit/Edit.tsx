@@ -107,7 +107,7 @@ class Edit extends React.Component<IEditProps, IBooking>{
         //console.log(this.listReservations());
         return (
             <div>
-                <Header title="Edit"></Header>
+                <Header images="headerImages" title="Edit"></Header>
                 {/* <input type="text" name="Name" value={this.state.reservationsState.dateOfBooking} onChange={this.handleEditDateChange} /> */}
                 <ul>
                     {this.listReservations()};

@@ -1,5 +1,7 @@
 import React from 'react';
 import MenuData from '../../Service/MenuData';
+import Header from '../../Components/Header/Header';
+import './Menu.css';
 
 export interface IMenuData {
     type: string;
@@ -47,6 +49,9 @@ class Menu extends React.Component {
 
         return (
             <div>
+                <Header images="menuImages" title="Welcome to Malina" />
+                        
+                   
                 <h3>Starter</h3>
                 {startersItemContainer}
 

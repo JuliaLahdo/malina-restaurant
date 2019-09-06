@@ -6,7 +6,7 @@ import './NotFound404.css';
 class NotFound404 extends React.Component {
     render() {
         return (
-           <Header title="404">
+           <Header images="errorImages" title="404">
             <h2>
                 you are in the wrong place
             </h2>
