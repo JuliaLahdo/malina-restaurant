@@ -17,6 +17,11 @@
     box-shadow: 0px 10px 30px grey;
 }
 
+form div{
+    margin-top: 10px;
+
+}
+
 label {
     font-size: 0.8em;
     margin-bottom: 0.25em;
