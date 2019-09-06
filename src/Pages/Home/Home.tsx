@@ -12,9 +12,9 @@ class Home extends React.Component {
                         <Link to="/Booking">Booking</Link>
                     </Header>
 
-                    <div className="container">
+                    {/* <div className="container"> */}
                         <img src={relax} alt="Malina restaurant window" className="windowImage" />
-                    </div>
+                    {/* </div> */}
                 </div>
             </div>
         )
