@@ -277,7 +277,7 @@ class Booking extends React.Component<{}, IBookingsState> {
     console.log(this.state.bookings);
     return (
       <div className="container">
-        <Header title="Booking page" />             
+        <Header images="bookingImages" title="Booking page" />             
         <div className="bookingFormContainer">   
 
           <form onSubmit={(e) => this.handleSubmit(e)}>

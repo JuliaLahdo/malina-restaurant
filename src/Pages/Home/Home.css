@@ -1,3 +1,17 @@
+.headerImages{
+    min-height: 60vh;
+    width: 100%;
+    background: url("../../Images/menugirleating.jpg") center / cover no-repeat;
+   
+
+}
+
+/* div{
+    border: solid 1px black;
+} */
+
+
+
 /* Small devices (landscape phones, 320px and up) */
 @media (min-width: 320px) {
     /* img.windowImage{
