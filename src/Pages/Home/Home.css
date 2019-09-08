@@ -7,21 +7,21 @@
         margin-bottom: 2em;
     }
 
-    .homeContainer{
-        text-align: center;
+    .reservationLinksContainer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .reservationImage{
         max-height: 15vh;
         max-width: 100%;
-        /* display: block; */
+        padding-right: 2em;
         margin: 0 auto;
     }
 
     .reservationsLink{
         font-family: 'Rajdhani', sans-serif;
-        /* text-align: center; */
-        /* display: block; */
         color: #1F1F1F;
         font-size: 2rem;
     }

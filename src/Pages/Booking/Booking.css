@@ -1,22 +1,19 @@
 /* Small devices (landscape phones, 320px and up) */
 @media (min-width: 320px) {
     .container{
-        
         width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-bottom: 100px;
+        margin-bottom: 5em;
     }
     
-    
     .bookingImages{
-        min-height: 60vh;
+        min-height: 100vh;
         width: 100%;
-        background: url("../../Images/bookingjohansjogren.jpg") center / cover no-repeat;
-       
-    
+        background: url("../../Images/menurestaurant.jpg") center / cover no-repeat;
+        margin-bottom: 2em;
     }
     
     .bookingFormContainer{        
@@ -30,7 +27,6 @@
     
     form div{
         margin-top: 10px;
-    
     }
     
     label {
