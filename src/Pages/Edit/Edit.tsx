@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../../Components/Header/Header';
 import './Edit.css';
 import Data from '../../Service/Data';
-// import { IBooking } from '../Admin/Admin';
 import moment from 'moment';
 
 export interface IListBookingDetails {
@@ -110,7 +109,7 @@ class Edit extends React.Component<IEditProps, IBooking>{
                 <Header images="headerImages" title="Edit"></Header>
                 {/* <input type="text" name="Name" value={this.state.reservationsState.dateOfBooking} onChange={this.handleEditDateChange} /> */}
                 <ul>
-                    {this.listReservations()};
+                    {this.listReservations()}
                 </ul>
             </div>
         )
