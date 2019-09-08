@@ -1,47 +1,68 @@
-.navbar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 0.75em 2rem;
-   
+/* Small devices (landscape phones, 320px and up) */
+@media (min-width: 320px) {
+    .navbar{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 0.75em 2rem;
+       
+        
+        
+    }
+    
+    .navIcon{
+        font-size: 1.5rem;
+        color: grey;
+       
+    }
+    
+    .navLinks{
+        height: 0;
+        overflow: hidden;   
+        list-style-type: none;
+    }
+    
+    .navHeader{
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .showNav{
+        height: 100px;
+    }
     
     
+    .navBtn{
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+    
+    }
 }
 
-.navIcon{
-    font-size: 1.5rem;
-    color: grey;
-   
-}
-
-.navLinks{
-    height: 0;
-    overflow: hidden;   
-    list-style-type: none;
-}
-
-.navHeader{
-    display: flex;
-    justify-content: space-between;
-}
-
-.showNav{
-    height: 100px;
-}
-
-
-.navBtn{
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
 
 }
 
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
 
+}
 
-@media screen and(min-width: 576px){
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
+/* @media screen and(min-width: 576px){
     .navBtn{
         display: none;
     }
@@ -54,5 +75,4 @@
 
 @media screen and(min-width: 992px){
     
-}
-
+} */
