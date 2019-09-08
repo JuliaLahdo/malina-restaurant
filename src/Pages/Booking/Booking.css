@@ -1,66 +1,124 @@
 /* Small devices (landscape phones, 320px and up) */
 @media (min-width: 320px) {
-    .container{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 5em;
-    }
-    
     .bookingImages{
         min-height: 100vh;
         width: 100%;
         background: url("../../Images/menurestaurant.jpg") center / cover no-repeat;
         margin-bottom: 2em;
     }
-    
-    .bookingFormContainer{        
-        /* width: 30%; */
+
+    .container{
+        /* width: 100%;
         display: flex;
         flex-direction: column;
-        padding: 20px;
-        border-radius: 10%;
-        box-shadow: 0px 10px 30px grey;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 5em; */
+    }
+
+    .pageDescription a{
+        color: #A43B0A;
+    }
+
+    .pageDescription a:hover{
+        color: #E87421;
+    }
+
+    .pageDescription p{
+        margin-bottom: 1em;
+    }
+
+    .bookingFormContainer{
+        /* display: flex;
+        justify-content: space-between; */
     }
     
     form div{
-        margin-top: 10px;
+        margin: 0.2em 0 0.5em 0;
+
     }
     
+    .bookingForm{
+        font-family: 'Source Sans Pro', sans-serif;
+        width: 90%;
+        display: flex;
+        /* justify-content: center; */
+        /* align-items: center; */
+        /* flex-direction: column; */
+        margin: 3em 0 5em 0;
+        padding: 1.5em;
+        border-radius: 10%;
+        box-shadow: 0px 10px 30px grey;
+    }
+
     label {
-        font-size: 0.8em;
-        margin-bottom: 0.25em;
+        display: block;
+        margin-top: 0.8em;
         color: #222;
-        font-weight: lighter;
+        /* font-weight: lighter; */
+        /* font-size: 0.8em; */
     }
     
     input {
         padding: 10px;
         border-radius: 5px;
-        outline: none;
+        /* outline: none; */
         border: 1px solid grey;
+    }
+
+    .timeToBook{
+        display: inline-block;
+    }
+
+    .firstTime{
+        margin-right: 2em;
+    }
+    
+    .radioButtonsTime{
+        margin-right: 0.5em;
+    }
+
+    .imageContainerForm{
+        width: 80%;
+        margin: 3em;
+        /* height: auto; */
+        /* flex: 100%; */
+    }
+
+    img.dessertImage{
+        width: 80%;
+        margin: 3em;
+        /* height: auto; */
+        /* max-height: 70vh; */
+        /* object-fit: cover; */
     }
     
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-
+    .bookingForm{
+        width: 80%
+    }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-
+    .bookingForm{
+        width: 70%
+    }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-
+    .bookingForm{
+        width: 60%
+    }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-
+    .bookingForm{
+        width: 50%
+    }
 }
