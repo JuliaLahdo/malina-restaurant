@@ -25,8 +25,6 @@ import { Redirect } from 'react-router';
  
 // }
 
-
-
 interface IBooking {  
   dateOfBooking: moment.Moment;
   timeOfBooking: string;
