@@ -5,11 +5,11 @@ import Data from '../../Service/Data';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 
-interface IError {
-    emailError: string,
-    nameError: string,
-    phoneError: string
-  }
+// interface IError {
+//     emailError: string,
+//     nameError: string,
+//     phoneError: string
+// }
 
 export interface IUpdateBooking {
     id: number;
@@ -27,7 +27,7 @@ interface IBookingsState {
     isAvailableAt18: boolean;
     isAvailableAt21: boolean;
     isAvilableBookingTime: boolean;
-    errors: IError;
+    // errors: IError;
 }
 
 interface IEditProps {
@@ -49,11 +49,11 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
                 name: '',
                 phone: ''
             },
-            errors: {        
-              emailError: "",
-              nameError: "",
-              phoneError: ""
-            },
+            // errors: {        
+            //   emailError: "",
+            //   nameError: "",
+            //   phoneError: ""
+            // },
             isCheckedGdpr: false,
             isAvailableAt18: true,
             isAvailableAt21: true,
@@ -61,7 +61,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
           };  
         
         this.getReservation = this.getReservation.bind(this);
-        this.listReservations = this.listReservations.bind(this);
+        // this.listReservations = this.listReservations.bind(this);
     }
 
     componentDidMount() {
@@ -69,6 +69,41 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
 
         this.getReservation(this.props.match.params.id);
     }
+
+    // validate() {
+    //     let emailError= "";
+    //     let nameError="";
+    //     let phoneError= "";
+    
+    //     if(!this.state.bookings.email){
+    //       emailError = "E-mail can not be blank";
+    //     }
+    
+    //     if(!this.state.bookings.name){
+    //       nameError = "Name can not be blank";
+    //     }
+    
+    //     if(this.state.bookings.name.length < 3){
+    //       nameError = "Name can not be more than 3 characters";
+    //     }
+    
+    //     if(!this.state.bookings.phone){
+    //       phoneError = "Phone can not be blank";
+    //     }
+    
+    //     if(this.state.bookings.phone.length < 5){
+    //       phoneError = "Phone can not be more than 5 numbers";
+    //     }
+    
+    //     if(emailError||nameError||phoneError){
+    //          this.setState({
+    //            errors: 
+    //            {emailError,nameError,phoneError}
+    //           });
+    //       return false;
+    //     }
+    //     return true;
+    // }
 
     handleDeleteBooking(id: number) {
         const deleteBookings = new Data();
@@ -97,11 +132,58 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
     }
 
     changeDate(e: Date) {
+        // let momentDate = moment(e);
+
+        // let numberOfTablesBookedAt18 = [];
+        // let numberOfTablesBookedAt21 = [];
+
+        // if(momentDate.format('YYYY-MM-DD') < moment().format('YYYY-MM-DD')){
+        //     alert("can not book");
+        //   }{
+        //     for (let i = 0; i < this.state.bookings.length; i++){   
+        //       if(this.state.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
+        //        if(response.data.bookings[i].timeOfBooking === "18:00:00") {
+        //           numberOfTablesBookedAt18.push(response.data.bookings[i]);
+        //           console.log(numberOfTablesBookedAt18);
+        //        }
+        //        if(response.data.bookings[i].timeOfBooking === "21:00:00") {
+        //           numberOfTablesBookedAt21.push(response.data.bookings[i]);
+        //           console.log(numberOfTablesBookedAt21);
+        //       }
+        //     }
+        //   }    
+        // }
+        //   if(numberOfTablesBookedAt18.length > 14) {
+        //     console.log("full booking 18:00:00");
+        //     this.setState({
+        //       isAvailableAt18: false 
+        //     });
+    
+        //   } else {
+        //     console.log("can book 18:00:00");
+        //     this.setState({
+        //       isAvailableAt18: true
+        //     });
+        //   }
+    
+        //   if(numberOfTablesBookedAt21.length > 14) {
+        //     console.log("full booking 21:00:00");
+        //     this.setState({
+        //       isAvailableAt21: false 
+        //     });
+        //   } else {
+        //     console.log("can book 21:00:00");
+        //     this.setState({
+        //       isAvailableAt21: true
+        //     });
+        //   }
+        //     return response;
+        // }).catch(error => {
+        //     console.log(error);
+        // });
+
         this.setState(prevState => {
             prevState.bookings.dateOfBooking = moment(e);
-            // prevState.bookings.dateOfBooking = moment(e).format(YYYY-MM-DD);
-            // moment(e).format(yyyy-MM-dd);
-            // moment(e).moment.HTML5_FMT.DATE
             return {
                 bookings: prevState.bookings
             }
@@ -135,6 +217,16 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
         const updateBooking = new Data();
         updateBooking.updateData(this.state.bookings);
     }
+
+    // handleSubmit(e: any) {
+        // const isValid = this.validate();
+        // if(isValid) {
+        //     const updateBooking = new Data();
+        //     updateBooking.updateData(this.state.bookings);
+        // } else {
+        //     e.preventDefault();
+        // }
+    // }
 
     listReservations() : JSX.Element {
 
