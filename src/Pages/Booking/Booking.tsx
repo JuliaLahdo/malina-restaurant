@@ -129,9 +129,6 @@ class Booking extends React.Component<{}, IBookingsState> {
   }
 
   handleSubmit(e:any) {
-    // e.preventDefault();
-    console.log(this.state.bookings);  
-
     const isValid = this.validate();
     if(isValid) {
       console.log(this.state.bookings);
@@ -180,6 +177,8 @@ class Booking extends React.Component<{}, IBookingsState> {
     }         
   }
 
+
+
   handleDateChange(date: Date) {      
     let momentDate = moment(date); 
     axios.get('http://localhost:8888/api/booking/read.php')
@@ -191,6 +190,7 @@ class Booking extends React.Component<{}, IBookingsState> {
       
     if(momentDate.format('YYYY-MM-DD') < moment().format('YYYY-MM-DD')){
         alert("can not book");
+
       }{
         for (let i = 0; i < response.data.bookings.length; i++){   
           if(response.data.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
@@ -260,17 +260,14 @@ class Booking extends React.Component<{}, IBookingsState> {
       this.setState({
         isCheckedGdpr: true
       });
-
     }else{
       this.setState({
         isCheckedGdpr: false
       });
-    }
-   
+    }   
   }
 
   render() {
-    console.log(this.state.bookings);
     return (
       <div className="container">
         <Header images="bookingImages" title="Booking page" />
@@ -290,7 +287,7 @@ class Booking extends React.Component<{}, IBookingsState> {
             <form onSubmit={(e) => this.handleSubmit(e)}>
               {/* <SelectDate />  */}
               <p>Select date:</p>
-              <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd" />  
+              <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd" minDate={moment().toDate()} />  
               {/* <SelectTime />  */}     
             
             <div className="selectTime">
