@@ -6,7 +6,6 @@ import './Booking.css';
 import axios from 'axios';
 import moment from 'moment';
 import Header from '../../Components/Header/Header';
-import {Link} from 'react-router-dom';
 import { Redirect } from 'react-router';
 // import dessert from '../../Images/indexcarousel1.png';
 // import { FaGalacticSenate } from 'react-icons/fa';
@@ -37,8 +36,7 @@ interface IBooking {
   phone:string;
 }
 
-interface IError {
-  
+interface IError {  
   emailError: string,
   nameError: string,
   phoneError: string
@@ -67,8 +65,7 @@ class Booking extends React.Component<{}, IBookingsState> {
         name: "",
         phone: ""
       },
-      errors: {    
-       
+      errors: {       
         emailError: "",
         nameError: "",
         phoneError: ""
@@ -157,13 +154,14 @@ class Booking extends React.Component<{}, IBookingsState> {
           headers: { 'Content-Type': 'text/plain' }})
           .then((response: any) => {
               console.log(response);
-              return response;
+        this.setState({
+          showConfirmation: true 
+        });
+                      return response;
           }).catch((error: any) => {
               console.log(error);
         });
-        // this.setState({
-        //   showConfirmation: true 
-        // });
+
         
       }else{
        e.preventDefault();
@@ -202,11 +200,6 @@ class Booking extends React.Component<{}, IBookingsState> {
       let numberOfTablesBookedAt18 = [];
       let numberOfTablesBookedAt21 = [];
 
-      
-    if(momentDate.format('YYYY-MM-DD') < moment().format('YYYY-MM-DD')){
-        alert("can not book");
-
-      }{
         for (let i = 0; i < response.data.bookings.length; i++){   
           if(response.data.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
            if(response.data.bookings[i].timeOfBooking === "18:00:00") {
@@ -219,7 +212,7 @@ class Booking extends React.Component<{}, IBookingsState> {
           }
         }
       }    
-    }
+
       if(numberOfTablesBookedAt18.length > 14) {
         console.log("full booking 18:00:00");
         this.setState({
@@ -257,6 +250,7 @@ class Booking extends React.Component<{}, IBookingsState> {
   }
 
   handleTimeChange(e:any) {
+    
     if (this.state.isAvailableAt18 === true || this.state.isAvailableAt21 === true){
       let time = e.target.value; 
       this.setState((prevState:any)=>{  
@@ -265,10 +259,13 @@ class Booking extends React.Component<{}, IBookingsState> {
             bookings: prevState.bookings
           };          
       });
-    }else{
+    }
+    
+    else{
       console.log("can not booking");
    }
   }
+
 
   checkedGdpr(){
     if(!this.state.isCheckedGdpr){
@@ -285,7 +282,7 @@ class Booking extends React.Component<{}, IBookingsState> {
   showConfirmation(){
     this.setState({
       showConfirmation: true
-  })
+    })
   }
 
  
@@ -318,8 +315,8 @@ class Booking extends React.Component<{}, IBookingsState> {
               <p>Select date:</p>
               <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd" minDate={moment().toDate()} />  
               {/* <SelectTime />  */}     
-            
-            <div className="selectTime">
+             
+            <div className= {this.handleDateChange ? "selectTime" : "disabledSelectTime"}>
                 {/* defaultChecked on 18:00, if not changed then booking won't be created */}
               <p>Select time:</p>
                 <input type="radio" value="18:00:00" name="timeOfBooking" disabled={!this.state.isAvailableAt18} onChange={this.handleTimeChange} className="radioButtonsTime"/>
@@ -386,7 +383,7 @@ class Booking extends React.Component<{}, IBookingsState> {
      );}
    } */}
 
-            <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit" onClick={this.showConfirmation}>Submit
+            <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit"/*  onClick={this.showConfirmation} */>Submit
    
               </button>
               

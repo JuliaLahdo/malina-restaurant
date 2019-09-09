@@ -1,4 +1,9 @@
 /* Small devices (landscape phones, 320px and up) */
+
+.disabledSelectTime{
+    display: none; 
+}
+
 @media (min-width: 320px) {
     .bookingImages{
         min-height: 100vh;
