@@ -8,11 +8,6 @@ export interface IHeaderProps {
 
 export default class Header extends Component <IHeaderProps,{}>{
 
-    constructor(props: IHeaderProps) {
-        super(props);
-      }
-
-
     render() {
         return (
                <div className="headerContainer">

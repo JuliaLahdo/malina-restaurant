@@ -6,9 +6,6 @@ import './Booking.css';
 import axios from 'axios';
 import moment from 'moment';
 import Header from '../../Components/Header/Header';
-import dessert from '../../Images/indexcarousel1.png';
-import { FaGalacticSenate } from 'react-icons/fa';
-
 
 // import SelectDate from '../../Components/SelectDate/SelectDate';
 // import SelectTime from '../../Components/SelectTime/SelectTime';
@@ -23,8 +20,6 @@ import { FaGalacticSenate } from 'react-icons/fa';
 //   bookingDatas(bookingData:IBooking):void;
  
 // }
-
-
 
 interface IBooking {  
   dateOfBooking: moment.Moment;
