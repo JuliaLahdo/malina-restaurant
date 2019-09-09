@@ -6,6 +6,7 @@ import './Booking.css';
 import axios from 'axios';
 import moment from 'moment';
 import Header from '../../Components/Header/Header';
+import dessert from '../../Images/indexcarousel1.png';
 import { FaGalacticSenate } from 'react-icons/fa';
 
 
@@ -100,8 +101,6 @@ class Booking extends React.Component<{}, IBookingsState> {
     if(!this.state.bookings.email){
       emailError = "E-mail can not be blank";
     }
-
-    
 
     if(!this.state.bookings.name){
       nameError = "Name can not be blank";
@@ -242,7 +241,6 @@ class Booking extends React.Component<{}, IBookingsState> {
     });
   }
 
-
   handleTimeChange(e:any) {
     if (this.state.isAvailableAt18 === true || this.state.isAvailableAt21 === true){
       let time = e.target.value; 
@@ -271,83 +269,97 @@ class Booking extends React.Component<{}, IBookingsState> {
    
   }
 
- 
-
   render() {
     console.log(this.state.bookings);
     return (
       <div className="container">
-        <Header images="bookingImages" title="Booking page" />             
-        <div className="bookingFormContainer">   
+        <Header images="bookingImages" title="Booking page" />
 
-          <form onSubmit={(e) => this.handleSubmit(e)}>
-            {/* <SelectDate />  */}
-            <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd" />  
-            {/* <SelectTime />  */}     
+        <div className="pageHeaderContainer">
+          <h1 className="pageHeading">Make a reservation</h1>
+        </div>
+        <div className="pageDescription">
+          <p>So you want to book a table? <strong>Awesome!</strong> Easily make your reservation below, where you can book for 1-6 people.</p>
+          <p>For larger parties or for those who would rather book by phone, call <a href="tel: +46725113113">072 511 3113</a> or email us at <a href="mailto: reservation@malina.se">reservation@malina.se</a>.</p>
+          <p><i>Please note that sitting time is calculated to 2,5hrs.</i></p>
+        </div>
+                  
+        <div className="bookingFormContainer">
 
-           
-          <div className="selectTime">
-              {/* defaultChecked on 18:00, if not changed then booking won't be created */}
-              <input type="radio" value="18:00:00" name="timeOfBooking" disabled={!this.state.isAvailableAt18} onChange={this.handleTimeChange} />
-              18:00
-              <input type="radio" value="21:00:00" name="timeOfBooking" disabled={!this.state.isAvailableAt21} onChange={this.handleTimeChange}/>21:00
-            </div>
-       
-
-            {/* <Details />  */}
-            <div className="guests">
-              <label htmlFor="guests">Number of guests </label>
-              <input type="number" min="1" max="6" value={ this.state.bookings.numberOfGuests } name="numberOfGuests" placeholder="Number of guests?" onChange={ this.handleChange }/>
-            </div>
-
-            <div className="name">
-              <label htmlFor="name">Name </label>
-              <input type="text" value={ this.state.bookings.name } name="name"  placeholder="Name" onChange={this.handleChange} />
-
-              {this.state.errors.nameError ? (<div style={{color: "red"}}>{this.state.errors.nameError}</div>
-              ) : null }
-              
-            </div>
-
-            {/* <div className="email">
-              <label htmlFor="email">Email </label>
-              <input type="email" value={ this.state.bookings.email } name="email" placeholder="name@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 3}$" onChange={this.handleChange} />
-            </div> */}
-
-            <div className="email">
-              <label htmlFor="email">Email </label>
-              <input type="email" placeholder="name@email.com"  value={ this.state.bookings.email } name="email"  onChange={this.handleChange} />
-              {/* error handling */}
-              {this.state.errors.emailError ? (<div style={{color: "red"}}>{this.state.errors.emailError}</div>
-              ) : null }              
-            </div>
-           
-{/* 
-            <div className="phone">
-              <label htmlFor="phone">Phone </label>
-              <input type="text" value={ this.state.bookings.phone } name="phone" placeholder="Phonenumber" pattern="^\d{8,13}$" onChange={this.handleChange} />
-            </div> */}
-
-            <div className="phone">
-              <label htmlFor="phone">Phone </label>
-              <input type="text" value={ this.state.bookings.phone } name="phone" placeholder="Phonenumber" onChange={this.handleChange} />
-              {this.state.errors.phoneError ? (<div style={{color: "red"}}>{this.state.errors.phoneError}</div>
-              ) : null }
-            </div>
-
-            <div className="gdpr">
-              <label htmlFor="gdpr">GDPR</label>
-              <input type="checkbox" checked={this.state.isCheckedGdpr} onChange={this.checkedGdpr}/>
-  
-            </div>
-
-            <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit">Submit</button>
+          <div className="bookingForm">
+            <form onSubmit={(e) => this.handleSubmit(e)}>
+              {/* <SelectDate />  */}
+              <p>Select date:</p>
+              <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd" />  
+              {/* <SelectTime />  */}     
             
+            <div className="selectTime">
+                {/* defaultChecked on 18:00, if not changed then booking won't be created */}
+              <p>Select time:</p>
+                <input type="radio" value="18:00:00" name="timeOfBooking" disabled={!this.state.isAvailableAt18} onChange={this.handleTimeChange} className="radioButtonsTime"/>
+                <p className="timeToBook firstTime">18:00</p>
+                <input type="radio" value="21:00:00" name="timeOfBooking" disabled={!this.state.isAvailableAt21} onChange={this.handleTimeChange} className="radioButtonsTime"/>
+                <p className="timeToBook">21:00</p>
+              </div>
 
-            {/* <button type="submit">Submit</button> */}
-          </form>
+              {/* <Details />  */}
+              <div className="guests">
+                <label htmlFor="guests">Number of guests <i>(max: 6)</i> : </label>
+                <input type="number" min="1" max="6" value={ this.state.bookings.numberOfGuests } name="numberOfGuests" placeholder="Number of guests?" onChange={ this.handleChange }/>
+              </div>
+
+              <div className="name">
+                <label htmlFor="name">Name: </label>
+                <input type="text" value={ this.state.bookings.name } name="name"  placeholder="Name" onChange={this.handleChange} />
+
+                {this.state.errors.nameError ? (<div style={{color: "red"}}>{this.state.errors.nameError}</div>
+                ) : null }
+                
+              </div>
+
+              {/* <div className="email">
+                <label htmlFor="email">Email </label>
+                <input type="email" value={ this.state.bookings.email } name="email" placeholder="name@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 3}$" onChange={this.handleChange} />
+              </div> */}
+
+              <div className="email">
+                <label htmlFor="email">Email: </label>
+                <input type="email" placeholder="name@email.com"  value={ this.state.bookings.email } name="email"  onChange={this.handleChange} />
+                {/* error handling */}
+                {this.state.errors.emailError ? (<div style={{color: "red"}}>{this.state.errors.emailError}</div>
+                ) : null }              
+              </div>
+            
+  {/* 
+              <div className="phone">
+                <label htmlFor="phone">Phone </label>
+                <input type="text" value={ this.state.bookings.phone } name="phone" placeholder="Phonenumber" pattern="^\d{8,13}$" onChange={this.handleChange} />
+              </div> */}
+
+              <div className="phone">
+                <label htmlFor="phone">Phone: </label>
+                <input type="text" value={ this.state.bookings.phone } name="phone" placeholder="Phonenumber" onChange={this.handleChange} />
+                {this.state.errors.phoneError ? (<div style={{color: "red"}}>{this.state.errors.phoneError}</div>
+                ) : null }
+              </div>
+
+              <div className="gdpr">
+                <label htmlFor="gdpr">GDPR</label>
+                <input type="checkbox" checked={this.state.isCheckedGdpr} onChange={this.checkedGdpr}/>
+    
+              </div>
+
+              <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit">Submit</button>
+              
+
+              {/* <button type="submit">Submit</button> */}
+            </form>
+
+          </div>
+
 
         </div>
+
       </div>
     )
   }
