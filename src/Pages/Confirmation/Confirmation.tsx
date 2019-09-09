@@ -2,8 +2,20 @@ import React, { Component } from 'react';
 import Header from '../../Components/Header/Header';
 import './Confirmation.css';
 import {Link} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+// import queryString from 'query-string';
 
-class Confirmation extends Component {
+
+interface IProps {
+    location: any
+}
+
+class Confirmation extends Component<IProps, {}> {
+
+    componentDidMount() {
+        console.log(this.props.location.search)
+    }
+
     render() {
         return (
             <div>

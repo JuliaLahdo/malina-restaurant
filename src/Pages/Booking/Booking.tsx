@@ -25,7 +25,8 @@ import { Redirect } from 'react-router';
  
 // }
 
-interface IBooking {  
+interface IBooking {
+  
   dateOfBooking: moment.Moment;
   timeOfBooking: string;
   numberOfGuests: number;
@@ -42,12 +43,15 @@ interface IError {
 
 interface IBookingsState {    
   bookings: IBooking;
+  isCheckedDate: boolean;
   isCheckedGdpr: boolean;
   isAvailableAt18: boolean;
   isAvailableAt21: boolean;
   isAvilableBookingTime: boolean;
   errors:IError;
   showConfirmation: boolean;
+  bookingId: string;
+
 }
 
 class Booking extends React.Component<{}, IBookingsState> { 
@@ -55,7 +59,8 @@ class Booking extends React.Component<{}, IBookingsState> {
   constructor(props:any) {
     super(props);
     this.state = {
-      bookings: {              
+      bookings: {
+                  
         dateOfBooking:moment(),
         timeOfBooking: "",
         numberOfGuests: 1,
@@ -68,11 +73,13 @@ class Booking extends React.Component<{}, IBookingsState> {
         nameError: "",
         phoneError: ""
       },
+      isCheckedDate: false,
       isCheckedGdpr: false,
       isAvailableAt18: true,
       isAvailableAt21: true,
       isAvilableBookingTime: false,
-      showConfirmation: false
+      showConfirmation: false,
+      bookingId: ""
     };  
       
     // This binding is necessary to make `this` work in the callback
@@ -135,6 +142,7 @@ class Booking extends React.Component<{}, IBookingsState> {
   }
 
   handleSubmit(e:any) {
+    e.preventDefault();
     const isValid = this.validate();
     if(isValid) {
       console.log(this.state.bookings);
@@ -151,10 +159,12 @@ class Booking extends React.Component<{}, IBookingsState> {
       axios.post('http://localhost:8888/api/booking/create.php', postData, {
           headers: { 'Content-Type': 'text/plain' }})
           .then((response: any) => {
-              console.log(response);
+              console.log(response.data.message);
         this.setState({
-          showConfirmation: true 
-        });
+          showConfirmation: true,
+          bookingId: response.data.message
+        },()=>console.log(this.state.showConfirmation));
+
                       return response;
           }).catch((error: any) => {
               console.log(error);
@@ -190,10 +200,11 @@ class Booking extends React.Component<{}, IBookingsState> {
 
 
 
-  handleDateChange(date: Date) {      
+  handleDateChange(date: Date) {
+          
     let momentDate = moment(date); 
     axios.get('http://localhost:8888/api/booking/read.php')
-    .then(response => { 
+    .then(response => {      
 
       let numberOfTablesBookedAt18 = [];
       let numberOfTablesBookedAt21 = [];
@@ -209,7 +220,8 @@ class Booking extends React.Component<{}, IBookingsState> {
               console.log(numberOfTablesBookedAt21);
           }
         }
-      }    
+      }
+
 
       if(numberOfTablesBookedAt18.length > 14) {
         console.log("full booking 18:00:00");
@@ -245,6 +257,10 @@ class Booking extends React.Component<{}, IBookingsState> {
           bookings: prevState.bookings
         };
     });
+
+    
+    
+
   }
 
   handleTimeChange(e:any) {
@@ -288,7 +304,7 @@ class Booking extends React.Component<{}, IBookingsState> {
   render() {
     if (this.state.showConfirmation) {
       return (
-        <Redirect to="/confirmation" />
+        <Redirect to={`/confirmation?id=${this.state.bookingId}`} />
       );
     }
 
@@ -314,7 +330,7 @@ class Booking extends React.Component<{}, IBookingsState> {
               <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd" minDate={moment().toDate()} />  
               {/* <SelectTime />  */}     
              
-            <div className= {this.handleDateChange ? "selectTime" : "disabledSelectTime"}>
+            <div className= {!this.state.isCheckedDate ? "selectTime" : "disabledSelectTime"}>
                 {/* defaultChecked on 18:00, if not changed then booking won't be created */}
               <p>Select time:</p>
                 <input type="radio" value="18:00:00" name="timeOfBooking" disabled={!this.state.isAvailableAt18} onChange={this.handleTimeChange} className="radioButtonsTime"/>
