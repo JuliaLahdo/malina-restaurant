@@ -14,10 +14,13 @@
     }
     
     .titlePriceContainer{
-        width: 40%;
+        /* width: 40%; */
         display: flex;
-        justify-content: space-between;
         /* justify-content: center; */
+        justify-content: space-between;
+    }
+
+    .itemTitle, .itemPrice{
     }
 
     .itemTitle, .itemDescription, .itemPrice{
@@ -29,14 +32,16 @@
     }
 
     .itemDescription{
-        max-width: 30%;
+        max-width: 80%;
         margin-left: 0.5em;
     }
 
-    .menuContainer{
+    .typeItemContainer{
+        /* width: 40%; */
         /* display: flex; */
+        /* justify-content: center; */
         /* flex-direction: column; */
-        /* justify-content: space-between; */
+        /* margin: auto; */
     }
 
 }
@@ -48,7 +53,9 @@
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-
+    .itemDescription{
+        max-width: 60%;
+    }
 }
 
 /* Large devices (desktops, 992px and up) */

@@ -22,7 +22,7 @@ class Menu extends React.Component {
 
         for (let i = 0; i < menu.menu.length; i++) {
             if(menu.menu[i].type === "starter") {
-                startersItemContainer.push((<div key={i}>
+                startersItemContainer.push((<div key={i} className="typeItemContainer">
                     <div className="titlePriceContainer">
                         <h3 className="itemTitle">{menu.menu[i].title}</h3>
                         <p className="itemPrice">{menu.menu[i].price}</p>
@@ -32,7 +32,7 @@ class Menu extends React.Component {
             }
 
             if(menu.menu[i].type === "main") {
-                mainsItemContainer.push((<div key={i}>
+                mainsItemContainer.push((<div key={i} className="typeItemContainer">
                     <div className="titlePriceContainer">
                         <h3 className="itemTitle">{menu.menu[i].title}</h3>
                         <p className="itemPrice">{menu.menu[i].price}</p>
@@ -42,7 +42,7 @@ class Menu extends React.Component {
             }
 
             if(menu.menu[i].type === "dessert") {
-                dessertsItemContainer.push((<div key={i}>
+                dessertsItemContainer.push((<div key={i} className="typeItemContainer">
                     <div className="titlePriceContainer">
                         <h3 className="itemTitle">{menu.menu[i].title}</h3>
                         <p className="itemPrice">{menu.menu[i].price}</p>
