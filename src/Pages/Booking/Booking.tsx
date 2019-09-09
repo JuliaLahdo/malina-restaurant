@@ -6,8 +6,10 @@ import './Booking.css';
 import axios from 'axios';
 import moment from 'moment';
 import Header from '../../Components/Header/Header';
-import dessert from '../../Images/indexcarousel1.png';
-import { FaGalacticSenate } from 'react-icons/fa';
+import {Link} from 'react-router-dom';
+import { Redirect } from 'react-router';
+// import dessert from '../../Images/indexcarousel1.png';
+// import { FaGalacticSenate } from 'react-icons/fa';
 
 
 // import SelectDate from '../../Components/SelectDate/SelectDate';
@@ -36,6 +38,7 @@ interface IBooking {
 }
 
 interface IError {
+  
   emailError: string,
   nameError: string,
   phoneError: string
@@ -48,6 +51,7 @@ interface IBookingsState {
   isAvailableAt21: boolean;
   isAvilableBookingTime: boolean;
   errors:IError;
+  showConfirmation: boolean;
 }
 
 class Booking extends React.Component<{}, IBookingsState> { 
@@ -63,7 +67,8 @@ class Booking extends React.Component<{}, IBookingsState> {
         name: "",
         phone: ""
       },
-      errors: {        
+      errors: {    
+       
         emailError: "",
         nameError: "",
         phoneError: ""
@@ -71,7 +76,8 @@ class Booking extends React.Component<{}, IBookingsState> {
       isCheckedGdpr: false,
       isAvailableAt18: true,
       isAvailableAt21: true,
-      isAvilableBookingTime: false
+      isAvilableBookingTime: false,
+      showConfirmation: false
     };  
       
     // This binding is necessary to make `this` work in the callback
@@ -81,6 +87,7 @@ class Booking extends React.Component<{}, IBookingsState> {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.checkedGdpr = this.checkedGdpr.bind(this);
     this.validate = this.validate.bind(this);
+    this.showConfirmation=this.showConfirmation.bind(this);
   }
 
   componentDidMount(){
@@ -94,9 +101,11 @@ class Booking extends React.Component<{}, IBookingsState> {
   }
 
   validate() {
+   
     let emailError= "";
     let nameError="";
     let phoneError= "";
+
 
     if(!this.state.bookings.email){
       emailError = "E-mail can not be blank";
@@ -121,7 +130,9 @@ class Booking extends React.Component<{}, IBookingsState> {
     if(emailError||nameError||phoneError){
          this.setState({
            errors: 
-           {emailError,nameError,phoneError}
+           { emailError, 
+            nameError, 
+            phoneError}
           });
       return false;
     }
@@ -150,6 +161,10 @@ class Booking extends React.Component<{}, IBookingsState> {
           }).catch((error: any) => {
               console.log(error);
         });
+        // this.setState({
+        //   showConfirmation: true 
+        // });
+        
       }else{
        e.preventDefault();
       }   
@@ -267,11 +282,25 @@ class Booking extends React.Component<{}, IBookingsState> {
     }   
   }
 
+  showConfirmation(){
+    this.setState({
+      showConfirmation: true
+  })
+  }
+
+ 
+
   render() {
+    if (this.state.showConfirmation) {
+      return (
+        <Redirect to="/confirmation" />
+      );
+    }
+
     return (
       <div className="container">
         <Header images="bookingImages" title="Booking page" />
-
+    
         <div className="pageHeaderContainer">
           <h1 className="pageHeading">Make a reservation</h1>
         </div>
@@ -346,7 +375,20 @@ class Booking extends React.Component<{}, IBookingsState> {
     
               </div>
 
-              <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit">Submit</button>
+              {/* {if (!this.state.showConfirmation) {
+     return (
+       <Redirect to = {/confirmation} />
+     );
+     } */}
+      {/* {if (this.state.showConfirmation) {
+     return (
+       <Redirect to ={/confirmation} />
+     );}
+   } */}
+
+            <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit" onClick={this.showConfirmation}>Submit
+   
+              </button>
               
 
               {/* <button type="submit">Submit</button> */}
