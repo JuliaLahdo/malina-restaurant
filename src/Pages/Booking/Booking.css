@@ -29,8 +29,8 @@
     }
 
     .bookingFormContainer{
-        /* display: flex;
-        justify-content: space-between; */
+        display: flex;
+        justify-content: center;
     }
     
     form div{
@@ -40,11 +40,11 @@
     
     .bookingForm{
         font-family: 'Source Sans Pro', sans-serif;
-        width: 90%;
+        width: 80%;
         display: flex;
-        /* justify-content: center; */
-        /* align-items: center; */
-        /* flex-direction: column; */
+        /* justify-content: center;
+        align-items: center;
+        flex-direction: column; */
         margin: 3em 0 5em 0;
         padding: 1.5em;
         border-radius: 10%;
@@ -78,19 +78,8 @@
         margin-right: 0.5em;
     }
 
-    .imageContainerForm{
-        width: 80%;
-        margin: 3em;
-        /* height: auto; */
-        /* flex: 100%; */
-    }
-
-    img.dessertImage{
-        width: 80%;
-        margin: 3em;
-        /* height: auto; */
-        /* max-height: 70vh; */
-        /* object-fit: cover; */
+    input[type=text], input[type=email]{
+        width: 20em;
     }
     
 }
@@ -98,27 +87,33 @@
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
     .bookingForm{
-        width: 80%
+        width: 60%
     }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .bookingForm{
-        width: 70%
+        width: 80%;
+        padding: 2em;
     }
+
+    input[type=text], input[type=email]{
+        width: 30em;
+    }
+    
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .bookingForm{
-        width: 60%
+        width: 40%
     }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
     .bookingForm{
-        width: 50%
+        /* width: 50% */
     }
 }

@@ -304,7 +304,7 @@ class Booking extends React.Component<{}, IBookingsState> {
 
               {/* <Details />  */}
               <div className="guests">
-                <label htmlFor="guests">Number of guests: </label>
+                <label htmlFor="guests">Number of guests <i>(max: 6)</i> : </label>
                 <input type="number" min="1" max="6" value={ this.state.bookings.numberOfGuests } name="numberOfGuests" placeholder="Number of guests?" onChange={ this.handleChange }/>
               </div>
 
@@ -354,10 +354,6 @@ class Booking extends React.Component<{}, IBookingsState> {
 
               {/* <button type="submit">Submit</button> */}
             </form>
-            
-            <div className="imageContainerForm">
-              <img src={dessert} className="dessertImage" alt="Sorbet dessert"/>
-            </div>
 
           </div>
 
