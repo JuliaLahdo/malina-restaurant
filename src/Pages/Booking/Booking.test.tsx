@@ -44,8 +44,9 @@ Enzyme.configure({ adapter: new EnzymeAdapter()});
       name:"eunjuhuss",
       phone:"0101555555"
     } 
+
     
-    // expect(booking.)
+    // expect(booking.instance().state.bookings.length)
     
   });
 
