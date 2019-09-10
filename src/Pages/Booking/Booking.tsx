@@ -6,6 +6,10 @@ import './Booking.css';
 import axios from 'axios';
 import moment from 'moment';
 import Header from '../../Components/Header/Header';
+import { Redirect } from 'react-router';
+// import dessert from '../../Images/indexcarousel1.png';
+// import { FaGalacticSenate } from 'react-icons/fa';
+
 
 // import SelectDate from '../../Components/SelectDate/SelectDate';
 // import SelectTime from '../../Components/SelectTime/SelectTime';
@@ -21,7 +25,7 @@ import Header from '../../Components/Header/Header';
  
 // }
 
-interface IBooking {  
+export interface IBooking {  
   dateOfBooking: moment.Moment;
   timeOfBooking: string;
   numberOfGuests: number;
@@ -30,7 +34,7 @@ interface IBooking {
   phone:string;
 }
 
-interface IError {
+interface IError {  
   emailError: string,
   nameError: string,
   phoneError: string
@@ -38,11 +42,15 @@ interface IError {
 
 interface IBookingsState {    
   bookings: IBooking;
+  isCheckedDate: boolean;
   isCheckedGdpr: boolean;
   isAvailableAt18: boolean;
   isAvailableAt21: boolean;
   isAvilableBookingTime: boolean;
   errors:IError;
+  showConfirmation: boolean;
+  bookingId: string;
+
 }
 
 class Booking extends React.Component<{}, IBookingsState> { 
@@ -50,7 +58,8 @@ class Booking extends React.Component<{}, IBookingsState> {
   constructor(props:any) {
     super(props);
     this.state = {
-      bookings: {              
+      bookings: {
+                  
         dateOfBooking:moment(),
         timeOfBooking: "",
         numberOfGuests: 1,
@@ -58,15 +67,18 @@ class Booking extends React.Component<{}, IBookingsState> {
         name: "",
         phone: ""
       },
-      errors: {        
+      errors: {       
         emailError: "",
         nameError: "",
         phoneError: ""
       },
+      isCheckedDate: false,
       isCheckedGdpr: false,
       isAvailableAt18: true,
       isAvailableAt21: true,
-      isAvilableBookingTime: false
+      isAvilableBookingTime: false,
+      showConfirmation: false,
+      bookingId: ""
     };  
       
     // This binding is necessary to make `this` work in the callback
@@ -76,22 +88,19 @@ class Booking extends React.Component<{}, IBookingsState> {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.checkedGdpr = this.checkedGdpr.bind(this);
     this.validate = this.validate.bind(this);
+    this.showConfirmation = this.showConfirmation.bind(this);
   }
 
   componentDidMount(){
-    axios.get('http://localhost:8888/api/booking/read.php')
-    .then(response => {
-        console.log(response.data);
-        return response;
-    }).catch(error => {
-        console.log(error);
-    });
+    this.handleDateChange(new Date());
   }
 
   validate() {
+   
     let emailError= "";
     let nameError="";
     let phoneError= "";
+
 
     if(!this.state.bookings.email){
       emailError = "E-mail can not be blank";
@@ -116,7 +125,9 @@ class Booking extends React.Component<{}, IBookingsState> {
     if(emailError||nameError||phoneError){
          this.setState({
            errors: 
-           {emailError,nameError,phoneError}
+           { emailError, 
+            nameError, 
+            phoneError}
           });
       return false;
     }
@@ -124,9 +135,7 @@ class Booking extends React.Component<{}, IBookingsState> {
   }
 
   handleSubmit(e:any) {
-    // e.preventDefault();
-    console.log(this.state.bookings);  
-
+    e.preventDefault();
     const isValid = this.validate();
     if(isValid) {
       console.log(this.state.bookings);
@@ -143,11 +152,18 @@ class Booking extends React.Component<{}, IBookingsState> {
       axios.post('http://localhost:8888/api/booking/create.php', postData, {
           headers: { 'Content-Type': 'text/plain' }})
           .then((response: any) => {
-              console.log(response);
-              return response;
+              console.log(response.data.message);
+        this.setState({
+          showConfirmation: true,
+          bookingId: response.data.message
+        },()=>console.log(this.state.showConfirmation));
+
+                      return response;
           }).catch((error: any) => {
               console.log(error);
         });
+
+        
       }else{
        e.preventDefault();
       }   
@@ -175,18 +191,17 @@ class Booking extends React.Component<{}, IBookingsState> {
     }         
   }
 
-  handleDateChange(date: Date) {      
+
+
+  handleDateChange(date: Date) {
+          
     let momentDate = moment(date); 
     axios.get('http://localhost:8888/api/booking/read.php')
-    .then(response => { 
+    .then(response => {      
 
       let numberOfTablesBookedAt18 = [];
       let numberOfTablesBookedAt21 = [];
 
-      
-    if(momentDate.format('YYYY-MM-DD') < moment().format('YYYY-MM-DD')){
-        alert("can not book");
-      }{
         for (let i = 0; i < response.data.bookings.length; i++){   
           if(response.data.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
            if(response.data.bookings[i].timeOfBooking === "18:00:00") {
@@ -198,8 +213,9 @@ class Booking extends React.Component<{}, IBookingsState> {
               console.log(numberOfTablesBookedAt21);
           }
         }
-      }    
-    }
+      }
+
+
       if(numberOfTablesBookedAt18.length > 14) {
         console.log("full booking 18:00:00");
         this.setState({
@@ -234,9 +250,14 @@ class Booking extends React.Component<{}, IBookingsState> {
           bookings: prevState.bookings
         };
     });
+
+    
+    
+
   }
 
   handleTimeChange(e:any) {
+    
     if (this.state.isAvailableAt18 === true || this.state.isAvailableAt21 === true){
       let time = e.target.value; 
       this.setState((prevState:any)=>{  
@@ -245,31 +266,45 @@ class Booking extends React.Component<{}, IBookingsState> {
             bookings: prevState.bookings
           };          
       });
-    }else{
+    }
+    
+    else{
       console.log("can not booking");
    }
   }
+
 
   checkedGdpr(){
     if(!this.state.isCheckedGdpr){
       this.setState({
         isCheckedGdpr: true
       });
-
     }else{
       this.setState({
         isCheckedGdpr: false
       });
-    }
-   
+    }   
   }
 
+  showConfirmation(){
+    this.setState({
+      showConfirmation: true
+    })
+  }
+
+ 
+
   render() {
-    console.log(this.state.bookings);
+    if (this.state.showConfirmation) {
+      return (
+        <Redirect to={`/confirmation?id=${this.state.bookingId}`} />
+      );
+    }
+
     return (
       <div className="container">
         <Header images="bookingImages" title="Booking page" />
-
+    
         <div className="pageHeaderContainer">
           <h1 className="pageHeading">Make a reservation</h1>
         </div>
@@ -285,10 +320,10 @@ class Booking extends React.Component<{}, IBookingsState> {
             <form onSubmit={(e) => this.handleSubmit(e)}>
               {/* <SelectDate />  */}
               <p>Select date:</p>
-              <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd" />  
+              <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd" minDate={moment().toDate()} />  
               {/* <SelectTime />  */}     
-            
-            <div className="selectTime">
+             
+            <div className= {!this.state.isCheckedDate ? "selectTime" : "disabledSelectTime"}>
                 {/* defaultChecked on 18:00, if not changed then booking won't be created */}
               <p>Select time:</p>
                 <input type="radio" value="18:00:00" name="timeOfBooking" disabled={!this.state.isAvailableAt18} onChange={this.handleTimeChange} className="radioButtonsTime"/>
@@ -344,7 +379,20 @@ class Booking extends React.Component<{}, IBookingsState> {
     
               </div>
 
-              <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit">Submit</button>
+              {/* {if (!this.state.showConfirmation) {
+     return (
+       <Redirect to = {/confirmation} />
+     );
+     } */}
+      {/* {if (this.state.showConfirmation) {
+     return (
+       <Redirect to ={/confirmation} />
+     );}
+   } */}
+
+            <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit"/*  onClick={this.showConfirmation} */>Submit
+   
+              </button>
               
 
               {/* <button type="submit">Submit</button> */}
