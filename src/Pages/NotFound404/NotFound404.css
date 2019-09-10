@@ -6,6 +6,10 @@
         background: url("../../Images/indexcarousel2.jpg") center / cover no-repeat;
     }
 
+    .notFoundContainer{
+        margin: 3em 0;
+    }
+
     .notFoundText{
         font-family: 'Source Sans Pro', sans-serif;
         text-align: center;
