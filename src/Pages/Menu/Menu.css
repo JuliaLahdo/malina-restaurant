@@ -7,10 +7,6 @@
         margin-bottom: 2em;
     }
 
-    /*{
-        border: 1px solid red;
-    } */
-
     .categoryHeader{
         font-family: 'Rajdhani', sans-serif;
         margin-top: 1em;
@@ -18,13 +14,8 @@
     }
     
     .titlePriceContainer{
-        width: 40%;
         display: flex;
-        /* justify-content: center; */
         justify-content: space-between;
-    }
-
-    .itemTitle, .itemPrice{
     }
 
     .itemTitle, .itemDescription, .itemPrice{
@@ -41,13 +32,8 @@
     }
 
     .typeItemContainer{
-        /* width: 40%; */
-        /* display: inline-flex;
-        flex-direction: column; */
-        /* justify-content: center; */
-        /* align-items: flex-start; */
-        /* flex-direction: column; */
-        /* margin: auto; */
+        width: 80%;
+        margin: 0 auto;
     }
 
 }
@@ -62,10 +48,17 @@
     .itemDescription{
         max-width: 60%;
     }
+
+    .typeItemContainer{
+        width: 60%;
+    }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+    .typeItemContainer{
+        width: 40%;
+    }
 
 }
 
