@@ -39,17 +39,19 @@ class Admin extends React.Component<{}, IAdminState> {
     async getReservations() {
         let getBookings = new Data();
         let response = await getBookings.readData()
-  
+        if(this._isMounted) {
           if (response) {
-              if(this._isMounted) {
+              
             this.setState({reservations: response.bookings});
             console.log(response.bookings);
             console.log('mi');
-          }} else {
-            this.setState({ reservations: [] });
+          } else {
+            window.alert("No reservations at the moment");
             console.log('mo');
+            this.setState({ reservations: [] });
+
           }
-          
+        }
 
       }
 
