@@ -3,6 +3,7 @@ import './App.css';
 import Home from './Pages/Home/Home';
 import Menu from './Pages/Menu/Menu';
 import Booking from './Pages/Booking/Booking';
+import Confirmation from './Pages/Confirmation/Confirmation';
 import Admin from './Pages/Admin/Admin';
 import Edit from './Pages/Edit/Edit';
 import NotFound404 from './Pages/NotFound404/NotFound404';
@@ -21,7 +22,8 @@ class App extends React.Component{
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/Menu" exact component={Menu} />
-                <Route path="/Booking" exact component={Booking} />          
+                <Route path="/Booking" exact component={Booking} /> 
+                <Route path="/Confirmation" exact component={Confirmation} />          
                 <Route path="/Admin" exact component={Admin} />
                 <Route path="/Admin/Edit/:id" exact component={Edit} />
                 <Route component={NotFound404} />
