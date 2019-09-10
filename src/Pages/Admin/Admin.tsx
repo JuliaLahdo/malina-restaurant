@@ -2,6 +2,7 @@ import React from 'react'
 import Data from '../../Service/Data'
 import { Link } from 'react-router-dom';
 import './Admin.css';
+import Header from '../../Components/Header/Header';
 // import Edit from '../Edit/Edit';
 
 export interface IBooking {
@@ -95,6 +96,8 @@ class Admin extends React.Component<{}, IAdminState> {
     render() {
         return (
             <div>
+                <Header images="adminHeaderImage" title="Admin bookings" />
+        
                 <ul>
                     {this.listReservations()}
                 </ul>
