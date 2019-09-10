@@ -1,29 +1,12 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
-// import Data from '../../Service/Data';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Booking.css';
 import axios from 'axios';
 import moment from 'moment';
 import Header from '../../Components/Header/Header';
 import { Redirect } from 'react-router';
-// import dessert from '../../Images/indexcarousel1.png';
-// import { FaGalacticSenate } from 'react-icons/fa';
 
-
-// import SelectDate from '../../Components/SelectDate/SelectDate';
-// import SelectTime from '../../Components/SelectTime/SelectTime';
-// import Details from '../../Components/Details/Details';
-
-// export interface IBookings{
-//     data: [];
-
-// }
-
-// export interface IBookingsProps{
-//   bookingDatas(bookingData:IBooking):void;
- 
-// }
 
 export interface IBooking {  
   dateOfBooking: moment.Moment;
@@ -119,8 +102,13 @@ class Booking extends React.Component<{}, IBookingsState> {
     }
 
     if(this.state.bookings.phone.length < 5){
-      phoneError = "Phone can not be more than 5 numbers";
+      phoneError = "Phone can be more than 5 numbers";
     }
+
+    if(this.state.bookings.phone.length > 13){
+      phoneError = "Phone can not be more than 13 numbers";
+    }
+
 
     if(emailError||nameError||phoneError){
          this.setState({
@@ -250,10 +238,6 @@ class Booking extends React.Component<{}, IBookingsState> {
           bookings: prevState.bookings
         };
     });
-
-    
-    
-
   }
 
   handleTimeChange(e:any) {
@@ -318,13 +302,10 @@ class Booking extends React.Component<{}, IBookingsState> {
 
           <div className="bookingForm">
             <form onSubmit={(e) => this.handleSubmit(e)}>
-              {/* <SelectDate />  */}
               <p>Select date:</p>
               <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd" minDate={moment().toDate()} />  
-              {/* <SelectTime />  */}     
              
             <div className= {!this.state.isCheckedDate ? "selectTime" : "disabledSelectTime"}>
-                {/* defaultChecked on 18:00, if not changed then booking won't be created */}
               <p>Select time:</p>
                 <input type="radio" value="18:00:00" name="timeOfBooking" disabled={!this.state.isAvailableAt18} onChange={this.handleTimeChange} className="radioButtonsTime"/>
                 <p className="timeToBook firstTime">18:00</p>
@@ -332,7 +313,6 @@ class Booking extends React.Component<{}, IBookingsState> {
                 <p className="timeToBook">21:00</p>
               </div>
 
-              {/* <Details />  */}
               <div className="guests">
                 <label htmlFor="guests">Number of guests <i>(max: 6)</i> : </label>
                 <input type="number" min="1" max="6" value={ this.state.bookings.numberOfGuests } name="numberOfGuests" placeholder="Number of guests?" onChange={ this.handleChange }/>
@@ -347,25 +327,13 @@ class Booking extends React.Component<{}, IBookingsState> {
                 
               </div>
 
-              {/* <div className="email">
-                <label htmlFor="email">Email </label>
-                <input type="email" value={ this.state.bookings.email } name="email" placeholder="name@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 3}$" onChange={this.handleChange} />
-              </div> */}
-
               <div className="email">
                 <label htmlFor="email">Email: </label>
                 <input type="email" placeholder="name@email.com"  value={ this.state.bookings.email } name="email"  onChange={this.handleChange} />
-                {/* error handling */}
                 {this.state.errors.emailError ? (<div style={{color: "red"}}>{this.state.errors.emailError}</div>
                 ) : null }              
               </div>
             
-  {/* 
-              <div className="phone">
-                <label htmlFor="phone">Phone </label>
-                <input type="text" value={ this.state.bookings.phone } name="phone" placeholder="Phonenumber" pattern="^\d{8,13}$" onChange={this.handleChange} />
-              </div> */}
-
               <div className="phone">
                 <label htmlFor="phone">Phone: </label>
                 <input type="text" value={ this.state.bookings.phone } name="phone" placeholder="Phonenumber" onChange={this.handleChange} />
@@ -379,23 +347,10 @@ class Booking extends React.Component<{}, IBookingsState> {
     
               </div>
 
-              {/* {if (!this.state.showConfirmation) {
-     return (
-       <Redirect to = {/confirmation} />
-     );
-     } */}
-      {/* {if (this.state.showConfirmation) {
-     return (
-       <Redirect to ={/confirmation} />
-     );}
-   } */}
-
-            <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit"/*  onClick={this.showConfirmation} */>Submit
+              <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit"/*  onClick={this.showConfirmation} */>Submit
    
               </button>
-              
 
-              {/* <button type="submit">Submit</button> */}
             </form>
 
           </div>
