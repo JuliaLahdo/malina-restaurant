@@ -131,7 +131,76 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
         });
     }
 
-    changeDate(e: Date) {
+    changeDate(date: Date) {      
+        let momentDate = moment(date);
+        let data = new Data();
+        data.readData()
+            .then(response => {
+    
+          let numberOfTablesBookedAt18 = [];
+          let numberOfTablesBookedAt21 = [];
+    
+          
+        if(momentDate.format('YYYY-MM-DD') < moment().format('YYYY-MM-DD')){
+            alert("can not book");
+          }{
+            for (let i = 0; i < response.data.bookings.length; i++){   
+              if(response.data.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
+               if(response.data.bookings[i].timeOfBooking === "18:00:00") {
+                  numberOfTablesBookedAt18.push(response.data.bookings[i]);
+                  console.log(numberOfTablesBookedAt18);
+               }
+               if(response.data.bookings[i].timeOfBooking === "21:00:00") {
+                  numberOfTablesBookedAt21.push(response.data.bookings[i]);
+                  console.log(numberOfTablesBookedAt21);
+              }
+            }
+          }    
+        }
+          if(numberOfTablesBookedAt18.length > 14) {
+            console.log("full booking 18:00:00");
+            this.setState({
+              isAvailableAt18: false 
+            });
+    
+          } else {
+            console.log("can book 18:00:00");
+            this.setState({
+              isAvailableAt18: true
+            });
+          }
+    
+          if(numberOfTablesBookedAt21.length > 14) {
+            console.log("full booking 21:00:00");
+            this.setState({
+              isAvailableAt21: false 
+            });
+          } else {
+            console.log("can book 21:00:00");
+            this.setState({
+              isAvailableAt21: true
+            });
+          }
+            return response;
+        }).catch(error => {
+            console.log(error);
+        });
+
+        // this.setState(prevState => {
+        //     prevState.bookings.dateOfBooking = moment(e);
+        //     return {
+        //         bookings: prevState.bookings
+        //     }
+        // });
+        this.setState((prevState:any)=>{  
+          prevState.bookings.dateOfBooking = momentDate; 
+            return {
+              bookings: prevState.bookings
+            };
+        });
+      }
+
+    // changeDate(e: Date) {
         // let momentDate = moment(e);
 
         // let numberOfTablesBookedAt18 = [];
@@ -182,13 +251,13 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
         //     console.log(error);
         // });
 
-        this.setState(prevState => {
-            prevState.bookings.dateOfBooking = moment(e);
-            return {
-                bookings: prevState.bookings
-            }
-        });
-    }
+    //     this.setState(prevState => {
+    //         prevState.bookings.dateOfBooking = moment(e);
+    //         return {
+    //             bookings: prevState.bookings
+    //         }
+    //     });
+    // }
 
     // Setting value to new input value using state
     changeTime(e: any) {
