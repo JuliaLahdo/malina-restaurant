@@ -50,7 +50,6 @@
     "@types/react-router-dom": "^4.3.5"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": " <rootDir>/src/setupTest.js",
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
