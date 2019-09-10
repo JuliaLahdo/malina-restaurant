@@ -54,7 +54,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
     componentDidMount() {
         console.log(this.props.match.params.id);
         this.getReservation(this.props.match.params.id);
-        this.changeDate(new Date());
+        
     }
 
     handleDeleteBooking(id: number) {
@@ -79,6 +79,8 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
                     name: data.bookings[0].name,
                     phone: data.bookings[0].phone
                 }
+            }, () => {
+                this.changeDate(this.state.bookings.dateOfBooking.toDate());
             });
         });
     }
@@ -93,10 +95,6 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
           let numberOfTablesBookedAt18 = [];
           let numberOfTablesBookedAt21 = [];
 
-        // if(momentDate.format('YYYY-MM-DD') < moment().format('YYYY-MM-DD')){
-        //     alert("can not book");
-        //   }{
-
             for (let i = 0; i < response.bookings.length; i++){
             // for (let i = 0; i < response.data.bookings.length; i++){
                 //Behöver vi denna if-sats?
@@ -105,16 +103,16 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
                   numberOfTablesBookedAt18.push(response.bookings[i]);
                   console.log("Trying to book 18: ",numberOfTablesBookedAt18);
                }
-               else{
+               if(response.bookings[i].timeOfBooking === "21:00:00") {
                   numberOfTablesBookedAt21.push(response.bookings[i]);
                   console.log("Trying to book 21: ", numberOfTablesBookedAt21);
+               }
               }
-            }
           }
 
           console.log("numberOfTablesBookedAt18 ", numberOfTablesBookedAt18);
           console.log("numberOfTablesBookedAt21 ", numberOfTablesBookedAt21);
-        // }
+
           if(numberOfTablesBookedAt18.length > 14) {
             console.log("full booking 18:00:00");
             this.setState({
@@ -150,7 +148,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
         //         bookings: prevState.bookings
         //     }
         // });
-        
+
         this.setState((prevState: any)=>{  
           prevState.bookings.dateOfBooking = momentDate; 
             return {
