@@ -12,7 +12,7 @@ export default class Header extends Component <IHeaderProps,{}>{
         return (
                <div className="headerContainer">
                         <div className={this.props.images}>
-                            <h1 className="text">
+                            <h1 className="headerImageText">
                                 {this.props.title}
                             </h1>
                         </div>

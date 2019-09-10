@@ -53,7 +53,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
 
     componentDidMount() {
         this.getReservation(this.props.match.params.id);
-        
+        window.scrollTo(0, 0);
     }
 
     handleDeleteBooking(id: number) {
@@ -227,7 +227,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
     render() {
         return (
             <div>
-                <Header images="editImages" title="Edit booking"></Header>
+                <Header images="editHeaderImage" title="Edit booking"></Header>
                 <div>
                     {this.listReservations()}
                 </div>

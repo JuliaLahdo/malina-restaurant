@@ -13,6 +13,10 @@ export interface IMenuData {
 
 class Menu extends React.Component {
     
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+    
     render() {
 
         let menu = new MenuData();
@@ -54,7 +58,7 @@ class Menu extends React.Component {
 
         return (
             <div>
-                <Header images="menuImages" title="Our Menu" />
+                <Header images="menuHeaderImage" title="Our Menu" />
 
                 <div className="pageHeaderContainer">
                     <h1 className="pageHeading">With a little love</h1>
