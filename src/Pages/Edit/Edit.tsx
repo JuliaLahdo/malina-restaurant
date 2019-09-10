@@ -5,12 +5,6 @@ import Data from '../../Service/Data';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 
-// interface IError {
-//     emailError: string,
-//     nameError: string,
-//     phoneError: string
-// }
-
 export interface IUpdateBooking {
     id: number;
     dateOfBooking: moment.Moment;
@@ -27,7 +21,6 @@ interface IBookingsState {
     isAvailableAt18: boolean;
     isAvailableAt21: boolean;
     isAvilableBookingTime: boolean;
-    // errors: IError;
 }
 
 interface IEditProps {
@@ -49,11 +42,6 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
                 name: '',
                 phone: ''
             },
-            // errors: {        
-            //   emailError: "",
-            //   nameError: "",
-            //   phoneError: ""
-            // },
             isCheckedGdpr: false,
             isAvailableAt18: true,
             isAvailableAt21: true,
@@ -61,49 +49,13 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
           };  
         
         this.getReservation = this.getReservation.bind(this);
-        // this.listReservations = this.listReservations.bind(this);
     }
 
     componentDidMount() {
         console.log(this.props.match.params.id);
-
         this.getReservation(this.props.match.params.id);
+        this.changeDate(new Date());
     }
-
-    // validate() {
-    //     let emailError= "";
-    //     let nameError="";
-    //     let phoneError= "";
-    
-    //     if(!this.state.bookings.email){
-    //       emailError = "E-mail can not be blank";
-    //     }
-    
-    //     if(!this.state.bookings.name){
-    //       nameError = "Name can not be blank";
-    //     }
-    
-    //     if(this.state.bookings.name.length < 3){
-    //       nameError = "Name can not be more than 3 characters";
-    //     }
-    
-    //     if(!this.state.bookings.phone){
-    //       phoneError = "Phone can not be blank";
-    //     }
-    
-    //     if(this.state.bookings.phone.length < 5){
-    //       phoneError = "Phone can not be more than 5 numbers";
-    //     }
-    
-    //     if(emailError||nameError||phoneError){
-    //          this.setState({
-    //            errors: 
-    //            {emailError,nameError,phoneError}
-    //           });
-    //       return false;
-    //     }
-    //     return true;
-    // }
 
     handleDeleteBooking(id: number) {
         const deleteBookings = new Data();
@@ -136,32 +88,32 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
         let data = new Data();
         data.readData()
             .then(response => {
-                console.log("This is the response ", response);
-    
+                console.log("This is the response ", response.bookings);
+
           let numberOfTablesBookedAt18 = [];
           let numberOfTablesBookedAt21 = [];
-    
-          
+
         // if(momentDate.format('YYYY-MM-DD') < moment().format('YYYY-MM-DD')){
         //     alert("can not book");
         //   }{
 
-            for (let i = 0; i < response.length; i++){
-            // for (let i = 0; i < response.data.bookings.length; i++){   
+            for (let i = 0; i < response.bookings.length; i++){
+            // for (let i = 0; i < response.data.bookings.length; i++){
                 //Behöver vi denna if-sats?
-            //   if(response[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
-               if(response[i].timeOfBooking === "18:00:00") {
-                  numberOfTablesBookedAt18.push(response[i]);
-                  console.log(numberOfTablesBookedAt18);
+              if(response.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
+               if(response.bookings[i].timeOfBooking === "18:00:00") {
+                  numberOfTablesBookedAt18.push(response.bookings[i]);
+                  console.log("Trying to book 18: ",numberOfTablesBookedAt18);
                }
                else{
-                  numberOfTablesBookedAt21.push(response[i]);
+                  numberOfTablesBookedAt21.push(response.bookings[i]);
                   console.log("Trying to book 21: ", numberOfTablesBookedAt21);
               }
-            // }
+            }
           }
 
-          console.log("numberOfTablesBookedAt18 ", numberOfTablesBookedAt18)
+          console.log("numberOfTablesBookedAt18 ", numberOfTablesBookedAt18);
+          console.log("numberOfTablesBookedAt21 ", numberOfTablesBookedAt21);
         // }
           if(numberOfTablesBookedAt18.length > 14) {
             console.log("full booking 18:00:00");
@@ -198,7 +150,8 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
         //         bookings: prevState.bookings
         //     }
         // });
-        this.setState((prevState:any)=>{  
+        
+        this.setState((prevState: any)=>{  
           prevState.bookings.dateOfBooking = momentDate; 
             return {
               bookings: prevState.bookings
@@ -332,7 +285,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
 
                             <div className="bookingInformationContainer">
                                 <p className="bodyText">Select date:</p>
-                                <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.changeDate.bind(this)} dateFormat="yyyy-MM-dd"/>
+                                <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.changeDate.bind(this)} dateFormat="yyyy-MM-dd" minDate={moment().toDate()}/>
 
                                 <div className="selectTime">
                                     <p className="bodyText">Select time:</p>
