@@ -92,7 +92,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
           let numberOfTablesBookedAt21 = [];
 
             for (let i = 0; i < response.bookings.length; i++){
-                // Check that fetched date equals selected date 
+                // Check that fetched date equals selected date in Datepicker
                 if(response.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
                     if(response.bookings[i].timeOfBooking === "18:00:00") {
                         numberOfTablesBookedAt18.push(response.bookings[i]);
