@@ -23,3 +23,8 @@ Enzyme.configure({ adapter: new EnzymeAdapter()});
    expect(wrapper.state("isCheckedGdpr")).toBe(true);
   });
 
+  // it('should render correctly with no props', () => {
+  //   const component = shallow(<Booking/>);    
+  //   expect(component).toMatchSnapshot();
+  // });
+
