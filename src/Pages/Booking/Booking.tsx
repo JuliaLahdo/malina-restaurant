@@ -25,8 +25,7 @@ import { Redirect } from 'react-router';
  
 // }
 
-interface IBooking {
-  
+export interface IBooking {  
   dateOfBooking: moment.Moment;
   timeOfBooking: string;
   numberOfGuests: number;
@@ -89,17 +88,11 @@ class Booking extends React.Component<{}, IBookingsState> {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.checkedGdpr = this.checkedGdpr.bind(this);
     this.validate = this.validate.bind(this);
-    this.showConfirmation=this.showConfirmation.bind(this);
+    this.showConfirmation = this.showConfirmation.bind(this);
   }
 
   componentDidMount(){
-    axios.get('http://localhost:8888/api/booking/read.php')
-    .then(response => {
-        console.log(response.data);
-        return response;
-    }).catch(error => {
-        console.log(error);
-    });
+    this.handleDateChange(new Date());
   }
 
   validate() {

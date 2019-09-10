@@ -6,70 +6,94 @@ import axios from 'axios';
 // import { withRouter } from 'react-router-dom';
 // import Data from '../../Service/Data'
 // import { any } from 'prop-types';
-// import queryString from 'query-string';
+// import IBooking from '../Booking/Booking';
+import moment from 'moment';
 
 
-interface IConfirmProps {
+interface IProps {
     location: any
 }
 
-// interface IBooking {
-//     id: number;
-// }
 
-// interface IState {
-//     latestBooking:  IBooking[];
-// }
+export interface IConfirmState {
 
-class Confirmation extends Component<IConfirmProps, {}> {
+    dateOfBooking: string;
+    timeOfBooking: string;
+    numberOfGuests: number;
+    email:string;
+    name:string;
+    phone:string;
+  }
+  
+
+// interface IConfirmState {    
+//     bookings: [];  
+// }
+ 
+
+class Confirmation extends Component<IProps, IConfirmState> {
+  
+ 
+
     constructor(props:any) {
         super(props);
-
-        // this.state = {
-        //  latestBooking: []
-        // };  
+        this.state = {
+                dateOfBooking: "",
+                timeOfBooking: "",
+                numberOfGuests: 1,
+                email: "",
+                name: "",               
+                phone:"",
+                
+            
+      
     }
+   
+}
+
 
     componentDidMount() {
-        // let latestBookingInfo = [];
-        // console.log(this.props.location.search);
-        // const getBookingId = new Data();
-        // getBookingId.readData()
-        // .then(response => {
-        //     console.log(response.data);
-            // for(let i = 0; i < response.data.length; i++){
-            //     if(response.data.booking[i].getBookingId === this.props.location.serch){
-            //         console.log(response.data.booking[i]);
-                    // latestBookingInfo.push(response.data.booking[i]);
-                   
+        const queryString = require('query-string');        
+        console.log(this.props.location);
+        const parsed = queryString.parse(this.props.location.search);
+        console.log(parsed.id);
 
-                // }
-            // })
-            
-        // })
-
-        axios.get('http://localhost:8888/api/booking/read.php')
+        return axios.get('http://localhost:8888/api/booking/read.php')
         .then(response => {
-            console.log(response.data.bookings[0]);
-            //  for(let i = 0; i < response.data.bookings.length; i++){
-            //     if(response.data.bookings[i].id === this.props.location.serch){
-            //         console.log(response.data.booking[i]);
-            //         latestBookingInfo.push(response.data.booking[i]);
-            //     }
 
-            //     }
-            // return response;
+            for (let i = 0; i < response.data.bookings.length; i++){   
+                if(response.data.bookings[i].id === parsed.id){
+                    this.setState({
+                        name: response.data.bookings[i].name,
+                        dateOfBooking: response.data.bookings[i].dateOfBooking,
+                        timeOfBooking:response.data.bookings[i].timeOfBooking,
+                        numberOfGuests: response.data.bookings[i].numberOfGuests,
+                        email:response.data.bookings[i].email,              
+                        phone:response.data.bookings[i].phone, 
+                      }); 
+                      console.log(this.state);                                   
+                }
+            } 
+            
+                 
         }).catch(error => {
             console.log(error);
         });
 
-
     }
 
+
     render() {
+
+  
+      
         return (
             <div>
-                   <Header images="menuImages" title="Thanks for booking" />
+                <Header images="menuImages" title="Thanks for booking" />
+                    <p>thanks for your reservation {this.state.name} {this.state.dateOfBooking} {this.state.timeOfBooking}</p>              
+             
+  
+                 
                         <Link to="/"><h3>Return to Home</h3></Link> 
                         
             </div>
