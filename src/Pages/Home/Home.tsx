@@ -9,7 +9,7 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-            <Header images="headerImages" title="Welcome to Malina">
+            <Header images="homeHeaderImage" title="Welcome to Malina">
             </Header>
                 <div className="homeContainer">
 
