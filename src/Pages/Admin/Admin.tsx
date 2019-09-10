@@ -26,18 +26,23 @@ class Admin extends React.Component<{}, IAdminState> {
 
   componentDidMount() {
     this._isMounted = true;
+    this.getReservations();
+    }
+
+    getReservations() {
         const getBookings = new Data();
         getBookings.readData()
         .then(response => {
-            if (this._isMounted) {
+          if (response) {
             this.setState({reservations: response.bookings});
-
-            console.log(response.bookings)
-            //console.log(getBookings.readData()); //works
-            }
+            console.log('mi');
+          } else {
+            this.setState({ reservations: [] });
+            console.log('mo');
+          }
         })
         .catch(error => console.log(error));
-    }
+      }
 
     componentWillUnmount() {
         this._isMounted = false;
