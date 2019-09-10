@@ -40,6 +40,10 @@
         padding-bottom: 1em;
         text-align: center;
     }
+
+    .bodyText{
+        font-family: 'Source Sans Pro', sans-serif;
+    }
 }
 
 /* Small devices (landscape phones, 576px and up) */

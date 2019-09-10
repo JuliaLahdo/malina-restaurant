@@ -6,6 +6,36 @@
         background: url("../../Images/indexcarousel3.jpg") center / cover no-repeat;
         margin-bottom: 2em;
     }
+
+    .categoryHeader{
+        font-family: 'Rajdhani', sans-serif;
+        margin-top: 1em;
+        text-align: center;
+    }
+    
+    .titlePriceContainer{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .itemTitle, .itemDescription, .itemPrice{
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+
+    .itemTitle{
+        font-size: 1.1rem;
+    }
+
+    .itemDescription{
+        max-width: 80%;
+        margin-left: 0.5em;
+    }
+
+    .typeItemContainer{
+        width: 80%;
+        margin: 0 auto;
+    }
+
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -15,11 +45,20 @@
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+    .itemDescription{
+        max-width: 60%;
+    }
 
+    .typeItemContainer{
+        width: 60%;
+    }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+    .typeItemContainer{
+        width: 40%;
+    }
 
 }
 

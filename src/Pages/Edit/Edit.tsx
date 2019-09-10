@@ -150,28 +150,40 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
         
             return (
                 <div>
+
+                    <div className="pageHeaderContainer">
+                        <h1 className="pageHeading">Edit reservation</h1>
+                    </div>
+
                     <form onSubmit={(e) => this.handleSubmit(e)}>
-                        <p>Reservation name: {this.state.bookings.name}</p>
-                        <p>Reservation email: {this.state.bookings.email}</p>
-                        <p>Reservation email: {this.state.bookings.phone}</p>
+                        <div className="editForm">
+                            <div className="customerInformationContainer">
+                                <p className="bodyText"><b>Reservation name:</b> {this.state.bookings.name}</p>
+                                <p className="bodyText"><b>Reservation email:</b> {this.state.bookings.email}</p>
+                                <p className="bodyText"><b>Reservation email:</b> {this.state.bookings.phone}</p>
+                            </div>
 
-                        <p>Select date:</p>
-                        <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.changeDate.bind(this)} dateFormat="yyyy-MM-dd"/>
+                            <div className="bookingInformationContainer">
+                                <p className="bodyText">Select date:</p>
+                                <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.changeDate.bind(this)} dateFormat="yyyy-MM-dd"/>
 
-                        <div className="selectTime">
-                            <p>Select time:</p>
-                            {radio18}
-                            <p className="timeToBook firstTime">18:00</p>
-                            {radio21}
-                            <p className="timeToBook">21:00</p>
+                                <div className="selectTime">
+                                    <p className="bodyText">Select time:</p>
+                                    {radio18}
+                                    <p className="bodyText timeToBook firstTime">18:00</p>
+                                    {radio21}
+                                    <p className="bodyText timeToBook">21:00</p>
+                                </div>
+
+                                <div className="selectNumberOfGuests">
+                                    <label htmlFor="selectNumberOfGuests" className="bodyText">Number of guests <i>(max: 6)</i> : </label>
+                                    <input type="number" min="1" max="6" value={this.state.bookings.numberOfGuests} name="numberOfGuests" placeholder="Number of guests?" onChange={this.changeGuests.bind(this)}/>
+                                </div>
+                            </div>
                         </div>
-
-                        <div className="selectNumberOfGuests">
-                            <label htmlFor="selectNumberOfGuests">Number of guests <i>(max: 6)</i> : </label>
-                            <input type="number" min="1" max="6" value={this.state.bookings.numberOfGuests} name="numberOfGuests" placeholder="Number of guests?" onChange={this.changeGuests.bind(this)}/>
+                        <div className="submitButtonContainer">
+                            <input type="submit" value="Click to update" className="editSubmitButton"/>
                         </div>
-
-                        <input type="submit" value="Click to update"/>
                     </form>
                 </div>
             )
@@ -180,7 +192,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
     render() {
         return (
             <div>
-                <Header images="headerImages" title="Edit"></Header>
+                <Header images="editImages" title="Edit booking"></Header>
                 <div>
                     {this.listReservations()}
                 </div>
