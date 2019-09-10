@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Booking from './Booking';
 import Enzyme,{ shallow } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
+import moment from 'moment';
 
 
 Enzyme.configure({ adapter: new EnzymeAdapter()});
@@ -23,8 +24,28 @@ Enzyme.configure({ adapter: new EnzymeAdapter()});
    expect(wrapper.state("isCheckedGdpr")).toBe(true);
   });
 
-  // it('should render correctly with no props', () => {
-  //   const component = shallow(<Booking/>);    
-  //   expect(component).toMatchSnapshot();
-  // });
+  it('should handle date change after click the calender', () => {
+    const booking = shallow(<Booking/>);
+    
+    interface IMockInterface{
+        dateOfBooking: string;
+        timeOfBooking: string;
+        numberOfGuests: number;
+        email:string;
+        name:string;
+        phone:string;
+    }
+
+    const mockBooking: IMockInterface = {
+      dateOfBooking: "2019-11-11",
+      timeOfBooking: "18:00:00",
+      numberOfGuests: 5,
+      email:"eunjuhuss@naver.com",
+      name:"eunjuhuss",
+      phone:"0101555555"
+    } 
+    
+    // expect(booking.)
+    
+  });
 
