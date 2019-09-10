@@ -5,7 +5,9 @@
         top: 0;
         left: 0;
         width: 100%;
+        background:#f7f7f7;
         padding: 0.75em 2rem;
+        /* background-color: #1f1f1f; */
        
         
         
@@ -13,7 +15,7 @@
     
     .navIcon{
         font-size: 1.5rem;
-        color: grey;
+        color: #A43B0A;
        
     }
     
@@ -21,8 +23,28 @@
         height: 0;
         overflow: hidden;   
         list-style-type: none;
+        font-family: 'Rajdhani', sans-serif;
+        color: black; 
+        font-weight: 800;  
+
+       
     }
-    
+
+    .navLinks a{
+        display: block;
+        text-decoration: none;
+        padding: 0.3rem 0;
+        color: #222;
+        transition:  all 0.3s linear;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 800;
+        letter-spacing: 3px;
+    }
+
+    .navLinks a:hover {
+        color: #af9a7d;
+      }
     .navHeader{
         display: flex;
         justify-content: space-between;
@@ -30,6 +52,8 @@
     
     .showNav{
         height: 100px;
+        font-family: 'Rajdhani', sans-serif;
+        color: black; 
     }
     
     
@@ -37,9 +61,13 @@
         background: transparent;
         border: none;
         cursor: pointer;
-        outline: none;
+        outline: none;    
     
     }
+    .navIcon {
+        font-size: 1.5rem;
+        color: #af9a7d;
+      }
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -49,7 +77,23 @@
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-
+    .navBtn {
+        display: none;
+      }
+      .navCenter {
+        max-width: 1170px;
+        margin: 0 auto;
+        display: flex;
+      }
+      .navLinks {
+        height: auto;
+        display: flex;
+        margin-left: 4rem;
+      }
+      .navLinks a {
+        margin: 0 1rem;
+        padding: 0.5rem 0;
+      }
 }
 
 /* Large devices (desktops, 992px and up) */
