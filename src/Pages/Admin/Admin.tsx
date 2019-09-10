@@ -2,8 +2,8 @@ import React from 'react'
 import Data from '../../Service/Data'
 import { Link } from 'react-router-dom';
 import './Admin.css';
-// import Edit from '../Edit/Edit';
 
+// import Edit from '../Edit/Edit';
 export interface IBooking {
     id: number;
     customerId: number;
@@ -31,39 +31,36 @@ class Admin extends React.Component<{}, IAdminState> {
         }
     }
 
-  componentDidMount() {
+  async componentDidMount() {
     this._isMounted = true;
-    this.getReservations();
+    await this.getReservations();
     }
 
     async getReservations() {
         let getBookings = new Data();
         let response = await getBookings.readData()
+
         if(this._isMounted) {
-          if (response) {
-              
+        if (response) {
             this.setState({reservations: response.bookings});
             console.log(response.bookings);
             console.log('mi');
           } else {
-            window.alert("No reservations at the moment");
-            console.log('mo');
             this.setState({ reservations: [] });
-
+            console.log('mo');
           }
         }
-
       }
 
-    componentWillUnmount() {
+    async componentWillUnmount() {
         this._isMounted = false;
-        this.getReservations();
+        await this.getReservations();
       }
     
 
-/*     getReservation = (id: number) => {
+    getReservation = (id: number) => {
         console.log('This reservation with id ' + id)
-    } */
+    }
 
     deleteReservation = (id: number) => {
 
@@ -94,7 +91,7 @@ class Admin extends React.Component<{}, IAdminState> {
             <div>
                 <ul>
                 {
-                    this.state.reservations.map( (booking: any) => {
+this.state.reservations.map( (booking: any) => {
 
             let url = "/Admin/Edit/" + booking.id;
             return (
@@ -108,7 +105,7 @@ class Admin extends React.Component<{}, IAdminState> {
                     
                     Reservation made by {booking.name} {booking.email}
                     {booking.phone} on {booking.dateOfBooking} {booking.timeOfBooking} for {booking.numberOfGuests} guests
-                    {/* <button onClick={(event) => this.getReservation(booking.id)}>Get</button> */}
+                    <button onClick={(event) => this.getReservation(booking.id)}>Get</button>
                     <button onClick={(event) => this.deleteReservation(booking.id)}>Delete</button>
                 </li>
             )
