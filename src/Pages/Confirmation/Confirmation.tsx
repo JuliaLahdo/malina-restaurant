@@ -3,11 +3,6 @@ import Header from '../../Components/Header/Header';
 import './Confirmation.css';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-// import { withRouter } from 'react-router-dom';
-// import Data from '../../Service/Data'
-// import { any } from 'prop-types';
-// import IBooking from '../Booking/Booking';
-import moment from 'moment';
 
 
 interface IProps {
@@ -16,7 +11,6 @@ interface IProps {
 
 
 export interface IConfirmState {
-
     dateOfBooking: string;
     timeOfBooking: string;
     numberOfGuests: number;
@@ -26,16 +20,11 @@ export interface IConfirmState {
   }
   
 
-// interface IConfirmState {    
-//     bookings: [];  
-// }
  
 
 class Confirmation extends Component<IProps, IConfirmState> {
   
- 
-
-    constructor(props:any) {
+     constructor(props:any) {
         super(props);
         this.state = {
                 dateOfBooking: "",
@@ -43,10 +32,7 @@ class Confirmation extends Component<IProps, IConfirmState> {
                 numberOfGuests: 1,
                 email: "",
                 name: "",               
-                phone:"",
-                
-            
-      
+                phone:""          
     }
    
 }
@@ -85,8 +71,6 @@ class Confirmation extends Component<IProps, IConfirmState> {
 
     render() {
 
-  
-      
         return (
             <div>
                 <Header images="menuImages" title="Thanks for booking" />
