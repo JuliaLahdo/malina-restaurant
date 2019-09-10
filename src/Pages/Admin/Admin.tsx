@@ -56,9 +56,9 @@ class Admin extends React.Component<{}, IAdminState> {
       }
     
 
-    getReservation = (id: number) => {
+/*     getReservation = (id: number) => {
         console.log('This reservation with id ' + id)
-    }
+    } */
 
     deleteReservation = (id: number) => {
 
@@ -103,7 +103,7 @@ class Admin extends React.Component<{}, IAdminState> {
                     
                     Reservation made by {booking.name} {booking.email}
                     {booking.phone} on {booking.dateOfBooking} {booking.timeOfBooking} for {booking.numberOfGuests} guests
-                    <button onClick={(event) => this.getReservation(booking.id)}>Get</button>
+                    {/* <button onClick={(event) => this.getReservation(booking.id)}>Get</button> */}
                     <button onClick={(event) => this.deleteReservation(booking.id)}>Delete</button>
                 </li>
             )
