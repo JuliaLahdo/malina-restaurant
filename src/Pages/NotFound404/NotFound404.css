@@ -5,6 +5,11 @@
         width: 100%;
         background: url("../../Images/indexcarousel2.jpg") center / cover no-repeat;
     }
+
+    .notFoundText{
+        font-family: 'Source Sans Pro', sans-serif;
+        text-align: center;
+    }
     
 }
 

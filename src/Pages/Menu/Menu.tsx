@@ -13,6 +13,10 @@ export interface IMenuData {
 
 class Menu extends React.Component {
     
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+    
     render() {
 
         let menu = new MenuData();

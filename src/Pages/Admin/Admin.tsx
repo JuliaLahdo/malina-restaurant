@@ -26,6 +26,7 @@ class Admin extends React.Component<{}, IAdminState> {
     }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this._isMounted = true;
         const getBookings = new Data();
         getBookings.readData()

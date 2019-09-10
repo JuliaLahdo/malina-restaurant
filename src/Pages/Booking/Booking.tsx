@@ -76,6 +76,7 @@ class Booking extends React.Component<{}, IBookingsState> {
 
   componentDidMount(){
     this.handleDateChange(new Date());
+    window.scrollTo(0, 0);
   }
 
   validate() {
