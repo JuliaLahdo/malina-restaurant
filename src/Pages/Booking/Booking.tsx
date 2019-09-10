@@ -145,7 +145,8 @@ class Booking extends React.Component<{}, IBookingsState> {
         this.setState({
           showConfirmation: true,
           bookingId: response.data.message
-        },()=>console.log(this.state.showConfirmation));
+        },
+        ()=>console.log(this.state.showConfirmation));
 
                       return response;
           }).catch((error: any) => {

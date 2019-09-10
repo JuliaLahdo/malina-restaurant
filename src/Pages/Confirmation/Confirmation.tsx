@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 
-interface IProps {
+export interface IProps {
     location: any
 }
 
