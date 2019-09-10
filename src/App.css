@@ -48,7 +48,10 @@
     .returnHomeLink{
         font-family: 'Source Sans Pro', sans-serif;
         color: #A43B0A;
-        text-align: center;
+        display: inline-block;
+        /* text-align: center; */
+        /* align-items: center; */
+        /* margin: 0 auto; */
     }
 }
 
