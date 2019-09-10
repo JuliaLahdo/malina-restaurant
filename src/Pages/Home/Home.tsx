@@ -6,10 +6,15 @@ import table from '../../Images/indextable.png';
 import './Home.css';
 
 class Home extends React.Component {
+
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+
     render() {
         return (
             <div>
-            <Header images="headerImages" title="Welcome to Malina">
+            <Header images="homeHeaderImage" title="Welcome to Malina">
             </Header>
                 <div className="homeContainer">
 
