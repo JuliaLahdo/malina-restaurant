@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material/textfield": "^3.1.0",
+    "@types/jest": "^24.0.18",
     "@types/node": "12.7.2",
     "@types/react": "16.9.2",
     "@types/react-datepicker": "^2.8.1",
