@@ -136,27 +136,33 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
         let data = new Data();
         data.readData()
             .then(response => {
+                console.log("This is the response ", response);
     
           let numberOfTablesBookedAt18 = [];
           let numberOfTablesBookedAt21 = [];
     
           
-        if(momentDate.format('YYYY-MM-DD') < moment().format('YYYY-MM-DD')){
-            alert("can not book");
-          }{
-            for (let i = 0; i < response.data.bookings.length; i++){   
-              if(response.data.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
-               if(response.data.bookings[i].timeOfBooking === "18:00:00") {
-                  numberOfTablesBookedAt18.push(response.data.bookings[i]);
+        // if(momentDate.format('YYYY-MM-DD') < moment().format('YYYY-MM-DD')){
+        //     alert("can not book");
+        //   }{
+
+            for (let i = 0; i < response.length; i++){
+            // for (let i = 0; i < response.data.bookings.length; i++){   
+                //Behöver vi denna if-sats?
+            //   if(response[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
+               if(response[i].timeOfBooking === "18:00:00") {
+                  numberOfTablesBookedAt18.push(response[i]);
                   console.log(numberOfTablesBookedAt18);
                }
-               if(response.data.bookings[i].timeOfBooking === "21:00:00") {
-                  numberOfTablesBookedAt21.push(response.data.bookings[i]);
-                  console.log(numberOfTablesBookedAt21);
+               else{
+                  numberOfTablesBookedAt21.push(response[i]);
+                  console.log("Trying to book 21: ", numberOfTablesBookedAt21);
               }
-            }
-          }    
-        }
+            // }
+          }
+
+          console.log("numberOfTablesBookedAt18 ", numberOfTablesBookedAt18)
+        // }
           if(numberOfTablesBookedAt18.length > 14) {
             console.log("full booking 18:00:00");
             this.setState({
