@@ -6,6 +6,13 @@ import './Admin.css';
 
 export interface IBooking {
     id: number;
+    customerId: number;
+    numberofGuests: number;
+    dateOfBooking: string;
+    timeOfBooking: string;
+    email: string;
+    name: string;
+    phone: string;
 }
 
 interface IAdminState {
@@ -29,23 +36,23 @@ class Admin extends React.Component<{}, IAdminState> {
     this.getReservations();
     }
 
-    getReservations() {
-        const getBookings = new Data();
-        getBookings.readData()
-        .then(response => {
+    async getReservations() {
+        let getBookings = new Data();
+        let response = await getBookings.readData()
+  
           if (response) {
             this.setState({reservations: response.bookings});
-            console.log('mi');
+            console.log(response.bookings);
           } else {
             this.setState({ reservations: [] });
             console.log('mo');
           }
-        })
-        .catch(error => console.log(error));
+
       }
 
     componentWillUnmount() {
         this._isMounted = false;
+        this.getReservations();
       }
     
 
@@ -66,8 +73,23 @@ class Admin extends React.Component<{}, IAdminState> {
         this.setState({reservations: this.state.reservations});
     }
     
-    listReservations = () => {
-        return this.state.reservations.map( (booking: any) => {
+
+
+    // editReservation(item: any) {
+	// 	const reservations = this.state.reservations;
+	// 	this.setState({
+	// 		reservations: [...reservations]
+	// 	}, () => {
+
+	// 	});
+	// }
+    
+    render() {
+        return (
+            <div>
+                <ul>
+                {
+                    this.state.reservations.map( (booking: any) => {
 
             let url = "/Admin/Edit/" + booking.id;
             return (
@@ -85,23 +107,7 @@ class Admin extends React.Component<{}, IAdminState> {
                     <button onClick={(event) => this.deleteReservation(booking.id)}>Delete</button>
                 </li>
             )
-        });
-    };
-
-    // editReservation(item: any) {
-	// 	const reservations = this.state.reservations;
-	// 	this.setState({
-	// 		reservations: [...reservations]
-	// 	}, () => {
-
-	// 	});
-	// }
-    
-    render() {
-        return (
-            <div>
-                <ul>
-                    {this.listReservations()}
+        })}
                 </ul>
             </div>
             )
