@@ -32,32 +32,31 @@ class Confirmation extends Component<IProps, IConfirmState> {
    
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const queryString = require('query-string');        
         console.log(this.props.location);
         const parsed = queryString.parse(this.props.location.search);
         console.log(parsed.id);
 
-        return axios.get('http://localhost:8888/api/booking/read.php')
-        .then(response => {
-
-            for (let i = 0; i < response.data.bookings.length; i++){   
-                if(response.data.bookings[i].id === parsed.id){
+        try {
+            const response = await axios.get('http://localhost:8888/api/booking/read.php');
+            for (let i = 0; i < response.data.bookings.length; i++) {
+                if (response.data.bookings[i].id === parsed.id) {
                     this.setState({
                         name: response.data.bookings[i].name,
                         dateOfBooking: response.data.bookings[i].dateOfBooking,
-                        timeOfBooking:response.data.bookings[i].timeOfBooking,
+                        timeOfBooking: response.data.bookings[i].timeOfBooking,
                         numberOfGuests: response.data.bookings[i].numberOfGuests,
-                        email:response.data.bookings[i].email,              
-                        phone:response.data.bookings[i].phone, 
-                    }); 
+                        email: response.data.bookings[i].email,
+                        phone: response.data.bookings[i].phone,
+                    });
                     console.log(this.state);
                 }
             }
-
-        }).catch(error => {
+        }
+        catch (error) {
             console.log(error);
-        });
+        }
 
     }
 

@@ -5,8 +5,16 @@ import './Admin.css';
 import Header from '../../Components/Header/Header';
 // import Edit from '../Edit/Edit';
 
+// import Edit from '../Edit/Edit';
 export interface IBooking {
     id: number;
+    customerId: number;
+    numberofGuests: number;
+    dateOfBooking: string;
+    timeOfBooking: string;
+    email: string;
+    name: string;
+    phone: string;
 }
 
 interface IAdminState {
@@ -25,24 +33,31 @@ class Admin extends React.Component<{}, IAdminState> {
         }
     }
 
-  componentDidMount() {
+  async componentDidMount() {
     window.scrollTo(0, 0);
     this._isMounted = true;
-        const getBookings = new Data();
-        getBookings.readData()
-        .then(response => {
-            if (this._isMounted) {
-            this.setState({reservations: response.bookings});
-
-            console.log(response.bookings)
-            //console.log(getBookings.readData()); //works
-            }
-        })
-        .catch(error => console.log(error));
+    await this.getReservations();
     }
 
-    componentWillUnmount() {
+    async getReservations() {
+        let getBookings = new Data();
+        let response = await getBookings.readData()
+
+        if(this._isMounted) {
+        if (response) {
+            this.setState({reservations: response.bookings});
+            console.log(response.bookings);
+            console.log('mi');
+          } else {
+            this.setState({ reservations: [] });
+            console.log('mo');
+          }
+        }
+      }
+
+    async componentWillUnmount() {
         this._isMounted = false;
+        await this.getReservations();
       }
     
 
@@ -63,27 +78,7 @@ class Admin extends React.Component<{}, IAdminState> {
         this.setState({reservations: this.state.reservations});
     }
     
-    listReservations = () => {
-        return this.state.reservations.map( (booking: any) => {
 
-            let url = "/Admin/Edit/" + booking.id;
-            return (
-                <li key={"Reservation: " + booking.id}>
-                    {/* <Link to={Admin/Edit/${booking.id}}>{booking.id}</Link> */}
-                    {/* <Link to={accordion/${booking.booking_ID}}> */}
-                    {/* <Link to={'Admin/Edit/'#{booking.id}}">{booking.id}</Link> */}
-                    {/* <Link to="Admin/Edit/"{booking.id}>{booking.id}</Link> */}
-
-                    <Link to={url}>{booking.id}</Link>
-                    
-                    Reservation made by {booking.name} {booking.email}
-                    {booking.phone} on {booking.dateOfBooking} {booking.timeOfBooking} for {booking.numberOfGuests} guests
-                    <button onClick={(event) => this.getReservation(booking.id)}>Get</button>
-                    <button onClick={(event) => this.deleteReservation(booking.id)}>Delete</button>
-                </li>
-            )
-        });
-    };
 
     // editReservation(item: any) {
 	// 	const reservations = this.state.reservations;
@@ -95,12 +90,37 @@ class Admin extends React.Component<{}, IAdminState> {
 	// }
     
     render() {
-        return (
+        return ( 
             <div>
                 <Header images="adminHeaderImage" title="Admin bookings" />
-        
-                <ul>
-                    {this.listReservations()}
+                <ul className="pageContainer">
+                {
+                    this.state.reservations.map( (booking: any) => {
+                        let url = "/Admin/Edit/" + booking.id;
+                        return (
+                        <li className="pageDescription" key={"Reservation: " + booking.id}>
+                        {/* <Link to={Admin/Edit/${booking.id}}>{booking.id}</Link> */}
+                        {/* <Link to={accordion/${booking.booking_ID}}> */}
+                        {/* <Link to={'Admin/Edit/'#{booking.id}}">{booking.id}</Link> */}
+                        {/* <Link to="Admin/Edit/"{booking.id}>{booking.id}</Link> */}
+                    
+                    <h3 className="bodyText"><b>Reservation number: </b><Link to={url}>{booking.id}</Link></h3>
+                    <br />
+                    <p className="bodyText"><b>Name: </b> {booking.name}</p>
+                    <p className="bodyText"><b>E-Mail: </b> {booking.email}</p>
+                    <p className="bodyText"><b>Phone number: </b> {booking.phone}</p>
+                    <hr></hr>
+                    <p><b>Date: </b>{booking.dateOfBooking}</p>
+                    <p><b>Time: </b>{booking.timeOfBooking}</p>
+                    <p><b>{booking.numberOfGuests}</b> guests</p>
+                    <div>
+                    <Link to={url}><button>Edit</button></Link>
+                    {/* <button onClick={(event) => this.getReservation(booking.id)}>Get</button> */}
+                    <button onClick={(event) => this.deleteReservation(booking.id)}>Delete</button>
+                    </div>
+                </li>
+            )
+        })}
                 </ul>
             </div>
             )
