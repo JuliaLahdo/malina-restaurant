@@ -3,7 +3,7 @@ import './Navbar.css';
 import logo from '../../Images/blacklogo.svg'
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
-import { Collapse } from 'reactstrap';
+
 
 interface IState {    
     isOpen: boolean;
