@@ -58,7 +58,7 @@ class Menu extends React.Component {
 
         return (
             <div>
-                <Header images="menuHeaderImage" title="Our Menu" />
+                <Header images="menuHeaderImage" title="Taste Our Menu" />
 
                 <div className="pageHeaderContainer">
                     <h1 className="pageHeading">With a little love</h1>

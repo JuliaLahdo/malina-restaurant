@@ -289,7 +289,7 @@ class Booking extends React.Component<{}, IBookingsState> {
 
     return (
       <div className="container">
-        <Header images="bookingHeaderImage" title="Booking page" />
+        <Header images="bookingHeaderImage" title="Make a Reservation" />
     
         <div className="pageHeaderContainer">
           <h1 className="pageHeading">Make a reservation</h1>
