@@ -8,6 +8,11 @@ import IAdminState from "./Admin";
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
+it('should render without error', () => {
+  const wrapper = shallow(<Admin />);
+  expect(wrapper.length).toBe(1);
+});
+
 const mockDatabase = [
   {
     id: 1,

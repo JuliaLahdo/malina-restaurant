@@ -46,11 +46,11 @@ class Admin extends React.Component<{}, IAdminState> {
         if(this._isMounted) {
         if (response) {
             this.setState({reservations: response.bookings});
-            console.log(response.bookings);
-            console.log('mi');
+/*             console.log(response.bookings);
+            console.log('mi'); */
           } else {
             this.setState({ reservations: [] });
-            console.log('mo');
+            // console.log('mo');
           }
         }
       }
@@ -113,9 +113,9 @@ class Admin extends React.Component<{}, IAdminState> {
                     <p><b>Time: </b>{booking.timeOfBooking}</p>
                     <p><b>{booking.numberOfGuests}</b> guests</p>
                     <div>
-                    <Link to={url}><button>Edit</button></Link>
                     {/* <button onClick={(event) => this.getReservation(booking.id)}>Get</button> */}
                     <button onClick={(event) => this.deleteReservation(booking.id)}>Delete</button>
+                    <Link to={url}><button>Edit</button></Link>
                     </div>
                 </li>
             )
