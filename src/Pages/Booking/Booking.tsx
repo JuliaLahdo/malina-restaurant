@@ -307,7 +307,7 @@ class Booking extends React.Component<{}, IBookingsState> {
               <p>Select date:</p>
               <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.handleDateChange} dateFormat="yyyy-MM-dd" minDate={moment().toDate()} />  
              
-            <div className= {!this.state.isCheckedDate ? "selectTime" : "disabledSelectTime"}>
+            <div className="selectTime">
               <p>Select time:</p>
                 <input type="radio" value="18:00:00" name="timeOfBooking" disabled={!this.state.isAvailableAt18} onChange={this.handleTimeChange} className="radioButtonsTime"/>
                 <p className="timeToBook firstTime">18:00</p>
