@@ -98,14 +98,13 @@ class Admin extends React.Component<{}, IAdminState> {
                     this.state.reservations.map( (booking: any) => {
                         let url = "/Admin/Edit/" + booking.id;
                         return (
-                        <li className="pageDescription" key={"Reservation: " + booking.id}>
+                        <li className="adminDescription" key={"Reservation: " + booking.id}>
                         {/* <Link to={Admin/Edit/${booking.id}}>{booking.id}</Link> */}
                         {/* <Link to={accordion/${booking.booking_ID}}> */}
                         {/* <Link to={'Admin/Edit/'#{booking.id}}">{booking.id}</Link> */}
                         {/* <Link to="Admin/Edit/"{booking.id}>{booking.id}</Link> */}
                     
-                    <h3 className="bodyText"><b>Reservation number: </b><Link to={url}>{booking.id}</Link></h3>
-                    <br />
+                    <h3 className="bodyText"><b>Reservation number: </b><Link to={url} className="singleReservationLink">{booking.id}</Link></h3>
                     <p className="bodyText"><b>Name: </b> {booking.name}</p>
                     <p className="bodyText"><b>E-Mail: </b> {booking.email}</p>
                     <p className="bodyText"><b>Phone number: </b> {booking.phone}</p>
