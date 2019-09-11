@@ -1,18 +1,18 @@
 /* Small devices (landscape phones, 320px and up) */
 @media (min-width: 320px) {
   .headerContainer{
-    text-align: center;
+    text-align: center;   
   }
 
   .headerImageText{
-    margin: 10vh;
+    margin: 20vh;
     display: inline-block;
     background: rgba(0, 0, 0, 0.5);
     color:  #fff;
     padding: 2rem 1rem;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
     letter-spacing: 3px;
-    font-family: 'Rajdhani', sans-serif;  
+    font-family: 'Tangerine', cursive;
   }
 
 }
