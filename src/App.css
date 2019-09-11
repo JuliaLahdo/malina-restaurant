@@ -44,6 +44,15 @@
     .bodyText{
         font-family: 'Source Sans Pro', sans-serif;
     }
+
+    .returnHomeLink{
+        font-family: 'Source Sans Pro', sans-serif;
+        color: #A43B0A;
+        display: inline-block;
+        /* text-align: center; */
+        /* align-items: center; */
+        /* margin: 0 auto; */
+    }
 }
 
 /* Small devices (landscape phones, 576px and up) */

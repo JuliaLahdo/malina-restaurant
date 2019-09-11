@@ -1,9 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './Header';
+import Header, {IHeaderProps} from './Header';
+import Enzyme,{shallow } from 'enzyme';
+import EnzymeAdapter from 'enzyme-adapter-react-16';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Header />, div);
-  ReactDOM.unmountComponentAtNode(div);
+Enzyme.configure({ adapter: new EnzymeAdapter()});
+
+  describe('header', () => {
+     const props: IHeaderProps = {
+        title: "",
+        images:""
+     }
+
+  it('shoule render without error', () => {
+      shallow(<Header {...props} />);
+  });
+
+
 });

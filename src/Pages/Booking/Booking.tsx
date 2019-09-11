@@ -76,6 +76,7 @@ class Booking extends React.Component<{}, IBookingsState> {
 
   componentDidMount(){
     this.handleDateChange(new Date());
+    window.scrollTo(0, 0);
   }
 
   validate() {
@@ -144,7 +145,8 @@ class Booking extends React.Component<{}, IBookingsState> {
         this.setState({
           showConfirmation: true,
           bookingId: response.data.message
-        },()=>console.log(this.state.showConfirmation));
+        },
+        ()=>console.log(this.state.showConfirmation));
 
                       return response;
           }).catch((error: any) => {
@@ -287,7 +289,7 @@ class Booking extends React.Component<{}, IBookingsState> {
 
     return (
       <div className="container">
-        <Header images="bookingImages" title="Booking page" />
+        <Header images="bookingHeaderImage" title="Booking page" />
     
         <div className="pageHeaderContainer">
           <h1 className="pageHeading">Make a reservation</h1>

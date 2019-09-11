@@ -4,11 +4,9 @@ import './Confirmation.css';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
-
-interface IProps {
+export interface IProps {
     location: any
 }
-
 
 export interface IConfirmState {
     dateOfBooking: string;
@@ -17,14 +15,11 @@ export interface IConfirmState {
     email:string;
     name:string;
     phone:string;
-  }
-  
-
- 
+}
 
 class Confirmation extends Component<IProps, IConfirmState> {
   
-     constructor(props:any) {
+    constructor(props:any) {
         super(props);
         this.state = {
                 dateOfBooking: "",
@@ -33,10 +28,9 @@ class Confirmation extends Component<IProps, IConfirmState> {
                 email: "",
                 name: "",               
                 phone:""          
-    }
+        }
    
-}
-
+    }
 
     async componentDidMount() {
         const queryString = require('query-string');        
@@ -66,18 +60,21 @@ class Confirmation extends Component<IProps, IConfirmState> {
 
     }
 
-
     render() {
 
         return (
             <div>
-                <Header images="menuImages" title="Thanks for booking" />
-                    <p>thanks for your reservation {this.state.name} {this.state.dateOfBooking} {this.state.timeOfBooking}</p>              
-             
-  
-                 
-                        <Link to="/"><h3>Return to Home</h3></Link> 
-                        
+                <Header images="confirmHeaderImage" title="Thanks for booking" />
+                <div className="confirmFoundContainer">
+                    <div className="pageHeaderContainer">
+                        <h1 className="pageHeading">Thanks for your reservation {this.state.name}!</h1>
+                    </div>
+                    {/* <p className="bodyText"></p> */}
+                    <h2 className="confirmText">You are welcome on {this.state.dateOfBooking} at {this.state.timeOfBooking}</h2>
+
+                    <Link to="/" className="returnHomeLink"><h4>Return home</h4></Link>
+
+                </div>
             </div>
         )
     }
