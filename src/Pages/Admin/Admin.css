@@ -33,7 +33,7 @@
         margin: 10px 10px 10px 10px;
     }
 
-    .pageDescription{
+    .adminDescription{
         font-family: 'Source Sans Pro', sans-serif;
         max-width: 90%;
         min-width: 100px;
@@ -45,7 +45,7 @@
         border-radius: 4px 4px 2px 2px;
         box-shadow: 0px 1px 4px grey;
         align-content: flex-start;
-        line-height: 1;
+        
     }
 
     button {
@@ -57,7 +57,7 @@
      
     }
 
-    .returnHomeLink{
+    .singleReservationLink{
         font-family: 'Source Sans Pro', sans-serif;
         color: #A43B0A;
         display: inline-block;
