@@ -31,11 +31,6 @@
         flex-flow: row wrap;
         list-style: none;
         margin: 10px 10px 10px 10px;
-
-    }
-
-    .pageHeading{
-        font-family: 'Rajdhani', sans-serif;
     }
 
     .pageDescription{
@@ -44,16 +39,22 @@
         min-width: 100px;
         margin: 3px;
         border-bottom: 1px solid #A43B0A;
-        
         margin-bottom: 1em;
-        padding-bottom: 1em;
+        padding: 1em;
         text-align: left;
         border-radius: 4px 4px 2px 2px;
         box-shadow: 0px 1px 4px grey;
+        align-content: flex-start;
+        line-height: 1;
+    }
+
+    button {
+        margin: 4px;
     }
 
     .bodyText{
         font-family: 'Source Sans Pro', sans-serif;
+     
     }
 
     .returnHomeLink{
@@ -69,7 +70,7 @@
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
     .pageDescription{
-        max-width: 50%;
+        max-width: 80%;
     }
 }
 

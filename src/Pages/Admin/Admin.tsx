@@ -103,13 +103,21 @@ class Admin extends React.Component<{}, IAdminState> {
                         {/* <Link to={accordion/${booking.booking_ID}}> */}
                         {/* <Link to={'Admin/Edit/'#{booking.id}}">{booking.id}</Link> */}
                         {/* <Link to="Admin/Edit/"{booking.id}>{booking.id}</Link> */}
-                        
-                        <Link to={url}>{booking.id}</Link>
                     
-                    Reservation made by {booking.name} {booking.email}
-                    {booking.phone} on {booking.dateOfBooking} {booking.timeOfBooking} for {booking.numberOfGuests} guests
-                    <button onClick={(event) => this.getReservation(booking.id)}>Get</button>
+                    <h3 className="bodyText"><b>Reservation number: </b><Link to={url}>{booking.id}</Link></h3>
+                    <br />
+                    <p className="bodyText"><b>Name: </b> {booking.name}</p>
+                    <p className="bodyText"><b>E-Mail: </b> {booking.email}</p>
+                    <p className="bodyText"><b>Phone number: </b> {booking.phone}</p>
+                    <hr></hr>
+                    <p><b>Date: </b>{booking.dateOfBooking}</p>
+                    <p><b>Time: </b>{booking.timeOfBooking}</p>
+                    <p><b>{booking.numberOfGuests}</b> guests</p>
+                    <div>
+                    <Link to={url}><button>Edit</button></Link>
+                    {/* <button onClick={(event) => this.getReservation(booking.id)}>Get</button> */}
                     <button onClick={(event) => this.deleteReservation(booking.id)}>Delete</button>
+                    </div>
                 </li>
             )
         })}
