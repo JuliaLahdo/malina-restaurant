@@ -4,6 +4,25 @@
     display: none; 
 }
 
+
+button {
+    float: right;
+    /* display: inline-block; */
+    text-decoration: none;
+    letter-spacing: 3px;;
+    color: #222;
+    background: #af9a7d;
+    padding: 0.4rem 0.9rem;
+    border: 3px solid #af9a7d;
+    transition: all 0.3s linear;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  button:hover {
+    background: transparent;
+    color: #af9a7d;
+  }
+
 @media (min-width: 320px) {
     .bookingHeaderImage{
         min-height: 100vh;
