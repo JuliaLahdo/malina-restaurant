@@ -93,19 +93,18 @@ class Admin extends React.Component<{}, IAdminState> {
         return ( 
             <div>
                 <Header images="adminHeaderImage" title="Admin bookings" />
-                <ul>
+                <ul className="pageContainer">
                 {
-this.state.reservations.map( (booking: any) => {
-
-            let url = "/Admin/Edit/" + booking.id;
-            return (
-                <li key={"Reservation: " + booking.id}>
-                    {/* <Link to={Admin/Edit/${booking.id}}>{booking.id}</Link> */}
-                    {/* <Link to={accordion/${booking.booking_ID}}> */}
-                    {/* <Link to={'Admin/Edit/'#{booking.id}}">{booking.id}</Link> */}
-                    {/* <Link to="Admin/Edit/"{booking.id}>{booking.id}</Link> */}
-
-                    <Link to={url}>{booking.id}</Link>
+                    this.state.reservations.map( (booking: any) => {
+                        let url = "/Admin/Edit/" + booking.id;
+                        return (
+                        <li className="pageDescription" key={"Reservation: " + booking.id}>
+                        {/* <Link to={Admin/Edit/${booking.id}}>{booking.id}</Link> */}
+                        {/* <Link to={accordion/${booking.booking_ID}}> */}
+                        {/* <Link to={'Admin/Edit/'#{booking.id}}">{booking.id}</Link> */}
+                        {/* <Link to="Admin/Edit/"{booking.id}>{booking.id}</Link> */}
+                        
+                        <Link to={url}>{booking.id}</Link>
                     
                     Reservation made by {booking.name} {booking.email}
                     {booking.phone} on {booking.dateOfBooking} {booking.timeOfBooking} for {booking.numberOfGuests} guests
