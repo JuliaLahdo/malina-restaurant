@@ -1,9 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Home from './Home';
+import Enzyme,{ shallow } from 'enzyme';
+import EnzymeAdapter from 'enzyme-adapter-react-16';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Home />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+Enzyme.configure({ adapter: new EnzymeAdapter()});
+
+  it('shoule render without error', () => {
+    const wrapper = shallow(<Home />);
+    expect(wrapper.length).toBe(1);
+  });
