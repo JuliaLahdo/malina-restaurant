@@ -195,7 +195,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
                             <div className="customerInformationContainer">
                                 <p className="bodyText"><b>Reservation name:</b> {this.state.bookings.name}</p>
                                 <p className="bodyText"><b>Reservation email:</b> {this.state.bookings.email}</p>
-                                <p className="bodyText"><b>Reservation email:</b> {this.state.bookings.phone}</p>
+                                <p className="bodyText"><b>Reservation phonenumber:</b> {this.state.bookings.phone}</p>
                             </div>
 
                             <div className="bookingInformationContainer">
@@ -217,7 +217,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
                             </div>
                         </div>
                         <div className="submitButtonContainer">
-                            <input type="submit" value="Click to update" className="editSubmitButton"/>
+                            <button type="submit" className="editSubmitButton">Update</button>
                         </div>
                     </form>
                 </div>
