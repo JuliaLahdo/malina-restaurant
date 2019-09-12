@@ -15,12 +15,15 @@ export interface IBooking {
   email:string;
   name:string;
   phone:string;
+  
 }
 
 interface IError {  
+  timeError: string,
   emailError: string,
   nameError: string,
-  phoneError: string
+  phoneError: string,
+  gdprError: string
 }
 
 interface IBookingsState {    
@@ -33,30 +36,29 @@ interface IBookingsState {
   errors:IError;
   showConfirmation: boolean;
   bookingId: string;
-
 }
 
 class Booking extends React.Component<{}, IBookingsState> { 
-
   constructor(props:any) {
     super(props);
     this.state = {
-      bookings: {
-                  
+      bookings: {                  
         dateOfBooking:moment(),
         timeOfBooking: "",
         numberOfGuests: 1,
         email: "",
         name: "",
-        phone: ""
+        phone: ""        
       },
-      errors: {       
+      errors: {   
+        timeError: "",    
         emailError: "",
         nameError: "",
-        phoneError: ""
+        phoneError: "",
+        gdprError: "",
       },
-      isCheckedDate: false,
       isCheckedGdpr: false,
+      isCheckedDate: false,
       isAvailableAt18: true,
       isAvailableAt21: true,
       isAvilableBookingTime: false,
@@ -74,17 +76,23 @@ class Booking extends React.Component<{}, IBookingsState> {
     this.showConfirmation = this.showConfirmation.bind(this);
   }
 
-  componentDidMount(){
+  //To get available booking time for a clicked date
+    componentDidMount(){
     this.handleDateChange(new Date());
     window.scrollTo(0, 0);
   }
 
-  validate() {
-   
+  //To get an error message
+   validate() {    
+    let timeError= "";
     let emailError= "";
     let nameError="";
     let phoneError= "";
+    let gdprError= "";
 
+    if(!this.state.bookings.timeOfBooking){
+      timeError = "Time must be checked";
+    }
 
     if(!this.state.bookings.email){
       emailError = "E-mail can not be blank";
@@ -92,42 +100,43 @@ class Booking extends React.Component<{}, IBookingsState> {
 
     if(!this.state.bookings.name){
       nameError = "Name can not be blank";
-    }
-
-    if(this.state.bookings.name.length < 3){
-      nameError = "Name can not be more than 3 characters";
+    }else if(this.state.bookings.name.length < 2){
+      nameError = "Name can be more than 2 characters";
     }
 
     if(!this.state.bookings.phone){
       phoneError = "Phone can not be blank";
-    }
-
-    if(this.state.bookings.phone.length < 5){
+    }else if(this.state.bookings.phone.length < 5){
       phoneError = "Phone can be more than 5 numbers";
-    }
-
-    if(this.state.bookings.phone.length > 13){
+    }else if(this.state.bookings.phone.length > 13){
       phoneError = "Phone can not be more than 13 numbers";
     }
 
+    if(!this.state.isCheckedGdpr){
+      gdprError = "Agree GDPR";
+    }
 
-    if(emailError||nameError||phoneError){
+    if(timeError||emailError||nameError||phoneError||gdprError){
          this.setState({
-           errors: 
-           { emailError, 
+           errors:          
+           { 
+            timeError, 
+            emailError, 
             nameError, 
-            phoneError}
-          });
+            phoneError,
+            gdprError
+          }
+        });
       return false;
     }
     return true;
   }
 
   async handleSubmit(e:any) {
-    e.preventDefault();
+    e.preventDefault(); 
     const isValid = this.validate();
+
     if(isValid) {
-      // console.log(this.state.bookings);
       let postData = {
         'dateOfBooking': this.state.bookings.dateOfBooking.format('YYYY-MM-DD'),
         'numberOfGuests': this.state.bookings.numberOfGuests,
@@ -136,25 +145,19 @@ class Booking extends React.Component<{}, IBookingsState> {
         'name': this.state.bookings.name,
         'phone': this.state.bookings.phone
       }
-  
       console.log('Did component create?');
       await axios.post('http://localhost:8888/api/booking/create.php', postData, {
           headers: { 'Content-Type': 'text/plain' }})
           .then((response: any) => {
-              // console.log(response.data.message);
         this.setState({
           showConfirmation: true,
           bookingId: response.data.message
-        }
-        // ,()=>console.log(this.state.showConfirmation)
+          }
         );
-
-                      return response;
+          return response;
           }).catch((error: any) => {
-              console.log(error);
-        });
-
-        
+            console.log(error);
+        });        
       }else{
        e.preventDefault();
       }   
@@ -163,8 +166,7 @@ class Booking extends React.Component<{}, IBookingsState> {
   handleChange(e:any) {
     let target = e.target;
     let value = target.value;
-    let name = target.name;
-    
+    let name = target.name;   
     
     if(!e.value){          
       this.setState((prevState:any)=>{   
@@ -174,59 +176,50 @@ class Booking extends React.Component<{}, IBookingsState> {
         };          
       },
       () => {
-        // console.log(this.state.bookings);
       });
-
     } else {
-      // console.log("Can not be empty!");
+      console.log("can not book")
     }         
   }
 
 
-
-  async handleDateChange(date: Date) {
+// Check clicked date for a avaliable time for booking
+async handleDateChange(date: Date) {
           
     let momentDate = moment(date); 
     await axios.get('http://localhost:8888/api/booking/read.php')
-    .then(response => {      
+    .then(response => { 
 
       let numberOfTablesBookedAt18 = [];
       let numberOfTablesBookedAt21 = [];
-
+        //To match a date form database and clicked date
         for (let i = 0; i < response.data.bookings.length; i++){   
           if(response.data.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
            if(response.data.bookings[i].timeOfBooking === "18:00:00") {
               numberOfTablesBookedAt18.push(response.data.bookings[i]);
-              // console.log(numberOfTablesBookedAt18);
            }
            if(response.data.bookings[i].timeOfBooking === "21:00:00") {
               numberOfTablesBookedAt21.push(response.data.bookings[i]);
-              // console.log(numberOfTablesBookedAt21);
           }
         }
       }
 
-
       if(numberOfTablesBookedAt18.length > 14) {
-        // console.log("full booking 18:00:00");
         this.setState({
           isAvailableAt18: false 
         });
 
       } else {
-        // console.log("can book 18:00:00");
         this.setState({
           isAvailableAt18: true
         });
       }
 
       if(numberOfTablesBookedAt21.length > 14) {
-        // console.log("full booking 21:00:00");
         this.setState({
           isAvailableAt21: false 
         });
       } else {
-        // console.log("can book 21:00:00");
         this.setState({
           isAvailableAt21: true
         });
@@ -243,8 +236,8 @@ class Booking extends React.Component<{}, IBookingsState> {
     });
   }
 
-  handleTimeChange(e:any) {
-    
+  
+  handleTimeChange(e:any) {    
     if (this.state.isAvailableAt18 === true || this.state.isAvailableAt21 === true){
       let time = e.target.value; 
       this.setState((prevState:any)=>{  
@@ -253,24 +246,28 @@ class Booking extends React.Component<{}, IBookingsState> {
             bookings: prevState.bookings
           };          
       });
-    }
-    
+    }    
     else{
       console.log("can not booking");
    }
   }
 
 
-  checkedGdpr(){
+  checkedGdpr(){    
     if(!this.state.isCheckedGdpr){
-      this.setState({
-        isCheckedGdpr: true
+        this.setState(()=>{       
+        return{
+          isCheckedGdpr: true
+        };          
       });
-    }else{
-      this.setState({
+    }
+    else{
+      this.setState(()=>{       
+      return{
         isCheckedGdpr: false
+        };          
       });
-    }   
+    }
   }
 
   showConfirmation(){
@@ -283,7 +280,7 @@ class Booking extends React.Component<{}, IBookingsState> {
 
   render() {
     if (this.state.showConfirmation) {
-      return (
+       return (
         <Redirect to={`/confirmation?id=${this.state.bookingId}`} />
       );
     }
@@ -302,7 +299,6 @@ class Booking extends React.Component<{}, IBookingsState> {
         </div>
                   
         <div className="bookingFormContainer">
-
           <div className="bookingForm">
             <form onSubmit={(e) => this.handleSubmit(e)}>
               <p>Select date:</p>
@@ -314,6 +310,8 @@ class Booking extends React.Component<{}, IBookingsState> {
                 <p className="timeToBook firstTime">18:00</p>
                 <input type="radio" value="21:00:00" name="timeOfBooking" disabled={!this.state.isAvailableAt21} onChange={this.handleTimeChange} className="radioButtonsTime"/>
                 <p className="timeToBook">21:00</p>
+                {this.state.errors.timeError ? (<div style={{color: "red"}}>{this.state.errors.timeError}</div>
+                ) : null }
               </div>
 
               <div className="guests">
@@ -324,10 +322,8 @@ class Booking extends React.Component<{}, IBookingsState> {
               <div className="name">
                 <label htmlFor="name">Name: </label>
                 <input type="text" value={ this.state.bookings.name } name="name"  placeholder="Name" onChange={this.handleChange} />
-
                 {this.state.errors.nameError ? (<div style={{color: "red"}}>{this.state.errors.nameError}</div>
-                ) : null }
-                
+                ) : null }                
               </div>
 
               <div className="email">
@@ -347,24 +343,16 @@ class Booking extends React.Component<{}, IBookingsState> {
               <div className="gdpr">
                 <label htmlFor="gdpr">GDPR</label>
                 <input type="checkbox" checked={this.state.isCheckedGdpr} onChange={this.checkedGdpr}/>
-    
+                {this.state.errors.gdprError ? (<div style={{color: "grey"}}>{this.state.errors.gdprError}</div>
+                ) : null }    
               </div>
-
-              <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit" className="bookingButton"/*  onClick={this.showConfirmation} */>Submit
-   
-              </button>
-
+              <button type="submit" className="bookingButton">Submit</button>
             </form>
-
           </div>
-
-
         </div>
-
       </div>
     )
   }
-
 }
 
 export default Booking;
