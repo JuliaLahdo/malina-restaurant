@@ -23,16 +23,16 @@ class Data {
             });
     }
 
-    createData(createData: any) {
-        axios.post('http://localhost:8888/api/booking/create.php', createData, {
-            headers: { 'Content-Type': 'text/plain' }})
-            .then((response: any) => {
-                console.log(response);
-                return response;
-            }).catch((error: any) => {
-                console.log(error);
-            });
-    }
+    // createData(createData: any) {
+    //     axios.post('http://localhost:8888/api/booking/create.php', createData, {
+    //         headers: { 'Content-Type': 'text/plain' }})
+    //         .then((response: any) => {
+    //             console.log(response);
+    //             return response;
+    //         }).catch((error: any) => {
+    //             console.log(error);
+    //         });
+    // }
 
     deleteData(id: any) {
         axios.delete('http://localhost:8888/api/booking/delete.php', {
