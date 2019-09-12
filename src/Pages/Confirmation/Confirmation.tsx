@@ -33,6 +33,7 @@ class Confirmation extends Component<IProps, IConfirmState> {
     }
 
     async componentDidMount() {
+        window.scrollTo(0, 0);
         const queryString = require('query-string');        
         console.log(this.props.location);
         const parsed = queryString.parse(this.props.location.search);
