@@ -24,29 +24,29 @@ Enzyme.configure({ adapter: new EnzymeAdapter()});
    expect(wrapper.state("isCheckedGdpr")).toBe(true);
   });
 
-  it('should handle date change after click the calender', () => {
-    const booking = shallow(<Booking/>);
+  // it('should handle date change after click the calender', () => {
+  //   const booking = shallow(<Booking/>);
     
-    interface IMockInterface{
-        dateOfBooking: string;
-        timeOfBooking: string;
-        numberOfGuests: number;
-        email:string;
-        name:string;
-        phone:string;
-    }
+  //   interface IMockInterface{
+  //       dateOfBooking: string;
+  //       timeOfBooking: string;
+  //       numberOfGuests: number;
+  //       email:string;
+  //       name:string;
+  //       phone:string;
+  //   }
 
-    const mockBooking: IMockInterface = {
-      dateOfBooking: "2019-11-11",
-      timeOfBooking: "18:00:00",
-      numberOfGuests: 5,
-      email:"eunjuhuss@naver.com",
-      name:"eunjuhuss",
-      phone:"0101555555"
-    } 
+  //   const mockBooking: IMockInterface = {
+  //     dateOfBooking: "2019-11-11",
+  //     timeOfBooking: "18:00:00",
+  //     numberOfGuests: 5,
+  //     email:"eunjuhuss@naver.com",
+  //     name:"eunjuhuss",
+  //     phone:"0101555555"
+  //   } 
 
     
     // expect(booking.instance().state.bookings.length)
     
-  });
+  // });
 

@@ -123,11 +123,11 @@ class Booking extends React.Component<{}, IBookingsState> {
     return true;
   }
 
-  handleSubmit(e:any) {
+  async handleSubmit(e:any) {
     e.preventDefault();
     const isValid = this.validate();
     if(isValid) {
-      console.log(this.state.bookings);
+      // console.log(this.state.bookings);
       let postData = {
         'dateOfBooking': this.state.bookings.dateOfBooking.format('YYYY-MM-DD'),
         'numberOfGuests': this.state.bookings.numberOfGuests,
@@ -138,15 +138,15 @@ class Booking extends React.Component<{}, IBookingsState> {
       }
   
       console.log('Did component create?');
-      axios.post('http://localhost:8888/api/booking/create.php', postData, {
+      await axios.post('http://localhost:8888/api/booking/create.php', postData, {
           headers: { 'Content-Type': 'text/plain' }})
           .then((response: any) => {
-              console.log(response.data.message);
+              // console.log(response.data.message);
         this.setState({
           showConfirmation: true,
           bookingId: response.data.message
-        },
-        ()=>console.log(this.state.showConfirmation));
+        }
+        ,()=>console.log(this.state.showConfirmation));
 
                       return response;
           }).catch((error: any) => {
@@ -173,20 +173,20 @@ class Booking extends React.Component<{}, IBookingsState> {
         };          
       },
       () => {
-        console.log(this.state.bookings);
+        // console.log(this.state.bookings);
       });
 
     } else {
-      console.log("Can not be empty!");
+      // console.log("Can not be empty!");
     }         
   }
 
 
 
-  handleDateChange(date: Date) {
+  async handleDateChange(date: Date) {
           
     let momentDate = moment(date); 
-    axios.get('http://localhost:8888/api/booking/read.php')
+    await axios.get('http://localhost:8888/api/booking/read.php')
     .then(response => {      
 
       let numberOfTablesBookedAt18 = [];
@@ -196,36 +196,36 @@ class Booking extends React.Component<{}, IBookingsState> {
           if(response.data.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
            if(response.data.bookings[i].timeOfBooking === "18:00:00") {
               numberOfTablesBookedAt18.push(response.data.bookings[i]);
-              console.log(numberOfTablesBookedAt18);
+              // console.log(numberOfTablesBookedAt18);
            }
            if(response.data.bookings[i].timeOfBooking === "21:00:00") {
               numberOfTablesBookedAt21.push(response.data.bookings[i]);
-              console.log(numberOfTablesBookedAt21);
+              // console.log(numberOfTablesBookedAt21);
           }
         }
       }
 
 
       if(numberOfTablesBookedAt18.length > 14) {
-        console.log("full booking 18:00:00");
+        // console.log("full booking 18:00:00");
         this.setState({
           isAvailableAt18: false 
         });
 
       } else {
-        console.log("can book 18:00:00");
+        // console.log("can book 18:00:00");
         this.setState({
           isAvailableAt18: true
         });
       }
 
       if(numberOfTablesBookedAt21.length > 14) {
-        console.log("full booking 21:00:00");
+        // console.log("full booking 21:00:00");
         this.setState({
           isAvailableAt21: false 
         });
       } else {
-        console.log("can book 21:00:00");
+        // console.log("can book 21:00:00");
         this.setState({
           isAvailableAt21: true
         });

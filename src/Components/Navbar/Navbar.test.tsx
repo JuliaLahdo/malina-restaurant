@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Navbar from './Navbar';
-import { BrowserRouter } from 'react-router-dom';
 import Enzyme,{ shallow } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 
@@ -18,12 +16,12 @@ it('shoule render without error', () => {
 
 it('shoule change isOpen state', () => {
   const wrapper = shallow(<Navbar />);
- expect(wrapper.state("isOpen")).toBe(false);
+ expect(wrapper.state("isOpen")).toBe(true);
  // Find a checkbox
  const toggle = wrapper.find('.navBtn');
  expect(toggle).toHaveLength(1);
 //onClick
  toggle.simulate("Click");
- expect(wrapper.state("isOpen")).toBe(true);
+ expect(wrapper.state("isOpen")).toBe(false);
 });
 
