@@ -341,10 +341,14 @@ async handleDateChange(date: Date) {
               </div>
 
               <div className="gdpr">
-                <label htmlFor="gdpr">GDPR</label>
-                <input type="checkbox" checked={this.state.isCheckedGdpr} onChange={this.checkedGdpr}/>
+                <input className="gdprCheckbox" type="checkbox" checked={this.state.isCheckedGdpr} onChange={this.checkedGdpr}/>
                 {this.state.errors.gdprError ? (<div style={{color: "grey"}}>{this.state.errors.gdprError}</div>
-                ) : null }    
+                ) : null }
+                <label htmlFor="gdpr">
+                  <p className="bodyText gdprText">By using our website, you hereby consent to our Privacy Policy and agree to its terms.
+                  We will retain and use your information to the extent necessary to comply with our obligations.
+                  If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us through email at info@malina.se</p>
+                </label>
               </div>
               <button type="submit" className="bookingButton">Submit</button>
             </form>
