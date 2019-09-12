@@ -1,10 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Booking from './Booking';
 import Enzyme,{ shallow } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
-import moment from 'moment';
-
 
 Enzyme.configure({ adapter: new EnzymeAdapter()});
 
