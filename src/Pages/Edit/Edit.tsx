@@ -96,37 +96,28 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
                 if(response.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
                     if(response.bookings[i].timeOfBooking === "18:00:00") {
                         numberOfTablesBookedAt18.push(response.bookings[i]);
-                        //console.log("Trying to book 18: ",numberOfTablesBookedAt18);
                     }
                     if(response.bookings[i].timeOfBooking === "21:00:00") {
                         numberOfTablesBookedAt21.push(response.bookings[i]);
-                        //console.log("Trying to book 21: ", numberOfTablesBookedAt21);
                     }
                 }
             }
 
-          //console.log("numberOfTablesBookedAt18 ", numberOfTablesBookedAt18);
-          //console.log("numberOfTablesBookedAt21 ", numberOfTablesBookedAt21);
-
           if(numberOfTablesBookedAt18.length > 14) {
-            //console.log("full booking 18:00:00");
             this.setState({
               isAvailableAt18: false 
             });
           } else {
-            //console.log("can book 18:00:00");
             this.setState({
               isAvailableAt18: true
             });
           }
     
           if(numberOfTablesBookedAt21.length > 14) {
-            //console.log("full booking 21:00:00");
             this.setState({
               isAvailableAt21: false 
             });
           } else {
-            //console.log("can book 21:00:00");
             this.setState({
               isAvailableAt21: true
             });
@@ -145,7 +136,6 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
       }
 
     changeTime(e: any) {
-        // Vad gör denna?
         e.persist();
         this.setState(prevState => {
             prevState.bookings.timeOfBooking = e.target.value;
@@ -183,45 +173,45 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
             radio21 = (<input type="radio" value="21:00:00" name="timeOfBooking" onChange={this.changeTime.bind(this)} className="radioButtonsTime" disabled={!this.state.isAvailableAt21} defaultChecked/>);
         }
         
-            return (
-                <div>
+        return (
+            <div>
 
-                    <div className="pageHeaderContainer">
-                        <h1 className="pageHeading">Edit reservation</h1>
-                    </div>
-
-                    <form onSubmit={(e) => this.handleSubmit(e)}>
-                        <div className="editForm">
-                            <div className="customerInformationContainer">
-                                <p className="bodyText"><b>Reservation name:</b> {this.state.bookings.name}</p>
-                                <p className="bodyText"><b>Reservation email:</b> {this.state.bookings.email}</p>
-                                <p className="bodyText"><b>Reservation phonenumber:</b> {this.state.bookings.phone}</p>
-                            </div>
-
-                            <div className="bookingInformationContainer">
-                                <p className="bodyText">Select date:</p>
-                                <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.changeDate.bind(this)} dateFormat="yyyy-MM-dd" minDate={moment().toDate()}/>
-
-                                <div className="selectTime">
-                                    <p className="bodyText">Select time:</p>
-                                    {radio18}
-                                    <p className="bodyText timeToBook firstTime">18:00</p>
-                                    {radio21}
-                                    <p className="bodyText timeToBook">21:00</p>
-                                </div>
-
-                                <div className="selectNumberOfGuests">
-                                    <label htmlFor="selectNumberOfGuests" className="bodyText">Number of guests <i>(max: 6)</i> : </label>
-                                    <input type="number" min="1" max="6" value={this.state.bookings.numberOfGuests} name="numberOfGuests" placeholder="Number of guests?" onChange={this.changeGuests.bind(this)}/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="submitButtonContainer">
-                            <button type="submit" className="editSubmitButton">Update</button>
-                        </div>
-                    </form>
+                <div className="pageHeaderContainer">
+                    <h1 className="pageHeading">Edit reservation</h1>
                 </div>
-            )
+
+                <form onSubmit={(e) => this.handleSubmit(e)}>
+                    <div className="editForm">
+                        <div className="customerInformationContainer">
+                            <p className="bodyText"><b>Reservation name:</b> {this.state.bookings.name}</p>
+                            <p className="bodyText"><b>Reservation email:</b> {this.state.bookings.email}</p>
+                            <p className="bodyText"><b>Reservation phonenumber:</b> {this.state.bookings.phone}</p>
+                        </div>
+
+                        <div className="bookingInformationContainer">
+                            <p className="bodyText">Select date:</p>
+                            <DatePicker selected={this.state.bookings.dateOfBooking.toDate()} onChange={this.changeDate.bind(this)} dateFormat="yyyy-MM-dd" minDate={moment().toDate()}/>
+
+                            <div className="selectTime">
+                                <p className="bodyText">Select time:</p>
+                                {radio18}
+                                <p className="bodyText timeToBook firstTime">18:00</p>
+                                {radio21}
+                                <p className="bodyText timeToBook">21:00</p>
+                            </div>
+
+                            <div className="selectNumberOfGuests">
+                                <label htmlFor="selectNumberOfGuests" className="bodyText">Number of guests <i>(max: 6)</i> : </label>
+                                <input type="number" min="1" max="6" value={this.state.bookings.numberOfGuests} name="numberOfGuests" placeholder="Number of guests?" onChange={this.changeGuests.bind(this)}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="submitButtonContainer">
+                        <button type="submit" className="editSubmitButton">Update</button>
+                    </div>
+                </form>
+            </div>
+        )
     }
 
     render() {
