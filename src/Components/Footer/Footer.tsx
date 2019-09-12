@@ -7,7 +7,7 @@ import { FaInstagram, FaFacebook, FaTwitter } from 'react-icons/fa';
 class Footer extends Component {
     render() {
         return (
-            <footer>
+            <footer role="contentinfo">
                 <div className="footerContainer">
                     <div className="restaurantInfoContainer">
                         <div className="restaurantInfo">

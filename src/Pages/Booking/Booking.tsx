@@ -286,7 +286,7 @@ async handleDateChange(date: Date) {
     }
 
     return (
-      <div className="container">
+      <main className="container" role="main">
         <Header images="bookingHeaderImage" title="Make a Reservation" />
     
         <div className="pageHeaderContainer">
@@ -350,7 +350,7 @@ async handleDateChange(date: Date) {
             </form>
           </div>
         </div>
-      </div>
+      </main>
     )
   }
 }

@@ -63,7 +63,7 @@ class Confirmation extends Component<IProps, IConfirmState> {
     render() {
 
         return (
-            <div>
+            <main role="main">
                 <Header images="confirmHeaderImage" title="Thanks for booking" />
                 <div className="confirmFoundContainer">
                     <div className="pageHeaderContainer">
@@ -75,7 +75,7 @@ class Confirmation extends Component<IProps, IConfirmState> {
                     <Link to="/" className="returnHomeLink"><h4>Return home</h4></Link>
 
                 </div>
-            </div>
+            </main>
         )
     }
 }

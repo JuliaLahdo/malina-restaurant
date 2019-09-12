@@ -14,7 +14,7 @@ class Home extends React.Component {
     render() {
 
         return (
-            <div>
+            <main role="main">
             <Header images="homeHeaderImage" title="MALINA">
             </Header>
                 <div className="homeContainer">
@@ -24,7 +24,7 @@ class Home extends React.Component {
                     </div>
                     <p className="pageDescription">We believe that you eat with your eyes. Not with eyes alone of course, but it's a big part of a nice dish. We combine artistic dishes with an indulgence of flavours with every bite. Welcome to Malina.</p>
 
-                    <div className="reservationLinksContainer">
+                    <div className="reservationLinksContainer" role="region">
                         <Link to="/Booking"><img src={table} alt="Table with white cloth" className="reservationImage"/></Link><br />
                         <Link to="/Booking" className="reservationsLink">Table reservations</Link>
                     </div>
@@ -33,7 +33,7 @@ class Home extends React.Component {
                         <img src={relax} alt="Malina restaurant window" className="windowImage" />
                     </div>
                 </div>
-            </div>
+            </main>
         )
     }
 }
