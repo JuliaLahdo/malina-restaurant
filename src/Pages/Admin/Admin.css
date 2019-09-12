@@ -1,0 +1,105 @@
+@media (min-width: 320px){
+    .adminHeaderImage{
+        min-height: 100vh;
+        width: 100%;
+        background: url("../../Images/admintime.jpg") center / cover no-repeat;
+        margin-bottom: 2em;
+    }
+
+    .pageContainer{
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+        list-style: none;
+    }
+
+    .newBookingContainer{
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .plusIcon{
+        font-size: 1.5rem;
+        color: #af9a7d;
+        margin-right: 2em;
+    }
+
+    .plusIcon:hover, .newBookingText:hover{
+        color: #ddccb4;
+    }
+
+    .newBookingText{
+        color: black;
+        margin-right: 0.5em;
+        font-size: 1.2rem;
+    }
+
+    .adminDescription{
+        flex-basis: 90%;
+        font-family: 'Source Sans Pro', sans-serif;
+        max-width: 100%;
+        min-width: 10em;
+        margin: 0.5em;
+        border-bottom: 1px solid #A43B0A;
+        margin-bottom: 1em;
+        padding: 1em;
+        text-align: left;
+        border-radius: 4px 4px 2px 2px;
+        box-shadow: 0px 1px 4px grey;
+        align-content: flex-start;
+    }
+
+    button{
+        margin: 1em;
+    }
+
+    .bodyText{
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+
+    .totalReservations{
+        font-family: 'Source Sans Pro', sans-serif;
+        color: #A43B0A;
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+        /* width: 20vw; */
+        min-width: 40vw;
+        margin-bottom: 1em;
+    }
+
+    .singleReservationLink{
+        font-family: 'Source Sans Pro', sans-serif;
+        color: #A43B0A;
+        display: inline-block;
+    }
+
+    .phoneTag{
+        border-bottom: 1px solid #A43B0A;
+        padding-bottom: 0.5em;
+    }
+
+    .dateTag{
+        padding-top: 0.5em;
+    }
+}
+
+@media (min-width: 576px){
+    .adminDescription{
+        max-width: 100%;
+        flex-basis: 45%;
+    }
+}
+
+@media (min-width: 768px){
+    .adminDescription{
+        max-width: 40%;
+    }
+
+}
+
+@media (min-width: 992px){
+    .adminDescription{
+        max-width: 30%;
+    }
+}
