@@ -16,12 +16,12 @@ it('shoule render without error', () => {
 
 it('shoule change isOpen state', () => {
   const wrapper = shallow(<Navbar />);
- expect(wrapper.state("isOpen")).toBe(true);
+ expect(wrapper.state("isOpen")).toBe(false);
  // Find a checkbox
  const toggle = wrapper.find('.navBtn');
  expect(toggle).toHaveLength(1);
 //onClick
  toggle.simulate("Click");
- expect(wrapper.state("isOpen")).toBe(false);
+ expect(wrapper.state("isOpen")).toBe(true);
 });
 
