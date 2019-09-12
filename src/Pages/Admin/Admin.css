@@ -1,5 +1,4 @@
-/* Small devices (landscape phones, 320px and up) */
-@media (min-width: 320px) {
+@media (min-width: 320px){
     .adminHeaderImage{
         min-height: 100vh;
         width: 100%;
@@ -7,31 +6,11 @@
         margin-bottom: 2em;
     }
 
-    *{
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    body{
-        line-height: 1.4;
-    }
-
-    a{
-        text-decoration: none;
-    }
-
-    a:hover{
-        color: #E87421;
-        text-decoration: none;
-    }
-
     .pageContainer{
         display: flex;
         justify-content: center;
         flex-flow: row wrap;
         list-style: none;
-        
     }
 
     .adminDescription{
@@ -49,16 +28,15 @@
         align-content: flex-start;
     }
 
-    button {
+    button{
         margin: 1em;
     }
 
     .bodyText{
         font-family: 'Source Sans Pro', sans-serif;
-     
     }
 
-    .totalReservations {
+    .totalReservations{
         font-family: 'Source Sans Pro', sans-serif;
         color: #A43B0A;
         display: flex;
@@ -85,31 +63,22 @@
     }
 }
 
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
+@media (min-width: 576px){
     .adminDescription{
         max-width: 100%;
         flex-basis: 45%;
     }
 }
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
+@media (min-width: 768px){
     .adminDescription{
         max-width: 40%;
     }
 
 }
 
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
+@media (min-width: 992px){
     .adminDescription{
         max-width: 30%;
     }
-
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-
 }

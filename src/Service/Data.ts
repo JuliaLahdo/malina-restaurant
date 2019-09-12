@@ -34,18 +34,18 @@ class Data {
             });
     }
 
-      deleteData(id: any) {
+    deleteData(id: any) {
         axios.delete('http://localhost:8888/api/booking/delete.php', {
             "data": {
                 "id": id
             }
-         })
-            .then((response: any) => {
-                console.log(response);
-                return response;
-            }).catch((error: any) => {
-                console.log(error);
-            });
+        })
+        .then((response: any) => {
+            console.log(response);
+            return response;
+        }).catch((error: any) => {
+            console.log(error);
+        });
     }
 
     updateData(updateData: IUpdateBooking) {
@@ -64,7 +64,7 @@ class Data {
             }).catch((error: any) => {
                 console.log(error);
             });
-        }
     }
+}
 
 export default Data;

@@ -46,7 +46,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
             isAvailableAt18: true,
             isAvailableAt21: true,
             isAvilableBookingTime: false
-          };  
+        };  
         
         this.getReservation = this.getReservation.bind(this);
     }
@@ -88,52 +88,52 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
         data.readData()
             .then(response => {
 
-          let numberOfTablesBookedAt18 = [];
-          let numberOfTablesBookedAt21 = [];
+                let numberOfTablesBookedAt18 = [];
+                let numberOfTablesBookedAt21 = [];
 
-            for (let i = 0; i < response.bookings.length; i++){
-                // Check that fetched date equals selected date in Datepicker
-                if(response.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
-                    if(response.bookings[i].timeOfBooking === "18:00:00") {
-                        numberOfTablesBookedAt18.push(response.bookings[i]);
-                    }
-                    if(response.bookings[i].timeOfBooking === "21:00:00") {
-                        numberOfTablesBookedAt21.push(response.bookings[i]);
+                for (let i = 0; i < response.bookings.length; i++){
+                    // Check that fetched date equals selected date in Datepicker
+                    if(response.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
+                        if(response.bookings[i].timeOfBooking === "18:00:00") {
+                            numberOfTablesBookedAt18.push(response.bookings[i]);
+                        }
+                        if(response.bookings[i].timeOfBooking === "21:00:00") {
+                            numberOfTablesBookedAt21.push(response.bookings[i]);
+                        }
                     }
                 }
-            }
 
-          if(numberOfTablesBookedAt18.length > 14) {
-            this.setState({
-              isAvailableAt18: false 
-            });
-          } else {
-            this.setState({
-              isAvailableAt18: true
-            });
-          }
+                if(numberOfTablesBookedAt18.length > 14) {
+                    this.setState({
+                    isAvailableAt18: false 
+                    });
+                } else {
+                    this.setState({
+                    isAvailableAt18: true
+                    });
+                }
     
-          if(numberOfTablesBookedAt21.length > 14) {
-            this.setState({
-              isAvailableAt21: false 
-            });
-          } else {
-            this.setState({
-              isAvailableAt21: true
-            });
-          }
-            return response;
-        }).catch(error => {
-            console.log(error);
-        });
+                if(numberOfTablesBookedAt21.length > 14) {
+                    this.setState({
+                    isAvailableAt21: false 
+                    });
+                } else {
+                    this.setState({
+                    isAvailableAt21: true
+                    });
+                }
+                    return response;
+                }).catch(error => {
+                    console.log(error);
+                });
 
-        this.setState((prevState: any)=>{  
-          prevState.bookings.dateOfBooking = momentDate; 
-            return {
-              bookings: prevState.bookings
-            };
-        });
-      }
+                this.setState((prevState: any)=>{  
+                prevState.bookings.dateOfBooking = momentDate; 
+                    return {
+                    bookings: prevState.bookings
+                    };
+                });
+    }
 
     changeTime(e: any) {
         e.persist();
@@ -165,6 +165,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
 
         let radio18: JSX.Element = (<div></div>);
         let radio21: JSX.Element = (<div></div>);
+
         if(this.state.bookings.timeOfBooking === "18:00:00") {
             radio18 = (<input type="radio" value="18:00:00" name="timeOfBooking" onChange={this.changeTime.bind(this)} className="radioButtonsTime" disabled={!this.state.isAvailableAt18} defaultChecked/>);
             radio21 = (<input type="radio" value="21:00:00" name="timeOfBooking" onChange={this.changeTime.bind(this)} className="radioButtonsTime" disabled={!this.state.isAvailableAt21} />);
@@ -206,9 +207,11 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
                             </div>
                         </div>
                     </div>
+
                     <div className="submitButtonContainer">
                         <button type="submit" className="editSubmitButton">Update</button>
                     </div>
+
                 </form>
             </div>
         )

@@ -69,7 +69,7 @@ class Confirmation extends Component<IProps, IConfirmState> {
                     <div className="pageHeaderContainer">
                         <h1 className="pageHeading">Thanks for your reservation {this.state.name}!</h1>
                     </div>
-                    {/* <p className="bodyText"></p> */}
+                    
                     <h2 className="confirmText">You are welcome on {this.state.dateOfBooking} at {this.state.timeOfBooking}</h2>
 
                     <Link to="/" className="returnHomeLink"><h4>Return home</h4></Link>
