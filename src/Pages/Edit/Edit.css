@@ -15,34 +15,12 @@
     .editForm{
         display: flex;
         justify-content: space-evenly;
-        padding: 2em;
-        /* border: 1px solid red; */
+        padding: 2em 15em 0 15em;
     }
-
-    .customerInformationContainer, .bookingInformationContainer{
-        /* flex: 10%; */
-    }
-
-    /* .editSubmitButton{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    } */
 
     .submitButtonContainer{
         text-align: center;
-    }
-
-    .editSubmitButton{
-        margin-bottom: 3em;
-        transition: background-color 0.2s ease;
-    }
-
-    .editSubmitButton:hover{
-        background-color: #E87421;
-        cursor: pointer;
-        color:white;
-        border: 1px solid white;
+        margin-bottom: 2em;
     }
 }
 

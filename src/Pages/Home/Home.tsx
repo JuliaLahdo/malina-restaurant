@@ -12,9 +12,10 @@ class Home extends React.Component {
     }
 
     render() {
+
         return (
             <div>
-            <Header images="homeHeaderImage" title="Welcome to Malina">
+            <Header images="homeHeaderImage" title="MALINA">
             </Header>
                 <div className="homeContainer">
 

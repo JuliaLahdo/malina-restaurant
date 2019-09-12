@@ -293,7 +293,7 @@ class Booking extends React.Component<{}, IBookingsState> {
         <Header images="bookingHeaderImage" title="Make a Reservation" />
     
         <div className="pageHeaderContainer">
-          <h1 className="pageHeading">Make a reservation</h1>
+          <h1 className="pageHeading">Reserve a table</h1>
         </div>
         <div className="pageDescription">
           <p>So you want to book a table? <strong>Awesome!</strong> Easily make your reservation below, where you can book for 1-6 people.</p>
@@ -350,7 +350,7 @@ class Booking extends React.Component<{}, IBookingsState> {
     
               </div>
 
-              <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit"/*  onClick={this.showConfirmation} */>Submit
+              <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit" className="bookingButton"/*  onClick={this.showConfirmation} */>Submit
    
               </button>
 
