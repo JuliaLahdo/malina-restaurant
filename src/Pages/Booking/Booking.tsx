@@ -15,12 +15,15 @@ export interface IBooking {
   email:string;
   name:string;
   phone:string;
+  
 }
 
 interface IError {  
+  timeError: string,
   emailError: string,
   nameError: string,
-  phoneError: string
+  phoneError: string,
+  gdprError: string
 }
 
 interface IBookingsState {    
@@ -37,7 +40,6 @@ interface IBookingsState {
 }
 
 class Booking extends React.Component<{}, IBookingsState> { 
-
   constructor(props:any) {
     super(props);
     this.state = {
@@ -49,14 +51,17 @@ class Booking extends React.Component<{}, IBookingsState> {
         email: "",
         name: "",
         phone: ""
+        
       },
-      errors: {       
+      errors: {   
+        timeError: "",    
         emailError: "",
         nameError: "",
-        phoneError: ""
+        phoneError: "",
+        gdprError: "",
       },
-      isCheckedDate: false,
       isCheckedGdpr: false,
+      isCheckedDate: false,
       isAvailableAt18: true,
       isAvailableAt21: true,
       isAvilableBookingTime: false,
@@ -79,12 +84,16 @@ class Booking extends React.Component<{}, IBookingsState> {
     window.scrollTo(0, 0);
   }
 
-  validate() {
-   
+  validate() {    
+    let timeError= "";
     let emailError= "";
     let nameError="";
     let phoneError= "";
+    let gdprError= "";
 
+    if(!this.state.bookings.timeOfBooking){
+      timeError = "Time must be checked";
+    }
 
     if(!this.state.bookings.email){
       emailError = "E-mail can not be blank";
@@ -92,42 +101,44 @@ class Booking extends React.Component<{}, IBookingsState> {
 
     if(!this.state.bookings.name){
       nameError = "Name can not be blank";
-    }
-
-    if(this.state.bookings.name.length < 3){
-      nameError = "Name can not be more than 3 characters";
+    }else if(this.state.bookings.name.length < 1){
+      nameError = "Name can be more than 1 characters";
     }
 
     if(!this.state.bookings.phone){
       phoneError = "Phone can not be blank";
-    }
-
-    if(this.state.bookings.phone.length < 5){
+    }else if(this.state.bookings.phone.length < 5){
       phoneError = "Phone can be more than 5 numbers";
-    }
-
-    if(this.state.bookings.phone.length > 13){
+    }else if(this.state.bookings.phone.length > 13){
       phoneError = "Phone can not be more than 13 numbers";
     }
 
+    if(!this.state.isCheckedGdpr){
+      gdprError = "Agree GDPR";
+    }
 
-    if(emailError||nameError||phoneError){
+
+    if(timeError||emailError||nameError||phoneError||gdprError){
          this.setState({
-           errors: 
-           { emailError, 
+           errors:
+          
+           { timeError, 
+            emailError, 
             nameError, 
-            phoneError}
+            phoneError,
+            gdprError}
           });
       return false;
     }
     return true;
   }
 
-  async handleSubmit(e:any) {
+  handleSubmit(e:any) {
     e.preventDefault();
+ 
     const isValid = this.validate();
+    
     if(isValid) {
-      // console.log(this.state.bookings);
       let postData = {
         'dateOfBooking': this.state.bookings.dateOfBooking.format('YYYY-MM-DD'),
         'numberOfGuests': this.state.bookings.numberOfGuests,
@@ -138,23 +149,19 @@ class Booking extends React.Component<{}, IBookingsState> {
       }
   
       console.log('Did component create?');
-      await axios.post('http://localhost:8888/api/booking/create.php', postData, {
+     axios.post('http://localhost:8888/api/booking/create.php', postData, {
           headers: { 'Content-Type': 'text/plain' }})
           .then((response: any) => {
-              // console.log(response.data.message);
         this.setState({
           showConfirmation: true,
           bookingId: response.data.message
-        }
-        // ,()=>console.log(this.state.showConfirmation)
+          }
         );
 
-                      return response;
+            return response;
           }).catch((error: any) => {
               console.log(error);
-        });
-
-        
+        });        
       }else{
        e.preventDefault();
       }   
@@ -174,20 +181,17 @@ class Booking extends React.Component<{}, IBookingsState> {
         };          
       },
       () => {
-        // console.log(this.state.bookings);
       });
-
     } else {
-      // console.log("Can not be empty!");
     }         
   }
 
 
 
-  async handleDateChange(date: Date) {
+ handleDateChange(date: Date) {
           
     let momentDate = moment(date); 
-    await axios.get('http://localhost:8888/api/booking/read.php')
+    axios.get('http://localhost:8888/api/booking/read.php')
     .then(response => {      
 
       let numberOfTablesBookedAt18 = [];
@@ -261,16 +265,22 @@ class Booking extends React.Component<{}, IBookingsState> {
   }
 
 
-  checkedGdpr(){
+  checkedGdpr(e:any){    
     if(!this.state.isCheckedGdpr){
-      this.setState({
-        isCheckedGdpr: true
+        this.setState(()=>{       
+        return{
+          isCheckedGdpr: true
+        };          
       });
-    }else{
-      this.setState({
+    }
+  else{
+      this.setState(()=>{       
+      return{
         isCheckedGdpr: false
-      });
-    }   
+      };          
+    });
+  }
+  
   }
 
   showConfirmation(){
@@ -314,6 +324,9 @@ class Booking extends React.Component<{}, IBookingsState> {
                 <p className="timeToBook firstTime">18:00</p>
                 <input type="radio" value="21:00:00" name="timeOfBooking" disabled={!this.state.isAvailableAt21} onChange={this.handleTimeChange} className="radioButtonsTime"/>
                 <p className="timeToBook">21:00</p>
+
+                {this.state.errors.timeError ? (<div style={{color: "red"}}>{this.state.errors.timeError}</div>
+                ) : null }
               </div>
 
               <div className="guests">
@@ -347,10 +360,12 @@ class Booking extends React.Component<{}, IBookingsState> {
               <div className="gdpr">
                 <label htmlFor="gdpr">GDPR</label>
                 <input type="checkbox" checked={this.state.isCheckedGdpr} onChange={this.checkedGdpr}/>
+                {this.state.errors.gdprError ? (<div style={{color: "grey"}}>{this.state.errors.gdprError}</div>
+                ) : null }
     
               </div>
 
-              <button disabled={ !this.state.bookings.dateOfBooking || !this.state.bookings.timeOfBooking || !this.state.isCheckedGdpr} type="submit" className="bookingButton"/*  onClick={this.showConfirmation} */>Submit
+              <button type="submit" className="bookingButton"/*  onClick={this.showConfirmation} */>Submit
    
               </button>
 
