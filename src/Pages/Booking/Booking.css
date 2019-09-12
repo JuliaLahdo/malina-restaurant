@@ -69,6 +69,14 @@
     input[type=text], input[type=email]{
         width: 20em;
     }
+
+    .gdprText{
+        font-size: 0.7rem;
+    }
+
+    .gdprCheckbox{
+        margin-top: 2em;
+    }
     
 }
 
