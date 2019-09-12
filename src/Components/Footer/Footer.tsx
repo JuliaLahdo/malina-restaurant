@@ -4,7 +4,7 @@ import logo from '../../Images/whitelogo.svg';
 
 import { FaInstagram, FaFacebook, FaTwitter } from 'react-icons/fa';
 
-export default class Footer extends Component {
+class Footer extends Component {
     render() {
         return (
             <footer>
@@ -62,3 +62,5 @@ export default class Footer extends Component {
         )
     }
 }
+
+export default Footer;

@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Rajdhani:300|Source+Sans+Pro:300&display=swap');
-@import url("https://fonts.googleapis.com/css?family=Tangerine&display=swap");
-/* Small devices (landscape phones, 320px and up) */
-@media (min-width: 320px) {
 
+@media (min-width: 320px){
     *{
         box-sizing: border-box;
         margin: 0;
@@ -22,7 +20,7 @@
         text-decoration: none;
     }
 
-    button {
+    button{
         text-decoration: none;
         letter-spacing: 3px;
         color: #222;
@@ -38,7 +36,7 @@
         float: right;
     }
 
-    button:hover {
+    button:hover{
         background: transparent;
         color: #af9a7d;
     }
@@ -66,42 +64,27 @@
         font-family: 'Source Sans Pro', sans-serif;
     }
 
-
-
     .returnHomeLink{
         font-family: 'Source Sans Pro', sans-serif;
         color: #A43B0A;
         display: inline-block;
-        /* text-align: center; */
-        /* align-items: center; */
-        /* margin: 0 auto; */
     }
 }
 
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
+@media (min-width: 576px){
     .pageDescription{
         max-width: 50%;
     }
 }
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
+@media (min-width: 768px){
     .pageDescription{
         max-width: 40%;
     }
-
 }
 
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
+@media (min-width: 992px){
     .pageDescription{
         max-width: 30%;
     }
-
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-
 }

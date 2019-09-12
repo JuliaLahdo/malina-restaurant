@@ -11,14 +11,12 @@ import Navbar from './Components/Navbar/Navbar';
 import Footer from './Components/Footer/Footer';
 import { BrowserRouter as Router,Route,Switch } from 'react-router-dom';
 
-
 class App extends React.Component{
   render() {
     return (
       <Router>
         <main>
           <Navbar />
-            
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/Menu" exact component={Menu} />
@@ -33,7 +31,6 @@ class App extends React.Component{
       </Router>
     );
   }
-
 }
 
 export default App;

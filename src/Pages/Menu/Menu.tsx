@@ -26,33 +26,39 @@ class Menu extends React.Component {
 
         for (let i = 0; i < menu.menu.length; i++) {
             if(menu.menu[i].type === "starter") {
-                startersItemContainer.push((<div key={i} className="typeItemContainer">
-                    <div className="titlePriceContainer">
-                        <h3 className="itemTitle">{menu.menu[i].title}</h3>
-                        <p className="itemPrice">{menu.menu[i].price}</p>
+                startersItemContainer.push((
+                    <div key={i} className="typeItemContainer">
+                        <div className="titlePriceContainer">
+                            <h3 className="itemTitle">{menu.menu[i].title}</h3>
+                            <p className="itemPrice">{menu.menu[i].price}</p>
+                        </div>
+                        <p className="itemDescription">{menu.menu[i].description}</p>
                     </div>
-                    <p className="itemDescription">{menu.menu[i].description}</p>
-                </div>));
+                ));
             }
 
             if(menu.menu[i].type === "main") {
-                mainsItemContainer.push((<div key={i} className="typeItemContainer">
-                    <div className="titlePriceContainer">
-                        <h3 className="itemTitle">{menu.menu[i].title}</h3>
-                        <p className="itemPrice">{menu.menu[i].price}</p>
+                mainsItemContainer.push((
+                    <div key={i} className="typeItemContainer">
+                        <div className="titlePriceContainer">
+                            <h3 className="itemTitle">{menu.menu[i].title}</h3>
+                            <p className="itemPrice">{menu.menu[i].price}</p>
+                        </div>
+                        <p className="itemDescription">{menu.menu[i].description}</p>
                     </div>
-                    <p className="itemDescription">{menu.menu[i].description}</p>
-                </div>));
+                ));
             }
 
             if(menu.menu[i].type === "dessert") {
-                dessertsItemContainer.push((<div key={i} className="typeItemContainer">
-                    <div className="titlePriceContainer">
-                        <h3 className="itemTitle">{menu.menu[i].title}</h3>
-                        <p className="itemPrice">{menu.menu[i].price}</p>
+                dessertsItemContainer.push((
+                    <div key={i} className="typeItemContainer">
+                        <div className="titlePriceContainer">
+                            <h3 className="itemTitle">{menu.menu[i].title}</h3>
+                            <p className="itemPrice">{menu.menu[i].price}</p>
+                        </div>
+                        <p className="itemDescription">{menu.menu[i].description}</p>
                     </div>
-                    <p className="itemDescription">{menu.menu[i].description}</p>
-                </div>));
+                ));
             }
         }
 
