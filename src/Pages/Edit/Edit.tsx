@@ -24,7 +24,7 @@ interface IBookingsState {
 }
 
 interface IEditProps {
-    match: any;
+    match?: any;
 }
 
 class Edit extends React.Component<IEditProps, IBookingsState>{
@@ -96,37 +96,37 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
                 if(response.bookings[i].dateOfBooking === momentDate.format('YYYY-MM-DD')){
                     if(response.bookings[i].timeOfBooking === "18:00:00") {
                         numberOfTablesBookedAt18.push(response.bookings[i]);
-                        console.log("Trying to book 18: ",numberOfTablesBookedAt18);
+                        //console.log("Trying to book 18: ",numberOfTablesBookedAt18);
                     }
                     if(response.bookings[i].timeOfBooking === "21:00:00") {
                         numberOfTablesBookedAt21.push(response.bookings[i]);
-                        console.log("Trying to book 21: ", numberOfTablesBookedAt21);
+                        //console.log("Trying to book 21: ", numberOfTablesBookedAt21);
                     }
                 }
             }
 
-          console.log("numberOfTablesBookedAt18 ", numberOfTablesBookedAt18);
-          console.log("numberOfTablesBookedAt21 ", numberOfTablesBookedAt21);
+          //console.log("numberOfTablesBookedAt18 ", numberOfTablesBookedAt18);
+          //console.log("numberOfTablesBookedAt21 ", numberOfTablesBookedAt21);
 
           if(numberOfTablesBookedAt18.length > 14) {
-            console.log("full booking 18:00:00");
+            //console.log("full booking 18:00:00");
             this.setState({
               isAvailableAt18: false 
             });
           } else {
-            console.log("can book 18:00:00");
+            //console.log("can book 18:00:00");
             this.setState({
               isAvailableAt18: true
             });
           }
     
           if(numberOfTablesBookedAt21.length > 14) {
-            console.log("full booking 21:00:00");
+            //console.log("full booking 21:00:00");
             this.setState({
               isAvailableAt21: false 
             });
           } else {
-            console.log("can book 21:00:00");
+            //console.log("can book 21:00:00");
             this.setState({
               isAvailableAt21: true
             });
