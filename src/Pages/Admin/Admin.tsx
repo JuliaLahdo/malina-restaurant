@@ -93,7 +93,9 @@ class Admin extends React.Component<{}, IAdminState> {
         return ( 
             <div>
                 <Header images="adminHeaderImage" title="Admin bookings" />
+                <h2 className="totalReservations"><b>Reservations: {this.state.reservations.length}</b> </h2>
                 <ul className="pageContainer">
+                
                 {
                     this.state.reservations.map( (booking: any) => {
                         let url = "/Admin/Edit/" + booking.id;

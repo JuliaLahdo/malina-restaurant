@@ -59,6 +59,17 @@
      
     }
 
+    .totalReservations {
+        font-family: 'Source Sans Pro', sans-serif;
+        color: #A43B0A;
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+        width: 20vw;
+        min-width: 30vw;
+        margin-bottom: 1em;
+    }
+
     .singleReservationLink{
         font-family: 'Source Sans Pro', sans-serif;
         color: #A43B0A;
