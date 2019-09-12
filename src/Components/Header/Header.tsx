@@ -10,13 +10,13 @@ class Header extends Component <IHeaderProps,{}>{
 
     render() {
         return (
-               <div className="headerContainer">
+               <header className="headerContainer" role="banner">
                     <div className={this.props.images}>
                         <h1 className="headerImageText">
                             {this.props.title}
                         </h1>
                     </div>
-                </div>
+                </header>
         )
     }
 }

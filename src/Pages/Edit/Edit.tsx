@@ -175,7 +175,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
         }
         
         return (
-            <div>
+            <main>
 
                 <div className="pageHeaderContainer">
                     <h1 className="pageHeading">Edit reservation</h1>
@@ -213,7 +213,7 @@ class Edit extends React.Component<IEditProps, IBookingsState>{
                     </div>
 
                 </form>
-            </div>
+            </main>
         )
     }
 

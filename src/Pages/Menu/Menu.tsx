@@ -63,7 +63,7 @@ class Menu extends React.Component {
         }
 
         return (
-            <div>
+            <main role="main">
                 <Header images="menuHeaderImage" title="Taste Our Menu" />
 
                 <div className="pageHeaderContainer">
@@ -71,7 +71,7 @@ class Menu extends React.Component {
                 </div>
                 <p className="pageDescription">With a little love we hope to bring joy to our food and other people. We focus on good fresh food, grown as locally and naturally as possible. Enjoy!</p>
 
-                <div className="menuContainer">
+                <div className="menuContainer" role="region">
                     <h2 className="categoryHeader">Starters</h2>
                     {startersItemContainer}
 
@@ -85,7 +85,7 @@ class Menu extends React.Component {
                 <div className="imageContainer">
                     <img src={food} alt="Malina restaurant window" className="windowImage" />
                 </div>
-            </div>
+            </main>
         )
     }
 }

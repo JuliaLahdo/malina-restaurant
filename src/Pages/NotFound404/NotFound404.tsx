@@ -10,8 +10,8 @@ class NotFound404 extends React.Component {
 
     render() {
         return (
-            <div>
-            <Header images="errorHeaderImage" title="404"/>
+            <main role="main">
+                <Header images="errorHeaderImage" title="404"/>
                 <div className="notFoundContainer">
                     <div className="pageHeaderContainer">
                         <h1 className="pageHeading">Page not found</h1>
@@ -19,7 +19,7 @@ class NotFound404 extends React.Component {
                     <h3 className="notFoundText">Unfortunately, the page you are looking for is currently unavaliable</h3>
                     <Link to="/" className="returnHomeLink"><h4>Return home</h4></Link>
                 </div>
-            </div>
+            </main>
         )
     }
 }

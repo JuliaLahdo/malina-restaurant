@@ -33,7 +33,7 @@ class Navbar extends React.Component<{}, IState> {
 
     render() {
         return(
-            <nav className="navbar">
+            <nav className="navbar" role="navigation">
                 <div className="navHeader">
                     <button type="button" className="navBtn" onClick={this.handleToggle}>
                         <FaBars className="navIcon" />

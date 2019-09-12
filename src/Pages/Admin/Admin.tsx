@@ -71,7 +71,7 @@ class Admin extends React.Component<{}, IAdminState> {
     
     render() {
         return ( 
-            <div>
+            <main role="main">
 
                 <Header images="adminHeaderImage" title="Admin bookings" />
                 <div className="newBookingContainer">
@@ -101,7 +101,7 @@ class Admin extends React.Component<{}, IAdminState> {
                         })
                     }
                 </ul>
-            </div>
+            </main>
             )
         }
     }
