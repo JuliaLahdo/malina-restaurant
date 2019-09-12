@@ -4,12 +4,19 @@
   }
 
   .headerImageText{
-    margin: 20vh;
+    margin-top: 5em;
     display: inline-block;
     background: rgba(0, 0, 0, 0.5);
     color:  #fff;
     padding: 1em 0.5em;
+    font-size: 1.5rem;
     letter-spacing: 0.5em;
     font-family: 'Rajdhani', sans-serif;
+  }
+}
+
+@media (min-width: 768px){
+  .headerImageText{
+    font-size: 2rem;
   }
 }
