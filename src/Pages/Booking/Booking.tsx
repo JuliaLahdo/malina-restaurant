@@ -145,7 +145,7 @@ class Booking extends React.Component<{}, IBookingsState> {
         'name': this.state.bookings.name,
         'phone': this.state.bookings.phone
       }
-      console.log('Did component create?');
+      
       await axios.post('http://localhost:8888/api/booking/create.php', postData, {
           headers: { 'Content-Type': 'text/plain' }})
           .then((response: any) => {
