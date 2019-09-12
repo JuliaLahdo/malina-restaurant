@@ -5,9 +5,11 @@ import EnzymeAdapter from 'enzyme-adapter-react-16';
 import Edit from './Edit';
 
 
+
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 it('should render without error', () => {
-  const wrapper = shallow(<Edit />);
+    const match = { params: { bookings: 'id' } }
+  const wrapper = shallow(<Edit match={match} />);
   expect(wrapper.length).toBe(1);
 });
