@@ -6,7 +6,7 @@
         left: 0;
         width: 100%;
         background:#f7f7f7;
-        padding: 0.75em 2rem;
+        padding: 1em 2em;
     }
     
     .navIcon{
@@ -27,7 +27,7 @@
     .navLinks a{
         display: block;
         text-decoration: none;
-        padding: 0.3rem 0;
+        padding: 0.3em 0;
         color: #222;
         transition:  all 0.3s linear;
         text-align: center;
@@ -80,12 +80,12 @@
     .navLinks {
         height: auto;
         display: flex;
-        margin-left: 4rem;
+        margin-left: 4em;
     }
 
     .navLinks a {
-        margin: 0 1rem;
-        padding: 0.5rem 0;
+        margin: 0 1em;
+        padding: 0.5em 0;
     }
 }
 
