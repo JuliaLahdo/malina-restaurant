@@ -13,6 +13,27 @@
         list-style: none;
     }
 
+    .newBookingContainer{
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .plusIcon{
+        font-size: 1.5rem;
+        color: #af9a7d;
+        margin-right: 2em;
+    }
+
+    .plusIcon:hover, .newBookingText:hover{
+        color: #ddccb4;
+    }
+
+    .newBookingText{
+        color: black;
+        margin-right: 0.5em;
+        font-size: 1.2rem;
+    }
+
     .adminDescription{
         flex-basis: 90%;
         font-family: 'Source Sans Pro', sans-serif;
@@ -42,8 +63,8 @@
         display: flex;
         margin: 0 auto;
         justify-content: center;
-        width: 20vw;
-        min-width: 30vw;
+        /* width: 20vw; */
+        min-width: 40vw;
         margin-bottom: 1em;
     }
 
