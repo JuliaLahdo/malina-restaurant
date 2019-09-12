@@ -3,6 +3,7 @@ import Data from '../../Service/Data'
 import { Link } from 'react-router-dom';
 import './Admin.css';
 import Header from '../../Components/Header/Header';
+import { FaPlus} from 'react-icons/fa';
 
 export interface IBooking {
     id: number;
@@ -71,7 +72,12 @@ class Admin extends React.Component<{}, IAdminState> {
     render() {
         return ( 
             <div>
+
                 <Header images="adminHeaderImage" title="Admin bookings" />
+                <div className="newBookingContainer">
+                    <Link to="/Booking"><p className="bodyText newBookingText">Add new booking</p></Link>
+                    <Link to="/Booking"><FaPlus className="plusIcon" /></Link>
+                </div>
                 <h2 className="totalReservations"><b>Reservations: {this.state.reservations.length}</b> </h2>
                 <ul className="pageContainer">
                     {
